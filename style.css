@@ -1,65 +1,90 @@
+/* พื้นฐาน */
+* { box-sizing: border-box; }
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
+    font-family: 'Inter', -apple-system, sans-serif;
     margin: 0;
-    padding: 20px;
+    background-color: #f8f9fa;
     color: #333;
-}
-
-header {
-    text-align: center;
-    padding: 40px 0;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
+    line-height: 1.6;
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
+/* Header สไตล์ใหม่ */
+.main-header {
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left { display: flex; align-items: center; gap: 25px; }
+.logo { font-weight: 800; font-size: 1.25rem; color: #007bff; text-decoration: none; }
+.desktop-menu a { text-decoration: none; color: #666; font-size: 0.9rem; margin-right: 15px; font-weight: 500; }
+.desktop-menu a:hover { color: #007bff; }
+
+.header-right { display: flex; align-items: center; gap: 12px; }
+.btn-ticket { 
+    background: #e74c3c; color: white; padding: 7px 14px; border-radius: 6px; 
+    text-decoration: none; font-size: 0.85rem; font-weight: 600; 
+}
+.search-btn { background: none; border: none; cursor: pointer; color: #666; display: flex; }
+
+/* Hero Section */
+.hero { text-align: center; padding: 50px 0 30px; }
+.hero h1 { font-size: 2.5rem; margin-bottom: 10px; color: #222; }
+.hero p { color: #777; font-size: 1.1rem; }
+
+/* Grid Menu - ปรับให้ Responsive */
 .grid-menu {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 15px;
+    padding-bottom: 50px;
 }
 
 .card {
     background: white;
-    padding: 25px;
+    padding: 30px 15px;
     text-align: center;
     text-decoration: none;
-    color: #2c3e50;
-    font-weight: bold;
-    border-radius: 10px;
-    transition: all 0.3s ease;
+    color: #444;
+    font-weight: 600;
+    border-radius: 12px;
     border: 1px solid #eee;
+    transition: all 0.2s;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: #007bff;
-    color: white;
-}
-
-.card.accent {
-    background: #e74c3c;
-    color: white;
-}
-
-.content-block {
-    background: white;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 10px;
-    border-left: 5px solid #007bff;
-}
-
-.doc-item {
-    display: block;
-    margin: 10px 0;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-color: #007bff;
     color: #007bff;
+}
+
+.card.accent { background: #e74c3c; color: white; border: none; }
+.card.accent:hover { background: #c0392b; color: white; }
+
+.main-footer { text-align: center; padding: 40px; color: #999; font-size: 0.85rem; }
+
+/* มือถือ */
+@media (max-width: 600px) {
+    .desktop-menu { display: none; } /* ซ่อนเมนูตัวอักษรบนมือถือ */
+    .grid-menu { grid-template-columns: repeat(2, 1fr); } /* แสดง 2 คอลัมน์บนมือถือ */
+    .hero h1 { font-size: 2rem; }
 }
