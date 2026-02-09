@@ -3,16 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools - First Page</title>
+    <title>8Baht Tools - First Page</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Tools</h1>
-        <p>เครื่องมือสนับสนุนโปรดักส์ทีม 8Baht สำหรับฝ่ายขาย</p>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="#" class="logo">8Baht Tools</a>
+                <nav class="desktop-menu">
+                    <a href="adobe/">Adobe</a>
+                    <a href="autodesk/">Autodesk</a>
+                    <a href="foxit/">Foxit</a>
+                    <a href="corona/">Corona</a>
+                    <a href="enscape/">Enscape</a>
+                    <a href="vray/">V-Ray</a>
+                    <a href="d5/">D5</a>
+                    <a href="sketchup/">SketchUp</a>
+                    <a href="bimbundle/">BIM Bundle</a>
+                    <a href="rhino/">Rhino</a>
+                    <a href="lumion/">Lumion</a>
+                    <a href="microsoft/">Microsoft</a>
+                    <a href="other/">อื่นๆ</a>
+                </nav>
+            </div>
+
+            <div class="header-right">
+                <a href="https://8baht.com/help" class="btn-ticket" target="_blank">Open Ticket</a>
+                <button class="search-btn" title="ค้นหา">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
     </header>
 
-    <nav class="container">
+    <section class="hero">
+        <div class="container">
+            <h1>Tools</h1>
+            <p>เครื่องมือสนับสนุนโปรดักส์ทีม 8Baht สำหรับฝ่ายขาย</p>
+        </div>
+    </section>
+
+    <main class="container">
         <div class="grid-menu">
             <a href="adobe/" class="card">Adobe</a>
             <a href="autodesk/" class="card">Autodesk</a>
@@ -28,8 +62,12 @@
             <a href="microsoft/" class="card">Microsoft</a>
             <a href="other/" class="card">อื่นๆ</a>
             
-            <a href="https://8baht.com/help" class="card accent" target="_blank">Opent Ticket</a>
+            <a href="https://8baht.com/help" class="card accent" target="_blank">Open Ticket</a>
         </div>
-    </nav>
+    </main>
+
+    <footer class="main-footer">
+        <p>© 2026 8Baht Product Team</p>
+    </footer>
 </body>
 </html>
