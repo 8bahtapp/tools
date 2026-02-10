@@ -133,7 +133,7 @@ body {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    min-height: 220px;
+    min-height: 180px;
     box-shadow: var(--shadow-sm);
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
     position: relative;
@@ -149,7 +149,7 @@ body {
 }
 
 .card-title {
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 600;
     color: var(--text-main);
     opacity: 0;
