@@ -1,127 +1,218 @@
-/* --- 1. พื้นฐาน --- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: #333; line-height: 1.6; }
-
-/* --- 2. Layout (98% ชิดขอบ) --- */
-.container, .header-container {
-    width: 98%;
-    max-width: 1800px;
-    margin: 0 auto;
-    padding: 0 10px;
+/* --- 1. Apple Style Variables & Reset --- */
+:root {
+    --bg-color: #f5f5f7;       /* สีพื้นหลังเทา Apple */
+    --text-main: #1d1d1f;      /* สีดำหลัก */
+    --text-gray: #86868b;      /* สีเทารอง */
+    --accent-blue: #0071e3;    /* สีฟ้า Apple Link */
+    --card-bg: #ffffff;
+    --header-glass: rgba(255, 255, 255, 0.8);
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+    --shadow-hover: 0 20px 40px rgba(0,0,0,0.08);
 }
 
-/* --- 3. Header --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased; /* ตัวหนังสือคมชัดบน Mac */
+}
+
+/* --- 2. Global Container --- */
+.container {
+    max-width: 1400px; /* คุมความกว้างเนื้อหา */
+    margin: 0 auto;
+    padding: 0 22px;
+    width: 100%;
+}
+
+/* --- 3. Glassmorphism Header (ใช้ทุกหน้า) --- */
 .main-header {
-    background: #ffffff;
-    border-bottom: 1px solid #f0f0f0;
-    padding: 10px 0;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 9999;
+    background-color: var(--header-glass);
+    backdrop-filter: saturate(180%) blur(20px); /* กระจกฝ้า */
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    height: 48px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
 }
 
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 22px;
 }
 
-.header-left { display: flex; align-items: center; gap: 15px; }
-
-.logo { height: 32px; width: auto; display: block; }
-
-/* Desktop Menu: ปรับไม่ให้ Wrap (ขึ้นบรรทัดใหม่) */
-.desktop-menu {
+.header-left {
     display: flex;
-    gap: 4px;
-    flex-wrap: nowrap; /* ห้ามขึ้นบรรทัดใหม่เด็ดขาด */
+    align-items: center;
+    gap: 24px;
 }
 
+/* Logo */
+.logo-wrapper { display: flex; align-items: center; }
+.logo {
+    height: 18px; /* Apple Logo ขนาดเล็ก */
+    width: auto;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+.logo-wrapper:hover .logo { opacity: 1; }
+
+/* Menu */
+.desktop-menu { display: flex; gap: 24px; }
 .desktop-menu a {
     text-decoration: none;
-    color: #666;
-    font-size: 0.85rem;
-    padding: 6px 8px;
-    border-radius: 6px;
-    white-space: nowrap; /* ห้ามตัวหนังสือตัดบรรทัด */
-    transition: 0.2s;
+    color: rgba(0,0,0,0.8);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    transition: color 0.2s;
+}
+.desktop-menu a:hover { color: var(--accent-blue); }
+
+/* Right Buttons */
+.header-right { display: flex; align-items: center; gap: 16px; }
+
+.btn-ticket {
+    background-color: var(--accent-blue);
+    color: white;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 980px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: transform 0.2s;
+}
+.btn-ticket:hover { background-color: #0077ed; transform: scale(1.02); }
+
+.search-btn {
+    background: none; border: none; cursor: pointer; color: #333;
+    opacity: 0.8; transition: opacity 0.2s; display: flex;
+}
+.search-btn:hover { opacity: 1; }
+
+/* --- 4. Hero Section --- */
+.hero {
+    padding: 80px 0 50px;
+    text-align: left;
+}
+.hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+.hero h1 span { color: var(--text-gray); }
+
+/* --- 5. Grid Menu (Cards) --- */
+.grid-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 24px;
+    padding-bottom: 100px;
 }
 
-.desktop-menu a:hover { background-color: #f5f5f5; color: #007bff; }
-
-/* ปุ่ม Ticket & Search */
-.header-right { display: flex; align-items: center; gap: 10px; }
-.btn-ticket { 
-    background: #e74c3c; color: white; padding: 8px 14px; 
-    border-radius: 8px; text-decoration: none; font-size: 0.82rem; font-weight: 600;
+.card {
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    min-height: 220px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    position: relative;
+    overflow: hidden;
 }
 
-.search-btn { background: none; border: none; cursor: pointer; color: #999; display: flex; }
+.card img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
-/* --- 4. ปุ่มสามขีด (Hamburger Button) --- */
+.card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+/* Hover Effects */
+.card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: scale(1.02);
+    background: #fff;
+    z-index: 10;
+}
+.card:hover img { transform: scale(1.1) translateY(-5px); }
+.card:hover .card-title { opacity: 1; transform: translateY(0); }
+
+/* --- 6. Mobile & Responsive --- */
 .mobile-menu-btn {
-    display: none; /* ซ่อนในจอใหญ่ */
+    display: none;
     flex-direction: column;
     gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    z-index: 1100;
+    background: none; border: none; cursor: pointer;
 }
+.mobile-menu-btn span { width: 18px; height: 1.5px; background: #333; transition: 0.3s; }
 
-.mobile-menu-btn span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background-color: #333;
-    transition: 0.3s;
-}
-
-/* --- 5. Responsive Logic (จุดที่เมนูเริ่มแน่น) --- */
-@media (max-width: 1250px) { /* ปรับตัวเลขนี้ตามความเหมาะสม ถ้าเมนูยังเบียดให้เพิ่มเลขขึ้น */
-    .mobile-menu-btn { display: flex; } /* แสดงปุ่มสามขีด */
-    
+@media (max-width: 1100px) {
     .desktop-menu {
         display: none; /* ซ่อนเมนูแนวนอน */
         position: absolute;
-        top: 100%;
+        top: 48px;
         left: 0;
         width: 100%;
-        background: white;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(20px);
         flex-direction: column;
-        padding: 20px;
-        box-shadow: 0 10px 15px rgba(0,0,0,0.05);
-        border-bottom: 1px solid #eee;
-        gap: 10px;
+        padding: 20px 40px;
+        border-bottom: 1px solid #ddd;
+        gap: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
     }
-
-    .desktop-menu.active { display: flex; } /* แสดงเมนูเมื่อกดปุ่ม */
-
-    /* อนิเมชั่นปุ่มสามขีดตอนกด (เป็นรูปตัว X) */
-    .mobile-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .mobile-menu-btn.open span:nth-child(2) { opacity: 0; }
-    .mobile-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    
+    .desktop-menu.active { display: flex; }
+    .desktop-menu a { font-size: 16px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+    
+    .mobile-menu-btn { display: flex; }
+    .hero h1 { font-size: 36px; }
 }
-
-/* --- ส่วน Grid และ Hero (คงเดิม) --- */
-.hero { text-align: center; padding: 50px 0 20px; }
-.hero h1 { font-size: 2.5rem; font-weight: 800; }
-.grid-menu {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding-bottom: 60px;
-}
-.card {
-    background: white; padding: 20px; display: flex; align-items: center; 
-    justify-content: center; min-height: 130px; border-radius: 12px;
-    border: 1px solid #f0f0f0; transition: 0.3s; text-decoration: none;
-}
-.card img { max-width: 80%; max-height: 60%; object-fit: contain; }
-.card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 
 @media (max-width: 600px) {
-    .grid-menu { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .hero h1 { font-size: 2rem; }
+    .grid-menu { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .hero { padding: 40px 0 20px; }
+    .hero h1 { font-size: 32px; }
+    .card { min-height: 160px; padding: 20px; }
+    .card img { width: 60px; height: 60px; }
+}
+
+/* Footer */
+.main-footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-gray);
+    font-size: 11px;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 40px;
 }
