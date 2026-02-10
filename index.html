@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>8Baht Tools - Internal Support</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header class="main-header">
         <div class="header-container">
             <div class="header-left">
-                <button class="mobile-menu-btn" id="mobile-toggle">
+                <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -34,6 +36,7 @@
                     <a href="lumion/">Lumion</a>
                     <a href="pdfelement/">PDFelement</a>
                     <a href="microsoft/">Microsoft</a>
+                    <a href="other/">อื่นๆ</a>
                 </nav>
             </div>
 
@@ -60,55 +63,42 @@
             <a href="adobe/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-adobe.png" alt="Adobe">
             </a>
-            
             <a href="autodesk/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-autodesk.png" alt="Autodesk">
             </a>
-            
             <a href="corona/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-corona.png" alt="Corona">
             </a>
-            
             <a href="enscape/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-enscape.png" alt="Enscape">
             </a>
-            
             <a href="vray/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-vray.png" alt="V-Ray">
             </a>
-            
             <a href="d5/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-d5.png" alt="D5">
             </a>
-            
             <a href="foxit/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-foxit.png" alt="Foxit">
             </a>
-            
             <a href="sketchup/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-sketchup.png" alt="SketchUp">
             </a>
-            
             <a href="bimbundle/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-bim.png" alt="BIM Bundle">
             </a>
-            
             <a href="rhino/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-rhino.png" alt="Rhino">
             </a>
-            
             <a href="lumion/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/lumion_logo.png" alt="Lumion">
             </a>
-
             <a href="pdfelement/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/log-pdfelement.png" alt="PDFelement">
             </a>
-            
             <a href="microsoft/" class="card">
                 <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-microsoft.png" alt="Microsoft">
             </a>
-
             <a href="other/" class="card">อื่นๆ</a>
         </div>
     </main>
@@ -122,8 +112,18 @@
         const mainNav = document.getElementById('main-nav');
 
         mobileToggle.addEventListener('click', () => {
+            // สลับคลาส active เพื่อแสดง/ซ่อนเมนู
             mainNav.classList.toggle('active');
+            // สลับคลาส open เพื่อเปลี่ยนปุ่มสามขีดเป็นกากบาท
             mobileToggle.classList.toggle('open');
+        });
+
+        // คลิกพื้นที่อื่นเพื่อปิดเมนู (Optional)
+        document.addEventListener('click', (e) => {
+            if (!mobileToggle.contains(e.target) && !mainNav.contains(e.target)) {
+                mainNav.classList.remove('active');
+                mobileToggle.classList.remove('open');
+            }
         });
     </script>
 </body>
