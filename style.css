@@ -17,14 +17,14 @@ body {
     width: 98%;
     max-width: 1800px;
     margin: 0 auto;
-    padding: 0 15px; /* ลด Padding เพื่อความชิด */
+    padding: 0 10px; /* ลดจาก 15px เพื่อให้ชิดขอบมากขึ้น */
 }
 
 /* --- 3. Header สไตล์ Wide & Clean --- */
 .main-header {
     background: #ffffff;
     border-bottom: 1px solid #f0f0f0;
-    padding: 12px 0;
+    padding: 10px 0; /* ลด padding แนวตั้งให้ header ดูเพรียวขึ้น */
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -37,37 +37,39 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 15px;
+    padding: 0 10px; /* ลด padding เพื่อให้โลโก้ชิดซ้ายสุดและปุ่มชิดขวาสุด */
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 25px; /* ระยะห่างระหว่างโลโก้กับเมนูแรก */
+    gap: 20px; /* ระยะห่างระหว่างโลโก้กับเมนู */
 }
 
-/* สไตล์โลโก้ */
+/* --- 4. แก้ไขขนาดโลโก้ 8Baht --- */
 .logo-wrapper {
     text-decoration: none;
     display: flex;
     align-items: center;
-    transition: opacity 0.2s;
 }
 
-.logo-wrapper:hover { opacity: 0.8; }
-
-.logo-text {
-    font-weight: 800;
-    font-size: 1.3rem;
-    color: #007bff;
-    letter-spacing: -0.5px;
+.logo {
+    height: 32px;      /* คุมความสูงโลโก้สีเขียวไม่ให้ใหญ่เกินไป */
+    width: auto;       /* ปรับความกว้างตามสัดส่วนรูป */
+    display: block;
+    object-fit: contain;
+    transition: transform 0.2s ease;
 }
 
-/* เมนูด้านบน */
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* --- 5. เมนูด้านบนและปุ่มทางขวา --- */
 .desktop-menu {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 5px;
 }
 
 .desktop-menu a {
@@ -85,11 +87,10 @@ body {
     color: #007bff;
 }
 
-/* ฝั่งขวา (Ticket + Search) */
 .header-right {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .btn-ticket { 
@@ -111,9 +112,12 @@ body {
     cursor: pointer; 
     color: #999; 
     display: flex;
+    transition: 0.2s;
 }
 
-/* --- 4. Hero Section --- */
+.search-btn:hover { color: #333; }
+
+/* --- 6. Hero Section --- */
 .hero {
     text-align: center;
     padding: 60px 0 30px;
@@ -126,7 +130,11 @@ body {
     margin-bottom: 10px;
 }
 
-/* --- 5. Grid Menu & Cards (คุมขนาดรูปแบรนด์) --- */
+.hero p {
+    color: #888;
+}
+
+/* --- 7. Grid Menu & Cards (คุมขนาดรูปแบรนด์ในการ์ด) --- */
 .grid-menu {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
@@ -144,16 +152,15 @@ body {
     border-radius: 16px;
     border: 1px solid #f0f0f0;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
 }
 
-/* คุมขนาดรูปภาพโลโก้แบรนด์ */
 .card img {
-    max-width: 80%;
+    max-width: 80%;    /* ป้องกันโลโก้แบรนด์ใหญ่ล้นการ์ด */
     max-height: 60%;
     object-fit: contain;
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
 }
 
 .card:hover {
@@ -164,26 +171,51 @@ body {
 
 .card:hover img { transform: scale(1.05); }
 
-/* การ์ดสีแดง (Ticket) */
-.card.accent { background: #e74c3c; color: white; border: none; font-weight: 600; }
-.card.accent:hover { background: #c0392b; color: white; }
-
-/* --- 6. Footer --- */
+/* --- 8. Footer --- */
 .main-footer {
     text-align: center;
     padding: 50px;
     color: #bbb;
     font-size: 0.85rem;
+    border-top: 1px solid #f5f5f5;
 }
 
-/* --- 7. Responsive (มือถือ) --- */
+/* --- 9. Mobile Menu & Responsive --- */
+.mobile-menu-btn {
+    display: none; /* ซ่อนไว้ก่อน จะแสดงผลใน Media Query */
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-menu-btn span {
+    width: 24px;
+    height: 2px;
+    background: #333;
+}
+
 @media (max-width: 1024px) {
-    .desktop-menu { display: none; } /* ซ่อนเมนูเยอะๆ บนมือถือ */
+    .desktop-menu { display: none; }
+    .mobile-menu-btn { display: flex; }
+    /* สไตล์สำหรับเมนูตอนกดเปิดบนมือถือ */
+    .desktop-menu.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+    }
 }
 
 @media (max-width: 600px) {
     .grid-menu { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .container, .header-container { width: 95%; }
     .hero h1 { font-size: 2rem; }
-    .card { min-height: 110px; }
+    .card { min-height: 110px; padding: 15px; }
 }
