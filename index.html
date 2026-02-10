@@ -18,7 +18,7 @@
                     <span></span>
                 </button>
 
-                <a href="/index.html" class="logo-wrapper">
+                <a href="https://8bahtapp.github.io/tools/" class="logo-wrapper">
                     <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/icon-8baht.png" alt="8Baht Logo" class="logo">
                 </a>
 
@@ -111,14 +111,13 @@
         const mobileToggle = document.getElementById('mobile-toggle');
         const mainNav = document.getElementById('main-nav');
 
+        // ฟังก์ชันคลิกปุ่มสามขีด
         mobileToggle.addEventListener('click', () => {
-            // สลับคลาส active เพื่อแสดง/ซ่อนเมนู
             mainNav.classList.toggle('active');
-            // สลับคลาส open เพื่อเปลี่ยนปุ่มสามขีดเป็นกากบาท
             mobileToggle.classList.toggle('open');
         });
 
-        // คลิกพื้นที่อื่นเพื่อปิดเมนู (Optional)
+        // ฟังก์ชันคลิกพื้นที่ว่างเพื่อปิดเมนู (Optional)
         document.addEventListener('click', (e) => {
             if (!mobileToggle.contains(e.target) && !mainNav.contains(e.target)) {
                 mainNav.classList.remove('active');
