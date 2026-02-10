@@ -1,221 +1,127 @@
-/* --- 1. พื้นฐานและฟอนต์ --- */
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-}
+/* --- 1. พื้นฐาน --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: #333; line-height: 1.6; }
 
-body {
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
-    background-color: #fcfcfc;
-    color: #333;
-    line-height: 1.6;
-}
-
-/* --- 2. การจัดการความกว้าง (98% ชิดขอบ) --- */
-.container {
+/* --- 2. Layout (98% ชิดขอบ) --- */
+.container, .header-container {
     width: 98%;
     max-width: 1800px;
     margin: 0 auto;
-    padding: 0 10px; /* ลดจาก 15px เพื่อให้ชิดขอบมากขึ้น */
+    padding: 0 10px;
 }
 
-/* --- 3. Header สไตล์ Wide & Clean --- */
+/* --- 3. Header --- */
 .main-header {
     background: #ffffff;
     border-bottom: 1px solid #f0f0f0;
-    padding: 10px 0; /* ลด padding แนวตั้งให้ header ดูเพรียวขึ้น */
+    padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
 .header-container {
-    width: 98%;
-    max-width: 1800px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px; /* ลด padding เพื่อให้โลโก้ชิดซ้ายสุดและปุ่มชิดขวาสุด */
 }
 
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 20px; /* ระยะห่างระหว่างโลโก้กับเมนู */
-}
+.header-left { display: flex; align-items: center; gap: 15px; }
 
-/* --- 4. แก้ไขขนาดโลโก้ 8Baht --- */
-.logo-wrapper {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
+.logo { height: 32px; width: auto; display: block; }
 
-.logo {
-    height: 32px;      /* คุมความสูงโลโก้สีเขียวไม่ให้ใหญ่เกินไป */
-    width: auto;       /* ปรับความกว้างตามสัดส่วนรูป */
-    display: block;
-    object-fit: contain;
-    transition: transform 0.2s ease;
-}
-
-.logo:hover {
-    transform: scale(1.05);
-}
-
-/* --- 5. เมนูด้านบนและปุ่มทางขวา --- */
+/* Desktop Menu: ปรับไม่ให้ Wrap (ขึ้นบรรทัดใหม่) */
 .desktop-menu {
     display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
+    gap: 4px;
+    flex-wrap: nowrap; /* ห้ามขึ้นบรรทัดใหม่เด็ดขาด */
 }
 
 .desktop-menu a {
     text-decoration: none;
     color: #666;
     font-size: 0.85rem;
-    font-weight: 500;
-    padding: 6px 10px;
+    padding: 6px 8px;
     border-radius: 6px;
+    white-space: nowrap; /* ห้ามตัวหนังสือตัดบรรทัด */
     transition: 0.2s;
 }
 
-.desktop-menu a:hover {
-    background-color: #f5f5f5;
-    color: #007bff;
-}
+.desktop-menu a:hover { background-color: #f5f5f5; color: #007bff; }
 
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
+/* ปุ่ม Ticket & Search */
+.header-right { display: flex; align-items: center; gap: 10px; }
 .btn-ticket { 
-    background: #e74c3c; 
-    color: white; 
-    padding: 8px 16px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-size: 0.85rem; 
-    font-weight: 600;
-    transition: 0.3s;
+    background: #e74c3c; color: white; padding: 8px 14px; 
+    border-radius: 8px; text-decoration: none; font-size: 0.82rem; font-weight: 600;
 }
 
-.btn-ticket:hover { background: #c0392b; }
+.search-btn { background: none; border: none; cursor: pointer; color: #999; display: flex; }
 
-.search-btn { 
-    background: none; 
-    border: none; 
-    cursor: pointer; 
-    color: #999; 
-    display: flex;
-    transition: 0.2s;
-}
-
-.search-btn:hover { color: #333; }
-
-/* --- 6. Hero Section --- */
-.hero {
-    text-align: center;
-    padding: 60px 0 30px;
-}
-
-.hero h1 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    color: #1a1a1a;
-    margin-bottom: 10px;
-}
-
-.hero p {
-    color: #888;
-}
-
-/* --- 7. Grid Menu & Cards (คุมขนาดรูปแบรนด์ในการ์ด) --- */
-.grid-menu {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-    gap: 20px;
-    padding-bottom: 80px;
-}
-
-.card {
-    background: white;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 140px;
-    border-radius: 16px;
-    border: 1px solid #f0f0f0;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-}
-
-.card img {
-    max-width: 80%;    /* ป้องกันโลโก้แบรนด์ใหญ่ล้นการ์ด */
-    max-height: 60%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
-    border-color: #007bff;
-}
-
-.card:hover img { transform: scale(1.05); }
-
-/* --- 8. Footer --- */
-.main-footer {
-    text-align: center;
-    padding: 50px;
-    color: #bbb;
-    font-size: 0.85rem;
-    border-top: 1px solid #f5f5f5;
-}
-
-/* --- 9. Mobile Menu & Responsive --- */
+/* --- 4. ปุ่มสามขีด (Hamburger Button) --- */
 .mobile-menu-btn {
-    display: none; /* ซ่อนไว้ก่อน จะแสดงผลใน Media Query */
+    display: none; /* ซ่อนในจอใหญ่ */
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
+    padding: 5px;
+    z-index: 1100;
 }
 
 .mobile-menu-btn span {
-    width: 24px;
+    display: block;
+    width: 22px;
     height: 2px;
-    background: #333;
+    background-color: #333;
+    transition: 0.3s;
 }
 
-@media (max-width: 1024px) {
-    .desktop-menu { display: none; }
-    .mobile-menu-btn { display: flex; }
-    /* สไตล์สำหรับเมนูตอนกดเปิดบนมือถือ */
-    .desktop-menu.active {
-        display: flex;
-        flex-direction: column;
+/* --- 5. Responsive Logic (จุดที่เมนูเริ่มแน่น) --- */
+@media (max-width: 1250px) { /* ปรับตัวเลขนี้ตามความเหมาะสม ถ้าเมนูยังเบียดให้เพิ่มเลขขึ้น */
+    .mobile-menu-btn { display: flex; } /* แสดงปุ่มสามขีด */
+    
+    .desktop-menu {
+        display: none; /* ซ่อนเมนูแนวนอน */
         position: absolute;
-        top: 60px;
+        top: 100%;
         left: 0;
         width: 100%;
         background: white;
+        flex-direction: column;
         padding: 20px;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.05);
         border-bottom: 1px solid #eee;
+        gap: 10px;
     }
+
+    .desktop-menu.active { display: flex; } /* แสดงเมนูเมื่อกดปุ่ม */
+
+    /* อนิเมชั่นปุ่มสามขีดตอนกด (เป็นรูปตัว X) */
+    .mobile-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .mobile-menu-btn.open span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 }
 
+/* --- ส่วน Grid และ Hero (คงเดิม) --- */
+.hero { text-align: center; padding: 50px 0 20px; }
+.hero h1 { font-size: 2.5rem; font-weight: 800; }
+.grid-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding-bottom: 60px;
+}
+.card {
+    background: white; padding: 20px; display: flex; align-items: center; 
+    justify-content: center; min-height: 130px; border-radius: 12px;
+    border: 1px solid #f0f0f0; transition: 0.3s; text-decoration: none;
+}
+.card img { max-width: 80%; max-height: 60%; object-fit: contain; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
 @media (max-width: 600px) {
-    .grid-menu { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .container, .header-container { width: 95%; }
+    .grid-menu { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .hero h1 { font-size: 2rem; }
-    .card { min-height: 110px; padding: 15px; }
 }
