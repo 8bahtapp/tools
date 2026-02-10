@@ -144,6 +144,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 140px; /* กำหนดความสูงเพื่อให้การ์ดเท่ากันทุกใบ */
+    overflow: hidden;
     text-decoration: none;
     color: #444;
     font-weight: 600;
@@ -156,8 +157,8 @@ body {
 
 /* จัดสัดส่วนรูปภาพในการ์ด */
 .card img {
-    max-width: 85%;    /* กว้างไม่เกินพื้นที่การ์ด */
-    max-height: 75%;   /* สูงไม่เกินพื้นที่การ์ด */
+    max-width: 80%;    /* กว้างไม่เกินพื้นที่การ์ด */
+    max-height: 60%;   /* สูงไม่เกินพื้นที่การ์ด */
     object-fit: contain; /* รักษาอัตราส่วนรูปภาพไม่ให้เบี้ยว */
     transition: transform 0.3s ease;
 }
