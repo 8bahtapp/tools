@@ -133,7 +133,7 @@ body {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    min-height: 180px;
+    min-height: 160px;
     box-shadow: var(--shadow-sm);
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
     position: relative;
