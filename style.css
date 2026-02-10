@@ -76,7 +76,7 @@ body {
     text-decoration: none;
     color: rgba(0,0,0,0.8);
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: -0.01em;
     display: inline-block; /* จำเป็นสำหรับการใช้ transform */
     /* ใช้ cubic-bezier เพื่อความ "วืบ" ที่นุ่มนวล */
@@ -113,8 +113,8 @@ body {
     text-align: left;
 }
 .hero h1 {
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 400;
     color: var(--text-main);
     letter-spacing: -0.02em;
     margin-bottom: 8px;
