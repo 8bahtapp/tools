@@ -1,33 +1,23 @@
-/* --- พื้นฐานและฟอนต์ --- */
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
+/* --- ส่วนเพิ่มเติม/แก้ไขจากของเดิม --- */
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    /* ช่วยให้ชิดขอบซ้ายสุดจริงๆ */
+    margin-left: -10px; 
 }
 
-body {
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
-    background-color: #fcfcfc;
-    color: #333;
-    line-height: 1.6;
+.logo {
+    /* ขนาดที่เหมาะสมสำหรับ Header สูง 35-40px */
+    height: 35px; 
+    width: auto;
+    display: block;
+    transition: opacity 0.2s;
 }
 
-/* --- การจัดการความกว้าง (95% ตามโจทย์) --- */
-.container {
-    width: 95%;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* --- Header สไตล์โปร่งสบาย --- */
-.main-header {
-    background: #ffffff;
-    border-bottom: 1px solid #f0f0f0;
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+.logo-link:hover .logo {
+    opacity: 0.8;
 }
 
 .header-container {
@@ -35,175 +25,22 @@ body {
     max-width: 1600px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    /* กระจายฝั่งซ้าย (Logo+Menu) และฝั่งขวา (Ticket+Search) ให้ชิดขอบ */
+    justify-content: space-between; 
     align-items: center;
     padding: 0 20px;
 }
 
+/* จัดระยะห่างของเมนูไม่ให้ติดโลโก้เกินไป */
 .header-left {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 30px; 
 }
 
-.logo {
-    height: 35px;
-    width: auto;
-    display: block;
-}
-
-.desktop-menu {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.desktop-menu a {
-    text-decoration: none;
-    color: #666;
-    font-size: 0.85rem;
-    font-weight: 500;
-    padding: 5px 8px;
-    border-radius: 4px;
-    transition: 0.2s;
-}
-
-.desktop-menu a:hover {
-    background-color: #f0f7ff;
-    color: #007bff;
-}
-
-/* --- ปุ่มทางขวา --- */
+/* จัดการให้ปุ่มทางขวารวมกลุ่มกันและชิดขวา */
 .header-right {
     display: flex;
     align-items: center;
-    gap: 15px;
-}
-
-.btn-ticket { 
-    background: #e74c3c; 
-    color: white; 
-    padding: 8px 18px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    font-size: 0.9rem; 
-    font-weight: 600;
-    box-shadow: 0 4px 6px rgba(231, 76, 60, 0.2);
-    transition: 0.3s;
-}
-
-.btn-ticket:hover {
-    background: #c0392b;
-    transform: translateY(-1px);
-}
-
-.search-btn { 
-    background: none; 
-    border: none; 
-    cursor: pointer; 
-    color: #999; 
-    display: flex;
-    transition: 0.2s;
-}
-
-.search-btn:hover { color: #333; }
-
-/* --- Hero Section --- */
-.hero {
-    text-align: center;
-    padding: 80px 0 40px;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    color: #1a1a1a;
-    margin-bottom: 15px;
-}
-
-.hero p {
-    color: #888;
-    font-size: 1.2rem;
-}
-
-/* --- Grid Menu (การ์ดโปรดักส์) --- */
-.grid-menu {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-    gap: 25px;
-    padding: 40px 0 100px;
-}
-
-/* ปรับปรุง Card ให้รองรับรูปภาพแบรนด์ */
-.card {
-    background: white;
-    padding: 20px; /* ลดจากเดิมเพื่อให้รูปดูเด่นในพื้นที่พอดี */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 140px; /* กำหนดความสูงเพื่อให้การ์ดเท่ากันทุกใบ */
-    overflow: hidden;
-    text-decoration: none;
-    color: #444;
-    font-weight: 600;
-    font-size: 1.1rem;
-    border-radius: 16px;
-    border: 1px solid #f0f0f0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* จัดสัดส่วนรูปภาพในการ์ด */
-.card img {
-    max-width: 80%;    /* กว้างไม่เกินพื้นที่การ์ด */
-    max-height: 60%;   /* สูงไม่เกินพื้นที่การ์ด */
-    object-fit: contain; /* รักษาอัตราส่วนรูปภาพไม่ให้เบี้ยว */
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-    border-color: #007bff;
-}
-
-/* เอฟเฟกต์รูปภาพเมื่อเอาเมาส์วาง */
-.card:hover img {
-    transform: scale(1.05);
-}
-
-.card.accent { 
-    background: #e74c3c; 
-    color: white; 
-    border: none; 
-}
-
-.card.accent:hover { 
-    background: #c0392b; 
-    color: white; 
-}
-
-/* --- Footer --- */
-.main-footer {
-    text-align: center;
-    padding: 60px;
-    color: #bbb;
-    font-size: 0.9rem;
-    border-top: 1px solid #f5f5f5;
-}
-
-/* --- Responsive สำหรับมือถือ --- */
-@media (max-width: 992px) {
-    .desktop-menu { display: none; }
-    .hero h1 { font-size: 2.2rem; }
-}
-
-@media (max-width: 600px) {
-    .grid-menu { 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 15px;
-    }
-    .container, .header-container { width: 92%; }
-    /* ปรับความสูงการ์ดบนมือถือให้เล็กลงเล็กน้อย */
-    .card { min-height: 110px; padding: 15px; font-size: 0.95rem; }
+    gap: 20px;
 }
