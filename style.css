@@ -189,7 +189,7 @@ body {
         display: none;
         position: absolute;
         top: 52px;            /* ตำแหน่งลอย */
-        right: 22px;          /* ชิดขอบขวา */
+        left: 22px;           /* ชิดขอบซ้าย (ให้ตรงกับปุ่มสามขีด) */
         left: auto;           /* ไม่เต็มจอ */
         width: 220px;         /* ขนาดคงที่ */
         max-height: 80vh;     /* เลื่อนได้ถ้าเมนูยาวเกินจอ */
