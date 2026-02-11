@@ -70,7 +70,7 @@ body {
 }
 .logo-wrapper:hover .logo { opacity: 1; }
 
-/* แก้ไขจุดนี้: เมนูวืบๆ */
+/* เมนูวืบๆ */
 .desktop-menu { display: flex; gap: 24px; }
 .desktop-menu a {
     text-decoration: none;
@@ -78,13 +78,12 @@ body {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: -0.01em;
-    display: inline-block; /* จำเป็นสำหรับการใช้ transform */
-    /* ใช้ cubic-bezier เพื่อความ "วืบ" ที่นุ่มนวล */
+    display: inline-block;
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
 }
 .desktop-menu a:hover { 
     color: var(--accent-blue); 
-    transform: scale(1.2); /* ขยายขึ้น 20% */
+    transform: scale(1.2); 
 }
 
 .header-right { display: flex; align-items: center; gap: 16px; }
@@ -189,16 +188,22 @@ body {
     .desktop-menu {
         display: none;
         position: absolute;
-        top: 48px;
-        left: 0;
-        width: 100%;
+        top: 52px;            /* ตำแหน่งลอย */
+        right: 22px;          /* ชิดขอบขวา */
+        left: auto;           /* ไม่เต็มจอ */
+        width: 220px;         /* ขนาดคงที่ */
+        max-height: 80vh;     /* เลื่อนได้ถ้าเมนูยาวเกินจอ */
+        overflow-y: auto;
+        
         background: rgba(255,255,255,0.98);
         backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
-        padding: 20px 40px;
-        border-bottom: 1px solid #ddd;
+        padding: 10px 20px;   /* ปรับ padding ให้เล็กลง */
+        border-radius: 18px;  /* ความโค้งมน */
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        border: 1px solid rgba(0,0,0,0.05);
         gap: 15px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
     }
     
     .desktop-menu.active { display: flex; }
@@ -206,9 +211,11 @@ body {
         font-size: 16px; 
         border-bottom: 1px solid #f0f0f0; 
         padding-bottom: 10px;
-        transform: none !important; /* ปิด scale ในมือถือเพื่อไม่ให้เบียดกัน */
+        transform: none !important; /* ปิด scale ในมือถือ */
     }
     
+    .desktop-menu a:last-child { border-bottom: none; }
+
     .mobile-menu-btn { display: flex; }
     .hero h1 { font-size: 36px; }
 }
