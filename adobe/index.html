@@ -4,181 +4,205 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adobe Tools - รายละเอียดการใช้งาน</title>
+
+    <!-- Global CSS -->
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../product-detail.css">
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <nav class="main-nav">
-                <div class="logo">8Baht Tools</div>
+<!-- ================= HEADER (ใช้ชุดเดียวกับหน้าหลัก) ================= -->
+<header class="main-header">
+    <div class="header-container">
+
+        <div class="header-left">
+            <a href="../index.html" class="logo-wrapper">
+                <img src="../logo.png" class="logo" alt="8Baht">
+            </a>
+
+            <nav class="desktop-menu" id="main-nav">
+                <a href="../index.html">Adobe</a>
+                <a href="#">Autodesk</a>
+                <a href="#">Corona</a>
+                <a href="#">Enscape</a>
+                <a href="#">V-Ray</a>
+                <a href="#">D5</a>
+                <a href="#">Foxit</a>
+                <a href="#">SketchUp</a>
+                <a href="#">BIM Bundle</a>
+                <a href="#">Rhino</a>
+                <a href="#">Lumion</a>
+                <a href="#">PDFelement</a>
+                <a href="#">Microsoft</a>
+                <a href="#">Other</a>
             </nav>
         </div>
-    </header>
-
-  <header class="main-header">
-    <div class="container header-flex">
-        <div class="logo">
-            <img src="../logo.png" alt="8Baht"> </div>
-
-        <nav class="main-nav" id="main-nav">
-            <a href="../index.html">Adobe</a>
-            <a href="#">Autodesk</a>
-            <a href="#">Corona</a>
-            <a href="#">Enscape</a>
-            <a href="#">V-Ray</a>
-            <a href="#">D5</a>
-            <a href="#">Foxit</a>
-            <a href="#">SketchUp</a>
-            <a href="#">BIM Bundle</a>
-            <a href="#">Rhino</a>
-            <a href="#">Lumion</a>
-            <a href="#">PDFelement</a>
-            <a href="#">Microsoft</a>
-            <a href="#">Other</a>
-        </nav>
 
         <div class="header-right">
-            <button class="search-btn">
-                <i class="fas fa-search"></i> </button>
+            <button class="search-btn">🔍</button>
             <a href="#" class="btn-ticket">Open Ticket</a>
         </div>
-        
-        <div class="mobile-toggle" id="mobile-toggle">
+
+        <button class="mobile-menu-btn" id="mobile-toggle">
             <span></span><span></span><span></span>
-        </div>
+        </button>
+
     </div>
 </header>
-    
-    <div class="product-layout">
-        <aside class="product-sidebar">
-            <a href="../index.html" class="back-link">← กลับหน้าหลัก</a>
-            <nav class="sticky-nav">
-                <p class="nav-label">เมนูช่วยเหลือ</p>
-                <a href="#install" class="nav-item active">ลิงก์ติดตั้ง (Link)</a>
-                <a href="#trial" class="nav-item">ทดลองใช้ (Trial)</a>
-                <a href="#docs" class="nav-item">เอกสาร (Document)</a>
-                <a href="#faq" class="nav-item">ถาม-ตอบ (FAQ)</a>
-                <a href="#tips" class="nav-item">Trip & Trick</a>
-                <a href="#older" class="nav-item">เวอร์ชั่นก่อนหน้า</a>
-            </nav>
-        </aside>
+<!-- ================= END HEADER ================= -->
 
-        <main class="product-content">
-            
-            <section id="install">
-                <h2 class="section-title">ลิงก์ติดตั้ง (Link)</h2>
-                <div class="card-grid">
-                    <div class="product-card">
-                        <div class="card-top">
-                            <a href="https://www.adobe.com" target="_blank" class="product-link-wrapper">
-                                <img src="adobe-logo.png" alt="Adobe">
-                                <div class="info">
-                                    <h3>Adobe Creative Cloud Pro</h3>
-                                    <p>ใบอนุญาตเช่าใช้ (ข้อความเพิ่มเติมระบุที่นี่)</p>
-                                </div>
-                            </a>
+
+<!-- ================= PRODUCT LAYOUT ================= -->
+<div class="product-layout">
+
+    <!-- Sidebar -->
+    <aside class="product-sidebar">
+        <a href="../index.html" class="back-link">← กลับหน้าหลัก</a>
+
+        <nav class="sticky-nav">
+            <p class="nav-label">เมนูช่วยเหลือ</p>
+            <a href="#install" class="nav-item active">ลิงก์ติดตั้ง</a>
+            <a href="#trial" class="nav-item">ทดลองใช้</a>
+            <a href="#docs" class="nav-item">เอกสาร</a>
+            <a href="#faq" class="nav-item">FAQ</a>
+            <a href="#tips" class="nav-item">Tip & Trick</a>
+            <a href="#older" class="nav-item">เวอร์ชั่นก่อนหน้า</a>
+        </nav>
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="product-content">
+
+        <!-- INSTALL -->
+        <section id="install">
+            <h2 class="section-title">ลิงก์ติดตั้ง</h2>
+
+            <div class="card-grid">
+                <div class="product-card">
+                    <a href="https://www.adobe.com" target="_blank" class="product-link-wrapper">
+                        <img src="adobe-logo.png" alt="Adobe">
+                        <div class="info">
+                            <h3>Adobe Creative Cloud Pro</h3>
+                            <p>ใบอนุญาตเช่าใช้</p>
                         </div>
-                        <div class="card-bottom">
-                            <span class="sub-text">ลิงก์ติดตั้งทางการ</span>
-                            <button class="btn-copy" data-url="https://link-to-install.com">Copy Link</button>
-                        </div>
+                    </a>
+
+                    <div class="card-bottom">
+                        <span class="sub-text">ลิงก์ติดตั้งทางการ</span>
+                        <button class="btn-copy" data-url="https://www.adobe.com">Copy Link</button>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="trial">
-                <h2 class="section-title">ทดลองใช้ (Trial)</h2>
-                <div class="card-grid">
-                    <div class="product-card">
-                        <div class="card-top">
-                            <a href="https://trial-link.com" target="_blank" class="product-link-wrapper">
-                                <div class="icon-placeholder">⏳</div>
-                                <div class="info">
-                                    <h3>Adobe Pro Free Trial</h3>
-                                    <p>ทดลองใช้งานฟรี 7-30 วัน</p>
-                                </div>
-                            </a>
+
+        <!-- TRIAL -->
+        <section id="trial">
+            <h2 class="section-title">ทดลองใช้</h2>
+
+            <div class="card-grid">
+                <div class="product-card">
+                    <a href="https://trial-link.com" target="_blank" class="product-link-wrapper">
+                        <div class="icon-placeholder">⏳</div>
+                        <div class="info">
+                            <h3>Adobe Free Trial</h3>
+                            <p>ทดลองใช้ฟรี 7-30 วัน</p>
                         </div>
-                        <div class="card-bottom">
-                            <span class="sub-text">ดาวน์โหลดตัว Trial</span>
-                            <button class="btn-copy" data-url="https://trial-link.com">Copy Link</button>
-                        </div>
+                    </a>
+
+                    <div class="card-bottom">
+                        <span class="sub-text">Trial Installer</span>
+                        <button class="btn-copy" data-url="https://trial-link.com">Copy Link</button>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="docs">
-                <h2 class="section-title">เอกสาร (Document)</h2>
-                <div class="doc-grid">
-                    <div class="doc-card">
-                        <div class="doc-icon">📄</div>
-                        <div class="doc-info">
-                            <p class="doc-name">เปรียบเทียบแผน Revit LT, Revit and AEC Collection (en)</p>
-                            <a href="https://drive.google.com/..." target="_blank" class="btn-view">เปิด Google Drive</a>
-                        </div>
+
+        <!-- DOCUMENT -->
+        <section id="docs">
+            <h2 class="section-title">เอกสาร</h2>
+
+            <div class="doc-grid">
+                <div class="doc-card">
+                    <div class="doc-icon">📄</div>
+                    <div class="doc-info">
+                        <p class="doc-name">Adobe Plan Comparison</p>
+                        <a href="https://drive.google.com/" target="_blank" class="btn-view">เปิด Google Drive</a>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="faq">
-                <h2 class="section-title">ถาม-ตอบ (FAQ)</h2>
-                <div class="faq-container">
-                    <details class="faq-item">
-                        <summary>วิธีติดตั้ง Font ภาษาไทยทำอย่างไร? <span class="plus">+</span></summary>
-                        <div class="faq-content">
-                            <p>สามารถดาวน์โหลดไฟล์ .ttf และติดตั้งลงในระบบ Windows/Mac ได้ทันทีครับ</p>
-                        </div>
-                    </details>
-                </div>
-            </section>
 
-            <section id="tips">
-                <h2 class="section-title">Trip & Trick</h2>
-                <div class="card-grid">
-                    <div class="product-card">
-                        <div class="card-top">
-                            <a href="https://tips-link.com" target="_blank" class="product-link-wrapper">
-                                <div class="icon-placeholder">💡</div>
-                                <div class="info">
-                                    <h3>Shortcut Keys ยอดนิยม</h3>
-                                    <p>รวมคีย์ลัดที่ช่วยให้ทำงานไวขึ้น</p>
-                                </div>
-                            </a>
+        <!-- FAQ -->
+        <section id="faq">
+            <h2 class="section-title">FAQ</h2>
+
+            <div class="faq-container">
+                <details class="faq-item">
+                    <summary>วิธีติดตั้ง Font ภาษาไทย? <span class="plus">+</span></summary>
+                    <div class="faq-content">
+                        ดาวน์โหลดไฟล์ .ttf แล้วดับเบิลคลิก Install ได้เลย
+                    </div>
+                </details>
+            </div>
+        </section>
+
+
+        <!-- TIPS -->
+        <section id="tips">
+            <h2 class="section-title">Tip & Trick</h2>
+
+            <div class="card-grid">
+                <div class="product-card">
+                    <a href="#" class="product-link-wrapper">
+                        <div class="icon-placeholder">💡</div>
+                        <div class="info">
+                            <h3>Shortcut Keys</h3>
+                            <p>รวมคีย์ลัดยอดนิยม</p>
                         </div>
-                        <div class="card-bottom">
-                            <span class="sub-text">อ่านเทคนิคเพิ่มเติม</span>
-                            <button class="btn-copy" data-url="https://tips-link.com">Copy Link</button>
-                        </div>
+                    </a>
+
+                    <div class="card-bottom">
+                        <span class="sub-text">อ่านเพิ่มเติม</span>
+                        <button class="btn-copy" data-url="#">Copy Link</button>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="older">
-                <h2 class="section-title">เวอร์ชั่นก่อนหน้า (Older Versions)</h2>
-                <div class="card-grid">
-                    <div class="product-card">
-                        <div class="card-top">
-                            <a href="https://older-v.com" target="_blank" class="product-link-wrapper">
-                                <div class="icon-placeholder">📦</div>
-                                <div class="info">
-                                    <h3>Adobe 2023 Legacy</h3>
-                                    <p>สำหรับ Windows รุ่นเก่า</p>
-                                </div>
-                            </a>
+
+        <!-- OLDER -->
+        <section id="older">
+            <h2 class="section-title">เวอร์ชั่นก่อนหน้า</h2>
+
+            <div class="card-grid">
+                <div class="product-card">
+                    <a href="#" class="product-link-wrapper">
+                        <div class="icon-placeholder">📦</div>
+                        <div class="info">
+                            <h3>Adobe 2023 Legacy</h3>
+                            <p>สำหรับ Windows รุ่นเก่า</p>
                         </div>
-                        <div class="card-bottom">
-                            <span class="sub-text">ดาวน์โหลดตัวติดตั้งเก่า</span>
-                            <button class="btn-copy" data-url="https://older-v.com">Copy Link</button>
-                        </div>
+                    </a>
+
+                    <div class="card-bottom">
+                        <span class="sub-text">Legacy Installer</span>
+                        <button class="btn-copy" data-url="#">Copy Link</button>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-        </main>
-    </div>
+    </main>
+</div>
+<!-- ================= END PRODUCT LAYOUT ================= -->
 
-    <script src="../script.js"></script>
+
+<!-- JS -->
+<script src="../script.js"></script>
+
 </body>
 </html>
