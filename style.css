@@ -1,13 +1,12 @@
 /* --- 1. Apple Style Variables & Reset --- */
 :root {
-    --bg-color: #f5f5f7;       /* สีพื้นหลังเทา Apple */
-    --text-main: #1d1d1f;      /* สีดำหลัก */
-    --text-gray: #86868b;      /* สีเทารอง */
-    --accent-blue: #0071e3;    /* สีฟ้า Apple Link */
+    --bg-color: #f5f5f7;
+    --text-main: #1d1d1f;
+    --text-gray: #86868b;
+    --accent-blue: #0071e3;
     --card-bg: #ffffff;
     --header-glass: rgba(255, 255, 255, 0.8);
     
-    /* เงาแบบหลายชั้นเพื่อความนุ่มนวลและมีมิติ */
     --shadow-sm: 0 2px 4px rgba(0,0,0,0.02), 0 10px 20px rgba(0,0,0,0.04);
     --shadow-hover: 0 30px 60px rgba(0,0,0,0.12);
 }
@@ -55,22 +54,11 @@ body {
     padding: 0 22px;
 }
 
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-}
-
+.header-left { display: flex; align-items: center; gap: 24px; }
 .logo-wrapper { display: flex; align-items: center; text-decoration: none; }
-.logo {
-    height: 18px;
-    width: auto;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-}
+.logo { height: 18px; width: auto; opacity: 0.8; transition: opacity 0.2s; }
 .logo-wrapper:hover .logo { opacity: 1; }
 
-/* เมนูวืบๆ */
 .desktop-menu { display: flex; gap: 24px; }
 .desktop-menu a {
     text-decoration: none;
@@ -81,13 +69,9 @@ body {
     display: inline-block;
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
 }
-.desktop-menu a:hover { 
-    color: var(--accent-blue); 
-    transform: scale(1.2); 
-}
+.desktop-menu a:hover { color: var(--accent-blue); transform: scale(1.2); }
 
 .header-right { display: flex; align-items: center; gap: 16px; }
-
 .btn-ticket {
     background-color: var(--accent-blue);
     color: white;
@@ -107,18 +91,18 @@ body {
 .search-btn:hover { opacity: 1; }
 
 /* --- 4. Hero Section --- */
-.hero {
-    padding: 80px 0 50px;
-    text-align: left;
+.hero { 
+    padding: 30px 0 15px; /* ลดระยะล่างลงอีกนิดให้รับกับตัวอักษรเล็ก */
+    text-align: left; 
 }
-.hero h1 {
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--text-main);
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
+
+.hero h1 { 
+    font-size: 13px; 
+    font-weight: 600; 
+    color: var(--text-gray); 
+    letter-spacing: -0.01em; /* ลดความแน่นของตัวอักษรลงเพื่อให้เข้ากับขนาด 13px */
+    margin-bottom: 0;        /* เอา margin ออกเพราะ padding ของ hero จัดการพื้นที่แล้ว */
 }
-.hero h1 span { color: var(--text-gray); }
 
 /* --- 5. Grid Menu (Cards) --- */
 .grid-menu {
@@ -131,11 +115,11 @@ body {
 .card {
     background: var(--card-bg);
     border-radius: 22px;
-    padding: 40px 25px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* จัดรูปให้อยู่กลางแนวตั้งเป๊ะ */
     text-decoration: none;
     min-height: 180px;
     border: 1px solid rgba(255, 255, 255, 0.7); 
@@ -147,20 +131,21 @@ body {
 
 .card img {
     width: auto;
-    max-width: 85%;
+    max-width: 80%;
     height: auto;
-    max-height: 60px;
+    max-height: 55px; /* คุมความสูงรูปให้สมดุล */
     object-fit: contain;
-    margin-bottom: 0px;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .card-title {
+    position: absolute;   /* แยกออกจาก Flow ปกติเพื่อให้รูปอยู่กลางเป๊ะ */
+    bottom: 25px;         /* ระยะห่างจากขอบล่างของการ์ด */
     font-size: 11px;
     font-weight: 600;
     color: var(--text-main);
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(15px);
     transition: all 0.3s ease;
 }
 
@@ -168,12 +153,9 @@ body {
 .card:hover {
     box-shadow: var(--shadow-hover);
     transform: translateY(-10px) scale(1.01);
-    background: #ffffff;
-    z-index: 10;
-    border-color: rgba(0,0,0,0.05);
 }
-.card:hover img { transform: scale(1.1) translateY(-5px); }
-.card:hover .card-title { opacity: 1; transform: translateY(15px); }
+.card:hover img { transform: scale(1.1) translateY(-10px); } /* ดันรูปขึ้นนิดนึงตอน Hover เพื่อหลบชื่อ */
+.card:hover .card-title { opacity: 1; transform: translateY(0); }
 
 /* --- 6. Mobile & Responsive --- */
 .mobile-menu-btn {
@@ -188,19 +170,17 @@ body {
     .desktop-menu {
         display: none;
         position: absolute;
-        top: 52px;            /* ตำแหน่งลอย */
-        left: 22px;           /* ชิดขอบซ้าย (ให้ตรงกับปุ่มสามขีด) */
-        left: auto;           /* ไม่เต็มจอ */
-        width: 220px;         /* ขนาดคงที่ */
-        max-height: 80vh;     /* เลื่อนได้ถ้าเมนูยาวเกินจอ */
+        top: 52px;
+        left: 22px;           /* ลอยชิดซ้ายตรงกับปุ่ม */
+        width: 220px;
+        max-height: 80vh;
         overflow-y: auto;
-        
         background: rgba(255,255,255,0.98);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
-        padding: 10px 20px;   /* ปรับ padding ให้เล็กลง */
-        border-radius: 18px;  /* ความโค้งมน */
+        padding: 15px 20px;
+        border-radius: 18px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         border: 1px solid rgba(0,0,0,0.05);
         gap: 15px;
@@ -211,9 +191,8 @@ body {
         font-size: 16px; 
         border-bottom: 1px solid #f0f0f0; 
         padding-bottom: 10px;
-        transform: none !important; /* ปิด scale ในมือถือ */
+        transform: none !important;
     }
-    
     .desktop-menu a:last-child { border-bottom: none; }
 
     .mobile-menu-btn { display: flex; }
@@ -226,9 +205,9 @@ body {
     .hero h1 { font-size: 32px; }
     .card { min-height: 160px; padding: 20px; border-radius: 18px; }
     .card img { max-height: 45px; }
+    .card-title { bottom: 15px; } /* ปรับระยะชื่อในมือถือ */
 }
 
-/* Footer */
 .main-footer {
     text-align: center;
     padding: 60px 40px;
