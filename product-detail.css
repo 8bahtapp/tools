@@ -233,3 +233,67 @@ details[open] summary .plus { transform: rotate(45deg); color: var(--text-gray);
     .card-grid { grid-template-columns: 1fr; }
     .section-title { font-size: 20px; }
 }
+/* --- Sidebar Menu: ปรับเงาให้นุ่มนวลตามรูปตัวอย่าง --- */
+.sticky-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: transparent;
+    padding: 10px 5px;
+}
+
+.nav-item {
+    position: relative;
+    padding: 14px 16px 14px 40px; /* เพิ่มพื้นที่ด้านซ้ายอีกนิด */
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 16px;
+    background: #ffffff;
+    
+    /* เงาสองชั้นเพื่อให้ดูฟุ้งและนุ่มนวล (Soft Depth) */
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+        0 10px 15px -3px rgba(0, 0, 0, 0.03);
+    
+    border: 1px solid rgba(0, 0, 0, 0.01); /* เส้นขอบจางมากๆ */
+    transition: all 0.3s ease;
+    display: block;
+}
+
+/* ขีดสีฟ้าด้านหน้า (คงเดิมตามรูปแรกที่คุณส่งมา) */
+.nav-item::before {
+    content: "";
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 0;
+    background-color: var(--accent-blue);
+    border-radius: 4px;
+    transition: height 0.3s ease, opacity 0.2s;
+    opacity: 0;
+}
+
+/* เมื่อเอาเมาส์ชี้ (Hover) ให้เงาเข้มขึ้นนิดเดียว */
+.nav-item:hover {
+    box-shadow: 
+        0 10px 20px -5px rgba(0, 0, 0, 0.08), 
+        0 4px 6px -2px rgba(0, 0, 0, 0.02);
+    transform: translateY(-1px);
+}
+
+/* สถานะ Active (คงขีดสีฟ้าไว้) */
+.nav-item.active {
+    color: var(--text-main); /* ไม่ต้องเปลี่ยนสีตัวอักษรเป็นฟ้าตามรูปตัวอย่าง */
+    box-shadow: 
+        0 10px 20px -5px rgba(0, 0, 0, 0.08);
+}
+
+.nav-item.active::before,
+.nav-item:hover::before {
+    height: 18px; /* ความยาวขีดสีฟ้า */
+    opacity: 1;
+}
