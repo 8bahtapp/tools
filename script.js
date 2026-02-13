@@ -12,11 +12,24 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(overlay);
     }
 
+    // ✅ REPLACED toggleMenu FUNCTION ONLY
     function toggleMenu() {
         if (!mainNav) return;
         const isOpen = mainNav.classList.toggle('active');
         overlay.classList.toggle('active', isOpen);
         document.body.classList.toggle('menu-open', isOpen);
+
+        // 🔥 เพิ่ม Lock Scroll Background + Scrollable Menu
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+            mainNav.style.overflowY = 'auto';
+            mainNav.style.maxHeight = 'calc(100vh - 60px)';
+        } else {
+            document.body.style.overflow = '';
+            mainNav.style.overflowY = '';
+            mainNav.style.maxHeight = '';
+        }
+
         if (isOpen && navigator.vibrate) navigator.vibrate(10);
     }
 
