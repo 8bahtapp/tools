@@ -1,5 +1,5 @@
 /* ============================================================
-   PRODUCT DETAIL STYLES - Optimized for Desktop & Mobile
+   PRODUCT DETAIL STYLES - Apple Style + Mobile Optimized
    ============================================================ */
 
 /* --- 1. Layout Structure --- */
@@ -11,13 +11,13 @@
     padding: 0 22px;
 }
 
-/* --- 2. Sidebar & Sticky Navigation (Desktop) --- */
+/* --- 2. Sidebar Navigation --- */
 .product-sidebar {
     width: 260px;
     position: sticky;
-    top: 80px; /* ระยะห่างจาก Header */
+    top: 80px;
     height: fit-content;
-    z-index: 100; /* ให้ต่ำกว่า Main Header เสมอ */
+    z-index: 100;
 }
 
 .back-link {
@@ -35,7 +35,6 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    background: transparent;
     padding: 10px 5px;
 }
 
@@ -57,13 +56,12 @@
     font-weight: 500;
     border-radius: 16px;
     background: #ffffff;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.01);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.01);
     transition: all 0.3s ease;
     display: block;
 }
 
-/* ขีดสีฟ้าด้านหน้า (Desktop) */
 .nav-item::before {
     content: "";
     position: absolute;
@@ -79,13 +77,8 @@
 }
 
 .nav-item:hover {
-    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08);
     transform: translateY(-1px);
-}
-
-.nav-item.active {
-    background: #ffffff;
-    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
 }
 
 .nav-item.active::before {
@@ -93,27 +86,37 @@
     opacity: 1;
 }
 
-/* --- 3. Main Content Area --- */
+/* --- 3. Main Content --- */
 .product-content { flex: 1; }
 section { padding: 40px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
 section:last-child { border-bottom: none; }
-.section-title { font-size: 24px; margin-bottom: 25px; font-weight: 600; letter-spacing: -0.02em; }
+.section-title { font-size: 24px; margin-bottom: 25px; font-weight: 600; }
 
-/* --- 4. Product Cards & Documents --- */
+/* --- 4. Card Grid --- */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
 }
 
+/* ============================================================
+   Product Card (Apple Style)
+   ============================================================ */
 .product-card {
-    background: #fff;
-    border-radius: 22px;
+    background: var(--card-bg, #fff);
+    border-radius: 16px;
     border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.15, 0.83, 0.66, 1);
+    display: flex;
+    flex-direction: column;
 }
-.product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
 
 .product-link-wrapper {
     display: flex;
@@ -123,13 +126,34 @@ section:last-child { border-bottom: none; }
     text-decoration: none;
     color: inherit;
 }
-.product-link-wrapper img, .icon-placeholder {
-    width: 50px; height: 50px; border-radius: 12px; object-fit: contain; flex-shrink: 0;
-}
-.icon-placeholder { background: #f5f5f7; display: flex; align-items: center; justify-content: center; font-size: 24px; }
 
-.info h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-.info p { font-size: 13px; color: var(--text-gray); line-height: 1.4; }
+.product-link-wrapper img,
+.icon-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.icon-placeholder {
+    background: #f5f5f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.info p {
+    font-size: 13px;
+    color: var(--text-gray);
+    line-height: 1.4;
+}
 
 .card-bottom {
     padding: 15px 25px;
@@ -140,60 +164,74 @@ section:last-child { border-bottom: none; }
     align-items: center;
 }
 
-.doc-card {
-    display: flex;
-    padding: 18px 20px;
-    background: #fff;
-    border-radius: 18px;
-    border: 1px solid #eee;
+/* ============================================================
+   Copy Link Button (Final Apple Style)
+   ============================================================ */
+.btn-copy {
+    background: transparent;
+    color: #1d1d1f;
+    border: 1.5px solid #1d1d1f;
+    padding: 7px 20px;
+    border-radius: 980px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
     align-items: center;
-    gap: 15px;
-    transition: 0.3s;
-    margin-bottom: 10px;
+    gap: 8px;
+    transition: all 0.2s ease;
 }
-.doc-card:hover { border-color: var(--accent-blue); background: #fbfcfe; }
 
-/* --- 5. FAQ Accordion --- */
-.faq-item { background: #fff; border-radius: 15px; border: 1px solid #eee; margin-bottom: 10px; }
-summary { padding: 20px; list-style: none; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
-.faq-content { padding: 0 20px 20px; color: var(--text-gray); font-size: 14px; line-height: 1.6; }
+/* Hover -> Black Button */
+.btn-copy:hover {
+    background: #1d1d1f;
+    color: #ffffff;
+}
 
-/* --- 6. Mobile & Split Screen Optimization --- */
+/* Success State */
+.btn-copy.success {
+    background: #34c759 !important;
+    color: white !important;
+    border-color: #34c759 !important;
+}
+
+/* Icon inside button */
+.btn-icon {
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* ============================================================
+   Mobile Optimization
+   ============================================================ */
 @media (max-width: 1100px) {
-    .product-layout { 
-        flex-direction: column; 
-        gap: 0; 
-        margin-top: 0; 
+
+    .product-layout {
+        flex-direction: column;
+        gap: 0;
+        margin-top: 0;
     }
 
-    /* แก้ไขปัญหาปุ่มสามขีดกดไม่ได้ โดยการจัด z-index และตำแหน่งใหม่ */
     .product-sidebar {
         width: 100%;
         position: sticky;
-        top: 48px; /* ติดขอบล่าง Header */
-        z-index: 500; /* ต้องน้อยกว่า Header หลัก */
-        margin: 0;
-        padding: 0;
-        background: rgba(255, 255, 255, 0.95);
+        top: 48px;
+        z-index: 500;
+        background: rgba(255,255,255,0.95);
         backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
         border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
-    /* ปรับเมนู Adobe เป็นแถบเลื่อนแนวนอน */
     .sticky-nav {
         flex-direction: row;
         overflow-x: auto;
-        display: flex;
         gap: 8px;
         padding: 12px 15px;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
     }
-    .sticky-nav::-webkit-scrollbar { display: none; } /* ซ่อน scrollbar */
+    .sticky-nav::-webkit-scrollbar { display: none; }
 
     .nav-item {
-        flex: 0 0 auto; /* ป้องกันปุ่มหดตัว */
+        flex: 0 0 auto;
         padding: 8px 18px !important;
         font-size: 13px;
         border-radius: 12px;
@@ -204,13 +242,12 @@ summary { padding: 20px; list-style: none; cursor: pointer; font-weight: 600; di
         align-items: center;
     }
 
-    /* สถานะ Active ในมือถือ: เน้นสีปุ่มให้เด่นแทนขีด */
     .nav-item.active {
         background: var(--accent-blue);
         color: white !important;
     }
 
-    .nav-item::before { display: none !important; } /* ปิดขีดข้างในมือถือ */
+    .nav-item::before { display: none !important; }
     .nav-label, .back-link { display: none !important; }
 
     .product-content { padding-top: 20px; }
