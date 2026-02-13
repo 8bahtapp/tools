@@ -7,6 +7,47 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../product-detail.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS ส่วนเพิ่มเติมสำหรับปุ่มไอคอนและการแจ้งเตือน */
+        .btn-copy-icon {
+            background: #f4f4f5;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #52525b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-copy-icon:hover {
+            background: #e4e4e7;
+            color: #18181b;
+        }
+
+        #copy-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #18181b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .toast-hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, 20px) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -81,26 +122,29 @@
                         </a>
                         <div class="card-bottom">
                             <span class="sub-text">Official Website</span>
-                            <button class="btn-copy" data-url="https://www.adobe.com/creativecloud.html">Copy Link</button>
+                            <button class="btn-copy-icon" data-url="https://www.adobe.com/creativecloud.html" title="คัดลอกลิงก์">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                            </button>
                         </div>
                     </div>
-  
-                <div class="card-grid">
+
                     <div class="product-card">
-                        <a href="https://www.adobe.com/creativecloud.html" class="product-link-wrapper" target="_blank">
-                            <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-adobe.png" alt="Adobe CC">
+                        <a href="https://www.adobe.com/acrobat.html" class="product-link-wrapper" target="_blank">
+                            <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-adobe.png" alt="Adobe Acrobat">
                             <div class="info">
                                 <h3>Acrobat</h3>
-                                <p>ใส่ข้อความเพิ่มเติมได้</p>
+                                <p>เครื่องมือจัดการเอกสาร PDF ครบวงจร</p>
                             </div>
                         </a>
                         <div class="card-bottom">
                             <span class="sub-text">Official Website</span>
-                            <button class="btn-copy" data-url="https://www.adobe.com/creativecloud.html">Copy Link</button>
+                            <button class="btn-copy-icon" data-url="https://www.adobe.com/acrobat.html" title="คัดลอกลิงก์">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                            </button>
                         </div>
                     </div>
-                  
-                </div> </section>
+                </div> 
+            </section>
 
             <section id="trial">
                 <h2 class="section-title">Trial</h2>
@@ -115,7 +159,9 @@
                         </a>
                         <div class="card-bottom">
                             <span class="sub-text">Free Trial</span>
-                            <button class="btn-copy" data-url="https://www.adobe.com/free-trial-download.html">Copy Link</button>
+                            <button class="btn-copy-icon" data-url="https://www.adobe.com/free-trial-download.html" title="คัดลอกลิงก์">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -140,12 +186,19 @@
                     <summary>ต้องลบเวอร์ชันเก่าก่อนติดตั้งหรือไม่? <span class="arrow">▾</span></summary>
                     <div class="faq-content">
                         แนะนำให้ลบเวอร์ชันเก่าออกก่อนเพื่อป้องกันความขัดแย้งของไฟล์โปรแกรม (Conflict)
+                        <button class="btn-copy-icon" data-url="แนะนำให้ลบเวอร์ชันเก่าออกก่อนเพื่อป้องกันความขัดแย้งของไฟล์โปรแกรม" style="margin-top:10px" title="คัดลอกคำตอบ">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                        </button>
                     </div>
                 </details>
+
                 <details class="faq-item">
                     <summary>ใช้งานบน Mac M1/M2 ได้ไหม? <span class="arrow">▾</span></summary>
                     <div class="faq-content">
                         รองรับการทำงานเต็มรูปแบบบน Apple Silicon ครับ
+                        <button class="btn-copy-icon" data-url="รองรับการทำงานเต็มรูปแบบบน Apple Silicon ครับ" style="margin-top:10px" title="คัดลอกคำตอบ">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                        </button>
                     </div>
                 </details>
             </section>
@@ -163,7 +216,9 @@
                         </a>
                         <div class="card-bottom">
                             <span class="sub-text">Trip & Trick</span>
-                            <button class="btn-copy" data-url="https://8baht.com/tips-adobe">Copy Link</button>
+                            <button class="btn-copy-icon" data-url="https://8baht.com/tips-adobe" title="คัดลอกลิงก์">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -182,7 +237,9 @@
                         </a>
                         <div class="card-bottom">
                             <span class="sub-text">Older Versions</span>
-                            <button class="btn-copy" data-url="https://8baht.com/adobe-2022">Copy Link</button>
+                            <button class="btn-copy-icon" data-url="https://8baht.com/adobe-2022" title="คัดลอกลิงก์">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -191,11 +248,46 @@
         </main>
     </div>
 
+    <div id="copy-toast" class="toast-hidden">คัดลอกสำเร็จ!</div>
+
     <footer class="main-footer">
         <p>Copyright © 2026 8Baht Product Team. All rights reserved.</p>
     </footer>
 
-    <script src="../script.js"></script>
+    <script>
+        // Script สำหรับจัดการการคัดลอกและการแสดง Toast
+        document.querySelectorAll('.btn-copy-icon').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const text = this.getAttribute('data-url');
+                const toast = document.getElementById('copy-toast');
+
+                navigator.clipboard.writeText(text).then(() => {
+                    // แสดง Toast
+                    toast.classList.remove('toast-hidden');
+                    
+                    // ซ่อน Toast หลังจาก 2 วินาที
+                    setTimeout(() => {
+                        toast.classList.add('toast-hidden');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('ไม่สามารถคัดลอกได้:', err);
+                });
+            });
+        });
+
+        // Script พื้นฐานสำหรับ Toggle Menu (จาก script.js เดิมของคุณ)
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mainNav = document.getElementById('main-nav');
+        const overlay = document.getElementById('menu-overlay');
+
+        if(mobileToggle) {
+            mobileToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                overlay.classList.toggle('active');
+            });
+        }
+    </script>
     
 </body>
 </html>
