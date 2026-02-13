@@ -1,14 +1,27 @@
-/* --- 1. Apple Style Variables & Reset --- */
+/* ================================
+   1. Apple Design Tokens
+================================ */
 :root {
     --bg-color: #f5f5f7;
     --text-main: #1d1d1f;
     --text-gray: #86868b;
-    --accent-blue: #0071e3;
+
+    /* Apple Official Colors */
+    --apple-blue: #0071e3;
+    --apple-green: #34c759;
+
+    /* Alias for theme system */
+    --accent-blue: var(--apple-blue);
+    --accent-green: var(--apple-green);
+
     --card-bg: #ffffff;
     --header-glass: rgba(255, 255, 255, 0.8);
-    
+
     --shadow-sm: 0 2px 4px rgba(0,0,0,0.02), 0 10px 20px rgba(0,0,0,0.04);
+    --shadow-standard: 0 4px 12px rgba(0,0,0,0.05);
     --shadow-hover: 0 30px 60px rgba(0,0,0,0.12);
+
+    --radius-main: 20px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -21,7 +34,9 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* --- 2. Global Container --- */
+/* ================================
+   2. Global Container
+================================ */
 .container {
     max-width: 1400px;
     margin: 0 auto;
@@ -29,7 +44,9 @@ body {
     width: 100%;
 }
 
-/* --- 3. Glassmorphism Header --- */
+/* ================================
+   3. Glass Header
+================================ */
 .main-header {
     position: sticky;
     top: 0;
@@ -56,7 +73,7 @@ body {
 
 .header-left { display: flex; align-items: center; gap: 24px; }
 .logo-wrapper { display: flex; align-items: center; text-decoration: none; }
-.logo { height: 18px; width: auto; opacity: 0.8; transition: opacity 0.2s; }
+.logo { height: 18px; opacity: 0.8; transition: opacity 0.2s; }
 .logo-wrapper:hover .logo { opacity: 1; }
 
 .desktop-menu { display: flex; gap: 24px; }
@@ -66,12 +83,12 @@ body {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: -0.01em;
-    display: inline-block;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .desktop-menu a:hover { color: var(--accent-blue); transform: scale(1.2); }
 
 .header-right { display: flex; align-items: center; gap: 16px; }
+
 .btn-ticket {
     background-color: var(--accent-blue);
     color: white;
@@ -85,62 +102,59 @@ body {
 .btn-ticket:hover { background-color: #0077ed; transform: scale(1.02); }
 
 .search-btn {
-    background: none; border: none; cursor: pointer; color: #333;
-    opacity: 0.8; transition: opacity 0.2s; display: flex;
+    background: none; border: none; cursor: pointer;
+    color: #333; opacity: 0.8;
 }
 .search-btn:hover { opacity: 1; }
 
-/* --- 4. Hero Section --- */
-.hero { 
-    padding: 30px 0 15px; /* ลดระยะล่างลงอีกนิดให้รับกับตัวอักษรเล็ก */
-    text-align: left; 
+/* ================================
+   4. Hero
+================================ */
+.hero { padding: 30px 0 15px; text-align: left; }
+.hero h1 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-gray);
+    letter-spacing: -0.01em;
 }
 
-.hero h1 { 
-    font-size: 13px; 
-    font-weight: 600; 
-    color: var(--text-gray); 
-    letter-spacing: -0.01em; /* ลดความแน่นของตัวอักษรลงเพื่อให้เข้ากับขนาด 13px */
-    margin-bottom: 0;        /* เอา margin ออกเพราะ padding ของ hero จัดการพื้นที่แล้ว */
-}
-
-/* --- 5. Grid Menu (Cards) --- */
+/* ================================
+   5. Grid Cards
+================================ */
 .grid-menu {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));  
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 24px;
     padding-bottom: 100px;
 }
 
 .card {
     background: var(--card-bg);
-    border-radius: 22px;
+    border-radius: var(--radius-main);
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* จัดรูปให้อยู่กลางแนวตั้งเป๊ะ */
+    justify-content: center;
     text-decoration: none;
     min-height: 180px;
-    border: 1px solid rgba(255, 255, 255, 0.7); 
-    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: var(--shadow-standard);
     transition: all 0.5s cubic-bezier(0.15, 0.83, 0.66, 1);
     position: relative;
     overflow: hidden;
 }
 
 .card img {
-    width: auto;
     max-width: 80%;
-    height: auto;
-    max-height: 55px; /* คุมความสูงรูปให้สมดุล */
+    max-height: 55px;
     object-fit: contain;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .card-title {
-    position: absolute;   /* แยกออกจาก Flow ปกติเพื่อให้รูปอยู่กลางเป๊ะ */
-    bottom: 25px;         /* ระยะห่างจากขอบล่างของการ์ด */
+    position: absolute;
+    bottom: 25px;
     font-size: 11px;
     font-weight: 600;
     color: var(--text-main);
@@ -149,65 +163,126 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Hover Effects */
 .card:hover {
     box-shadow: var(--shadow-hover);
     transform: translateY(-10px) scale(1.01);
 }
-.card:hover img { transform: scale(1.1) translateY(-10px); } /* ดันรูปขึ้นนิดนึงตอน Hover เพื่อหลบชื่อ */
+.card:hover img { transform: scale(1.1) translateY(-10px); }
 .card:hover .card-title { opacity: 1; transform: translateY(0); }
 
-/* --- 6. Mobile & Responsive --- */
+/* ================================
+   6. Apple Blur Overlay
+================================ */
+.menu-overlay {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 9998;
+    opacity: 0;
+    display: none;
+    transition: opacity 0.3s ease;
+}
+.menu-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* ================================
+   7. Apple Copy Button
+================================ */
+.btn-copy {
+    background: #f2f2f7;
+    color: var(--apple-blue);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-copy:active { transform: scale(0.92); }
+
+/* Success State */
+.btn-copy.success {
+    background: var(--apple-green) !important;
+    color: white !important;
+}
+
+/* SVG icon inside button */
+.btn-copy svg {
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* ================================
+   8. Mobile Menu
+================================ */
 .mobile-menu-btn {
     display: none;
     flex-direction: column;
     gap: 5px;
-    background: none; border: none; cursor: pointer;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
-.mobile-menu-btn span { width: 18px; height: 1.5px; background: #333; transition: 0.3s; }
+.mobile-menu-btn span {
+    width: 18px;
+    height: 1.5px;
+    background: #333;
+    transition: 0.3s;
+}
 
 @media (max-width: 1100px) {
     .desktop-menu {
         display: none;
         position: absolute;
         top: 52px;
-        left: 22px;           /* ลอยชิดซ้ายตรงกับปุ่ม */
+        left: 22px;
         width: 220px;
-        max-height: 80vh;
-        overflow-y: auto;
         background: rgba(255,255,255,0.98);
         backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
         padding: 15px 20px;
         border-radius: 18px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        border: 1px solid rgba(0,0,0,0.05);
         gap: 15px;
     }
-    
+
     .desktop-menu.active { display: flex; }
-    .desktop-menu a { 
-        font-size: 16px; 
-        border-bottom: 1px solid #f0f0f0; 
+
+    .desktop-menu a {
+        font-size: 16px;
+        border-bottom: 1px solid #f0f0f0;
         padding-bottom: 10px;
         transform: none !important;
     }
-    .desktop-menu a:last-child { border-bottom: none; }
 
     .mobile-menu-btn { display: flex; }
-    .hero h1 { font-size: 36px; }
 }
 
+/* ================================
+   9. Mobile Cards
+================================ */
 @media (max-width: 600px) {
     .grid-menu { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .hero { padding: 40px 0 20px; }
-    .hero h1 { font-size: 32px; }
-    .card { min-height: 160px; padding: 20px; border-radius: 18px; }
+    .card { min-height: 160px; border-radius: 18px; }
     .card img { max-height: 45px; }
-    .card-title { bottom: 15px; } /* ปรับระยะชื่อในมือถือ */
+    .card-title { bottom: 15px; }
 }
 
+/* ================================
+   10. Footer
+================================ */
 .main-footer {
     text-align: center;
     padding: 60px 40px;
@@ -216,7 +291,10 @@ body {
     border-top: 1px solid #e0e0e0;
     margin-top: 40px;
 }
-/* Toast Notification */
+
+/* ================================
+   11. Toast Notification
+================================ */
 .copy-toast {
     position: fixed;
     bottom: 30px;
@@ -228,14 +306,9 @@ body {
     padding: 12px 24px;
     border-radius: 980px;
     font-size: 14px;
-    font-weight: 500;
     z-index: 10000;
     transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.4s;
     opacity: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .copy-toast.show {
