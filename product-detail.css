@@ -202,7 +202,7 @@ section:last-child { border-bottom: none; }
 }
 
 /* ============================================================
-   Mobile Optimization
+   Mobile Optimization (REPLACED ONLY THIS BLOCK)
    ============================================================ */
 @media (max-width: 1100px) {
 
@@ -219,15 +219,28 @@ section:last-child { border-bottom: none; }
         z-index: 500;
         background: rgba(255,255,255,0.95);
         backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
+    /* ให้ back-link แสดงบนมือถือ */
+    .back-link {
+        display: block !important;
+        padding: 10px 15px 0;
+        margin-bottom: 0;
+        font-size: 13px;
+    }
+
     .sticky-nav {
+        display: flex;
         flex-direction: row;
         overflow-x: auto;
+        white-space: nowrap;
         gap: 8px;
         padding: 12px 15px;
+        -webkit-overflow-scrolling: touch;
     }
+
     .sticky-nav::-webkit-scrollbar { display: none; }
 
     .nav-item {
@@ -238,7 +251,7 @@ section:last-child { border-bottom: none; }
         background: #f2f2f7;
         box-shadow: none;
         border: none;
-        display: flex;
+        display: inline-flex;
         align-items: center;
     }
 
@@ -248,7 +261,7 @@ section:last-child { border-bottom: none; }
     }
 
     .nav-item::before { display: none !important; }
-    .nav-label, .back-link { display: none !important; }
+    .nav-label { display: none !important; }
 
     .product-content { padding-top: 20px; }
     .card-grid { grid-template-columns: 1fr; }
