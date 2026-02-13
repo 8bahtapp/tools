@@ -24,24 +24,31 @@ document.addEventListener("DOMContentLoaded", () => {
     mobileToggle?.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu); // คลิกที่ว่างแล้วปิดทันที!
 
-    // --- 3. Scroll Spy (ขีดสีฟ้าขยับตามการเลื่อน) ---
+// --- 3. ปรับปรุง Scroll Spy (ให้แม่นยำขึ้นแม้เนื้อหาสั้น) ---
     function handleScrollSpy() {
         let currentId = "";
-        const scrollPosition = window.scrollY + 100;
-
+        
+        // คำนวณหา Section ที่อยู่ใกล้สายตาที่สุด
         sections.forEach((section) => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            const sectionTop = section.offsetTop - 120; // เผื่อระยะ Header
+            const sectionBottom = sectionTop + section.offsetHeight;
+            const scrollPosition = window.scrollY;
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
                 currentId = section.getAttribute("id");
             }
         });
 
+        // กรณีพิเศษ: ถ้าเลื่อนจนสุดขอบล่างของหน้าจอ ให้ Active เมนูสุดท้ายเสมอ (แก้ปัญหาเนื้อหาสั้น)
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 20) {
+            currentId = sections[sections.length - 1]?.getAttribute("id");
+        }
+
         navItems.forEach((item) => {
             item.classList.remove("active");
-            if (item.getAttribute("href") === `#${currentId}`) {
+            const href = item.getAttribute("href");
+            if (href === `#${currentId}` || (href.startsWith('#') && href.substring(1) === currentId)) {
                 item.classList.add("active");
-                // สำหรับมือถือ: ให้แถบเมนูเลื่อนมาตรงกลางถ้า Active
                 if (window.innerWidth < 1100) {
                     item.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
                 }
@@ -50,20 +57,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (sections.length > 0) window.addEventListener("scroll", handleScrollSpy);
 
-    // --- 4. Smooth Scroll (คลิกเมนูแล้วเลื่อนนุ่มๆ) ---
+    // --- 4. ปรับปรุง Smooth Scroll (แก้ปัญหาคลิกแล้วไม่ไป) ---
     navItems.forEach(item => {
         item.addEventListener("click", (e) => {
-            const targetId = item.getAttribute("href");
-            if (targetId.startsWith("#")) {
-                e.preventDefault();
+            const href = item.getAttribute("href");
+            
+            // ตรวจสอบว่าเป็น Link ภายในหน้าเดียวกันหรือไม่ (#)
+            if (href && href.startsWith("#")) {
+                const targetId = href;
                 const targetSection = document.querySelector(targetId);
+                
                 if (targetSection) {
+                    e.preventDefault();
+                    
+                    // ปิดเมนูมือก่อนเลื่อน (ถ้าเป็น Mobile)
+                    if (mainNav.classList.contains('active')) toggleMenu();
+
+                    // เลื่อนไปยังตำแหน่ง Section นั้นๆ
+                    const offsetTop = targetSection.offsetTop - 70; // ลบความสูง Header
                     window.scrollTo({
-                        top: targetSection.offsetTop - 80,
+                        top: offsetTop,
                         behavior: "smooth"
                     });
-                    // ปิดเมนูอัตโนมัติหลังคลิก (ถ้าเปิดอยู่)
-                    if (mainNav.classList.contains('active')) toggleMenu();
                 }
             }
         });
