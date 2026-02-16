@@ -164,6 +164,13 @@ section:last-child { border-bottom: none; }
     align-items: center;
 }
 
+/* เพิ่มขนาดข้อความ Official Website */
+.sub-text {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-gray);
+}
+
 /* ============================================================
     Copy Link Button
     ============================================================ */
