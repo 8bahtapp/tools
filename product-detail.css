@@ -1,6 +1,6 @@
 /* ============================================================
-   PRODUCT DETAIL STYLES - Apple Style + Mobile Optimized
-   ============================================================ */
+    PRODUCT DETAIL STYLES - Apple Style + Mobile Optimized
+    ============================================================ */
 
 /* --- 1. Layout Structure --- */
 .product-layout {
@@ -100,8 +100,8 @@ section:last-child { border-bottom: none; }
 }
 
 /* ============================================================
-   Product Card (Apple Style)
-   ============================================================ */
+    Product Card (Apple Style)
+    ============================================================ */
 .product-card {
     background: var(--card-bg, #fff);
     border-radius: 16px;
@@ -165,8 +165,8 @@ section:last-child { border-bottom: none; }
 }
 
 /* ============================================================
-   Copy Link Button
-   ============================================================ */
+    Copy Link Button
+    ============================================================ */
 .btn-copy {
     background: transparent;
     color: #1d1d1f;
@@ -199,8 +199,8 @@ section:last-child { border-bottom: none; }
 }
 
 /* ============================================================
-   Document Section
-   ============================================================ */
+    Document Section
+    ============================================================ */
 .doc-card {
     display: flex !important;
     align-items: center;
@@ -245,8 +245,8 @@ section:last-child { border-bottom: none; }
 .btn-view { display: none !important; }
 
 /* ============================================================
-   FAQ STYLE (ADDED)
-   ============================================================ */
+    FAQ STYLE (ADDED)
+    ============================================================ */
 
 #faq details {
     background: #fff;
@@ -291,15 +291,52 @@ section:last-child { border-bottom: none; }
     font-size: 14px;
     color: var(--text-gray);
     line-height: 1.6;
+    /* เพิ่มส่วนนี้เพื่อให้ไอคอนอยู่ขวามือ */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
 }
 
 .faq-copy {
     margin-top: 10px;
 }
 
+/* --- เพิ่มเติมเฉพาะปุ่มไอคอนและ Toast --- */
+.btn-copy-icon {
+    background: #f4f4f5;
+    border: none;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #52525b;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.btn-copy-icon:hover { background: #e4e4e7; color: #18181b; }
+
+#copy-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #18181b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 2000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: opacity 0.3s, transform 0.3s;
+}
+.toast-hidden { opacity: 0; pointer-events: none; transform: translate(-50%, 20px) !important; }
+
 /* ============================================================
-   Mobile Optimization
-   ============================================================ */
+    Mobile Optimization
+    ============================================================ */
 @media (max-width: 1100px) {
 
     .product-layout {
