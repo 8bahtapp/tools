@@ -47,6 +47,8 @@
     font-weight: 600;
 }
 
+/* --- 2. Sidebar Navigation (ส่วนที่ปรับปรุงการขยับ) --- */
+
 .nav-item {
     position: relative;
     padding: 14px 16px 14px 40px;
@@ -58,10 +60,19 @@
     background: #ffffff;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.03);
     border: 1px solid rgba(0,0,0,0.01);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* ปรับให้การขยับดูมีสปริงนุ่มนวลขึ้น */
     display: block;
 }
 
+/* ปรับการ Hover ให้ขยับมากขึ้น */
+.nav-item:hover {
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.12); /* เงาฟุ้งขึ้นเพื่อให้ดูเหมือนลอยออกมา */
+    transform: translateX(15px); /* ขยับไปทางขวา 15px (จากเดิมแค่ 1px) */
+    background: #ffffff;
+    color: var(--accent-blue);
+}
+
+/* ปรับแถบสีฟ้าด้านหน้าให้ตอบสนองตอน Hover */
 .nav-item::before {
     content: "";
     position: absolute;
@@ -76,11 +87,12 @@
     opacity: 0;
 }
 
-.nav-item:hover {
-    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08);
-    transform: translateY(-1px);
+.nav-item:hover::before {
+    height: 24px; /* ให้แถบสีฟ้ายืดตัวยาวขึ้นเวลาชี้ */
+    opacity: 1;
 }
 
+/* สำหรับเมนูที่ Active อยู่ */
 .nav-item.active::before {
     height: 18px;
     opacity: 1;
