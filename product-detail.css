@@ -105,7 +105,7 @@ section:last-child { border-bottom: none; }
 .product-card {
     background: var(--card-bg, #fff);
     border-radius: 16px;
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.1);
     box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     transition: all 0.3s ease;
     overflow: hidden;
@@ -208,7 +208,7 @@ section:last-child { border-bottom: none; }
     padding: 15px 20px;
     background: #fff;
     border-radius: 14px;
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     cursor: pointer;
     text-decoration: none;
@@ -251,7 +251,7 @@ section:last-child { border-bottom: none; }
 #faq details {
     background: #fff;
     border-radius: 14px;
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.1);
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     margin-bottom: 12px;
     padding: 4px 0;
