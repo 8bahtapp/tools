@@ -102,7 +102,7 @@
 .product-content { flex: 1; }
 section { padding: 40px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
 section:last-child { border-bottom: none; }
-.section-title { font-size: 24px; margin-bottom: 25px; font-weight: 600; }
+.section-title { font-size: 20px; margin-bottom: 25px; font-weight: 600; }
 
 /* --- 4. Card Grid --- */
 .card-grid {
