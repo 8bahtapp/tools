@@ -1,73 +1,70 @@
-// --- PIN SYSTEM SETTINGS ---
+// --- PIN CONFIGURATION ---
 const CORRECT_PIN = "8888";
-const SESSION_TIMEOUT = 12 * 60 * 60 * 1000; // 12 Hours
+const SESSION_DURATION = 12 * 60 * 60 * 1000; // 12 Hours
 
 function initPinSystem() {
-    // ตรวจสอบ Session
-    const authTime = localStorage.getItem('auth_time');
+    const authTime = localStorage.getItem('auth_time_8baht');
     const now = new Date().getTime();
 
-    if (authTime && (now - authTime < SESSION_TIMEOUT)) {
-        return; // เข้าใช้งานได้เลย
-    }
+    // ถ้าเคยล็อกอินแล้ว และยังไม่หมดเวลา 12 ชม. ให้จบการทำงาน
+    if (authTime && (now - authTime < SESSION_DURATION)) return;
 
-    // สร้างหน้าจอ PIN ถ้ายังไม่ได้ล็อกอิน
+    // สร้าง UI
     const pinHtml = `
         <div id="pin-screen">
-            <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/icon-8baht.png" style="height:30px; margin-bottom:50px; opacity:0.5;">
-            <div class="pin-display" id="pin-dots"></div>
-            <div class="pin-grid">
-                ${[1,2,3,4,5,6,7,8,9].map(n => `<button class="pin-btn" onclick="pressPin('${n}')">${n}</button>`).join('')}
-                <div></div><button class="pin-btn" onclick="pressPin('0')">0</button>
-                <button class="pin-btn" onclick="clearPin()" style="font-size:14px; color:#ff3b30;">ลบ</button>
+            <div class="pin-container">
+                <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/icon-8baht.png" style="height:25px; margin-bottom:20px;">
+                <p style="font-size:14px; color:#86868b; margin-bottom:20px; font-weight:500;">Enter Security PIN</p>
+                
+                <div class="pin-display-wrapper">
+                    <div class="pin-display" id="pin-dots"></div>
+                </div>
+
+                <div class="pin-grid">
+                    ${[1,2,3,4,5,6,7,8,9].map(n => `<button class="pin-btn" onclick="pressPin('${n}')">${n}</button>`).join('')}
+                    <button class="pin-btn special" onclick="clearPin()">Clear</button>
+                    <button class="pin-btn" onclick="pressPin('0')">0</button>
+                    <div style="visibility:hidden"></div>
+                </div>
+                <div id="pin-error" style="color:#ff3b30; font-size:12px; margin-top:20px; min-height:16px; font-weight:500;"></div>
             </div>
-            <div class="pin-error" id="pin-error"></div>
         </div>
     `;
     document.body.insertAdjacentHTML('afterbegin', pinHtml);
 }
 
-let currentInput = "";
+let inputCode = "";
+
 window.pressPin = function(num) {
-    if (currentInput.length < 8) {
-        currentInput += num;
-        updateDots();
+    if (inputCode.length < 8) {
+        inputCode += num;
+        document.getElementById('pin-dots').innerText = "*".repeat(inputCode.length);
         
-        // เช็ครหัสทันทีที่กด (ไม่ต้องกด OK)
-        if (currentInput === CORRECT_PIN) {
-            localStorage.setItem('auth_time', new Date().getTime());
-            document.getElementById('pin-screen').style.opacity = '0';
-            setTimeout(() => document.getElementById('pin-screen').remove(), 300);
-        } else if (currentInput.length >= 4 && currentInput !== CORRECT_PIN) {
-            // ถ้ายาวเกิน 4 ตัวแล้วยังผิด ให้รอแป๊บเดียวแล้วล้างใหม่
-            if(currentInput.length >= 4) {
-                 setTimeout(() => {
-                    document.getElementById('pin-error').innerText = "รหัสผ่านไม่ถูกต้อง";
-                    clearPin();
-                 }, 200);
-            }
+        // ตรวจสอบรหัสทันที
+        if (inputCode === CORRECT_PIN) {
+            localStorage.setItem('auth_time_8baht', new Date().getTime());
+            const screen = document.getElementById('pin-screen');
+            screen.style.transition = "opacity 0.4s ease";
+            screen.style.opacity = "0";
+            setTimeout(() => screen.remove(), 400);
+        } else if (inputCode.length >= 4 && inputCode !== CORRECT_PIN.substring(0, inputCode.length)) {
+            // ถ้ารหัสผิด (กรณีกดครบหรือกดผิดตัว)
+            document.getElementById('pin-error').innerText = "Incorrect PIN, please try again.";
+            setTimeout(clearPin, 500);
         }
     }
 }
 
 window.clearPin = function() {
-    currentInput = "";
-    updateDots();
+    inputCode = "";
+    document.getElementById('pin-dots').innerText = "";
     document.getElementById('pin-error').innerText = "";
 }
 
-function updateDots() {
-    const dots = document.getElementById('pin-dots');
-    if (dots) dots.innerText = "*".repeat(currentInput.length);
-}
-
-// รันระบบ PIN
+// เรียกใช้งานระบบทันที
 initPinSystem();
 
-// --- ส่วนของ Code เดิมที่แถมมา ---
-document.addEventListener("DOMContentLoaded", () => {
-    // ... โค้ดเดิมของคุณทั้งหมด ...
-});
+// --- จบส่วนของ PIN เริ่มต้น Code เดิมของคุณด้านล่างนี้ ---
 
 document.addEventListener("DOMContentLoaded", () => {
     // --- 1. Mobile Menu ---
