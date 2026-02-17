@@ -240,11 +240,9 @@ function updateBasketUI() {
 
     // สร้างรายการในตะกร้า
     previewList.innerHTML = basket.map((item, index) => `
-        <div class="basket-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f0f0;">
-            <div style="font-size: 13px; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%;">
-                ${item.name}
-            </div>
-            <button onclick="removeItem(${index})" style="background: none; border: none; color: #ff3b30; cursor: pointer; font-size: 16px; padding: 0 5px;">✕</button>
+        <div class="basket-item">
+            <span>${item.name}</span>
+            <button onclick="removeItem(${index})" style="background:none; border:none; color:#ff453a; cursor:pointer; padding:5px;">✕</button>
         </div>
     `).join('');
 }
