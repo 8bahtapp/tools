@@ -460,3 +460,104 @@ body {
     padding: 16px;
     border: 1px solid #e5e5ea;
 }
+/* --- Basket Floating Container --- */
+.basket-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 320px;
+    z-index: 2000;
+    font-family: 'Inter', 'Noto Sans Thai', sans-serif;
+}
+
+/* --- Card Body (สีเข้ม) --- */
+.basket-card {
+    background: #1c1c1e; /* สีเทาเข้มแบบ Apple Dark Mode */
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #ffffff;
+}
+
+/* --- Header --- */
+.basket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.basket-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.basket-title h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.btn-clear {
+    background: transparent;
+    border: none;
+    color: #ff453a; /* สีแดง Apple */
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* --- Items List --- */
+.basket-items {
+    max-height: 250px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+/* ปรับแต่ง Scrollbar สำหรับสีเข้ม */
+.basket-items::-webkit-scrollbar { width: 4px; }
+.basket-items::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+.basket-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.basket-item span {
+    font-size: 13px;
+    color: #ebebf5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+/* --- Footer & Copy Button --- */
+.btn-copy-all {
+    width: 100%;
+    background: #ffffff; /* ปุ่มขาวตัดกับพื้นหลังเข้ม */
+    color: #000000;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-copy-all:hover {
+    background: #f2f2f7;
+    transform: scale(1.02);
+}
+
+.btn-copy-all:active {
+    transform: scale(0.98);
+}
