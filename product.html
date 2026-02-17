@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title id="page-title">8Baht Tools</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/favicon.png">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="product-detail.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,9 +18,11 @@
                 <button class="mobile-menu-btn" id="mobile-toggle">
                     <span></span><span></span><span></span>
                 </button>
+
                 <a href="index.html" class="logo-wrapper">
                     <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/icon-8baht.png" alt="8Baht" class="logo">
                 </a>
+
                 <nav class="desktop-menu" id="main-nav">
                     <a href="product.html?id=adobe">Adobe</a>
                     <a href="product.html?id=autodesk">Autodesk</a>
@@ -37,12 +40,19 @@
                     <a href="product.html?id=other">Other</a>
                 </nav>
             </div>
+
             <div class="header-right">
-                <button class="search-btn">🔍</button>
+                <button class="search-btn">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
                 <a href="https://8baht.com/help" class="btn-ticket" target="_blank">Open Ticket</a>
             </div>
         </div>
     </header>
+
+    <div class="menu-overlay" id="menu-overlay"></div>
 
     <div class="product-layout">
         <aside class="product-sidebar">
@@ -59,15 +69,16 @@
         </aside>
 
         <main class="product-content">
+            
             <section id="links">
                 <h2 class="section-title">Get started link</h2>
                 <div class="card-grid">
                     <div class="product-card">
                         <div class="product-link-wrapper">
-                            <img id="p-logo" src="" alt="Logo">
+                            <img id="p-logo" src="" alt="Logo" style="width: 50px; height: 50px; object-fit: contain;">
                             <div class="info">
                                 <h3 id="p-name">Loading...</h3>
-                                <p id="p-desc">...</p>
+                                <p id="p-desc">Fetching information...</p>
                             </div>
                         </div>
                         <div class="card-bottom">
@@ -83,7 +94,7 @@
                 <div class="card-grid">
                     <div class="product-card">
                         <div class="product-link-wrapper">
-                            <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/icon-8baht.png" alt="Trial">
+                            <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/icon-8baht.png" alt="Trial" style="width: 50px; height: 50px; object-fit: contain;">
                             <div class="info">
                                 <h3>Free Trial</h3>
                                 <p>ทดลองใช้ฟรี 7-30 วัน (เงื่อนไขตามผู้ผลิต)</p>
@@ -97,14 +108,69 @@
                 </div>
             </section>
 
-            <hr>
+            <section id="docs">
+                <h2 class="section-title">เอกสาร</h2>
+                <div class="card-grid">
+                    <div class="product-card">
+                        <div class="product-link-wrapper">
+                            <div class="info">
+                                <h3>คู่มือการใช้งาน</h3>
+                                <p>วิธีการติดตั้งและเปิดใช้งานเบื้องต้น</p>
+                            </div>
+                        </div>
+                        <div class="card-bottom">
+                            <span class="sub-text">เอกสาร</span>
+                            <button class="btn-copy" id="copy-docs">Copy Link</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
 
             <section id="faq">
                 <h2 class="section-title">คำถามที่พบบ่อย</h2>
-                <div id="faq-container"></div>
+                <div id="faq-container">
+                    </div>
             </section>
 
-            </main>
+            <section id="troubleshoot">
+                <h2 class="section-title">แนวทางแก้ไข</h2>
+                <div class="card-grid">
+                    <div class="product-card">
+                        <div class="product-link-wrapper">
+                            <div class="info">
+                                <h3>Troubleshooting Guide</h3>
+                                <p>รวมวิธีแก้ปัญหาเบื้องต้นเมื่อติดตั้งไม่ได้</p>
+                            </div>
+                        </div>
+                        <div class="card-bottom">
+                            <span class="sub-text">แนวทางแก้ไข</span>
+                            <button class="btn-copy" id="copy-troubleshoot">Copy Link</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="older">
+                <h2 class="section-title">เวอร์ชันก่อนหน้า</h2>
+                <div class="card-grid">
+                    <div class="product-card">
+                        <div class="product-link-wrapper">
+                            <div class="info">
+                                <h3>Older Versions</h3>
+                                <p>ดาวน์โหลดเวอร์ชันเก่าสำหรับเครื่องสเปกเดิม</p>
+                            </div>
+                        </div>
+                        <div class="card-bottom">
+                            <span class="sub-text">เวอร์ชันก่อนหน้า</span>
+                            <button class="btn-copy" id="copy-older">Copy Link</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
     </div>
 
     <footer class="main-footer">
