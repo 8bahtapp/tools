@@ -7,19 +7,17 @@
     "trial_link": "https://8baht.com/adobe-trial",
     "doc_link": "https://8baht.com/adobe-docs",
     "faq": [
-      { "q": "คำถามที่พบบ่อย 1", "a": "คำตอบรายละเอียด..." }
-    ],
-    "fix_link": "https://8baht.com/adobe-fix",
-    "old_version_link": "https://8baht.com/adobe-old"
-  }
-},
+      { "q": "ใช้งานได้กี่เครื่อง?", "a": "ล็อกอินได้หลายเครื่อง แต่ใช้งานพร้อมกันได้ 2 เครื่องครับ" },
+      { "q": "มีปัญหาติดตั้งไม่ได้ทำอย่างไร?", "a": "ติดต่อฝ่ายสนับสนุนผ่านปุ่ม Open Ticket ได้เลยครับ" }
+    ]
+  },
   "autodesk": {
     "name": "Autodesk",
     "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-autodesk.png",
+    "desc": "AutoCAD, Revit, 3ds Max สำหรับงานออกแบบวิศวกรรม",
     "install_link": "https://8baht.com/autodesk-link",
-    "description": "AutoCAD, Revit, 3ds Max",
     "faq": [
-      { "q": "ต้องต่อเน็ตตลอดเวลาไหม?", "a": "ไม่จำเป็นครับ" }
+      { "q": "ต้องต่อเน็ตตลอดเวลาไหม?", "a": "ไม่จำเป็นครับ ใช้งานออฟไลน์ได้" }
     ]
   }
 }
