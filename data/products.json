@@ -5,19 +5,24 @@
     "desc": "ชุดโปรแกรม Adobe ทั้งหมดรวมในที่เดียว",
     "install_link": "https://8baht.com/adobe-install",
     "trial_link": "https://8baht.com/adobe-trial",
-    "doc_link": "https://8baht.com/adobe-docs",
-    "faq": [
-      { "q": "ใช้งานได้กี่เครื่อง?", "a": "ล็อกอินได้หลายเครื่อง แต่ใช้งานพร้อมกันได้ 2 เครื่องครับ" },
-      { "q": "มีปัญหาติดตั้งไม่ได้ทำอย่างไร?", "a": "ติดต่อฝ่ายสนับสนุนผ่านปุ่ม Open Ticket ได้เลยครับ" }
-    ]
+    "faq": [{ "q": "คำถาม Adobe 1", "a": "คำตอบ..." }]
   },
   "autodesk": {
     "name": "Autodesk",
     "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-autodesk.png",
-    "desc": "AutoCAD, Revit, 3ds Max สำหรับงานออกแบบวิศวกรรม",
-    "install_link": "https://8baht.com/autodesk-link",
-    "faq": [
-      { "q": "ต้องต่อเน็ตตลอดเวลาไหม?", "a": "ไม่จำเป็นครับ ใช้งานออฟไลน์ได้" }
-    ]
-  }
+    "desc": "AutoCAD, Revit, 3ds Max",
+    "install_link": "https://8baht.com/autodesk-link"
+  },
+  "corona": { "name": "Corona", "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-corona.png", "desc": "High-end photorealistic rendering" },
+  "enscape": { "name": "Enscape", "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-enscape.png", "desc": "Real-time rendering & VR" },
+  "vray": { "name": "V-Ray", "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-vray.png", "desc": "Professional rendering for 3D artists" },
+  "d5": { "name": "D5 Render", "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-d5.png", "desc": "Real-time ray tracing renderer" },
+  "foxit": { "name": "Foxit", "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-foxit.png", "desc": "PDF Software & Tools" },
+  "sketchup": { "name": "SketchUp", "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-sketchup.png", "desc": "3D design for everyone" },
+  "bimbundle": { "name": "BIM Bundle", "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-bim.png", "desc": "ชุดรวมโปรแกรมสาย BIM" },
+  "rhino": { "name": "Rhino", "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-rhino.png", "desc": "3D Computer Graphics & CAD" },
+  "lumion": { "name": "Lumion", "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/lumion_logo.png", "desc": "Architectural visualization" },
+  "pdfelement": { "name": "PDFelement", "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/log-pdfelement.png", "desc": "PDF Editor & Converter" },
+  "microsoft": { "name": "Microsoft", "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-microsoft.png", "desc": "Office & Windows" },
+  "other": { "name": "Other", "logo": "", "desc": "โปรแกรมอื่นๆ" }
 }
