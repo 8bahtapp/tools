@@ -470,14 +470,31 @@ body {
     font-family: 'Inter', 'Noto Sans Thai', sans-serif;
 }
 
-/* --- Card Body (สีเข้ม) --- */
+/* --- ปรับแต่งตัวตะกร้าให้โปร่งใส --- */
 .basket-card {
-    background: #1c1c1e; /* สีเทาเข้มแบบ Apple Dark Mode */
+    /* ใช้ rgba เพื่อกำหนดความโปร่งใส (0.8 คือ โปร่งใส 80%) */
+    background: rgba(28, 28, 30, 0.8) !important; 
+    
+    /* เอฟเฟกต์กระจกฝ้า (สำคัญมากสำหรับสไตล์ Apple) */
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px); /* สำหรับ Safari */
+    
     border-radius: 20px;
     padding: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     border: 1px solid rgba(255,255,255,0.1);
     color: #ffffff;
+}
+
+/* ปรับให้รายการข้างในดูโปร่งตามไปด้วย (ถ้าต้องการ) */
+.basket-item {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-copy-all {
+    /* ปรับปุ่มให้มีความโปร่งใสเล็กน้อยเพื่อให้เข้าเซตกัน */
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
 }
 
 /* --- Header --- */
