@@ -195,3 +195,116 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+/* ============================================================
+   8Baht Tools - Main Scripts
+   ============================================================ */
+
+// --- 1. ตัวแปรส่วนกลาง (Global Variables) ---
+let basket = [];
+
+// --- 2. ระบบ Basket (ตะกร้าสะสมรายการ) ---
+
+// ฟังก์ชันเพิ่มของลงตะกร้า
+function addToBasket(name, url) {
+    // ป้องกันการเพิ่มซ้ำ (Optional)
+    const exists = basket.find(item => item.url === url);
+    if (!exists) {
+        basket.push({ name, url });
+        updateBasketUI();
+    }
+    
+    // แสดง Notification (เรียกใช้ Toast ที่คุณมีในหน้า HTML)
+    if (typeof showToast === 'function') {
+        showToast();
+    } else {
+        console.log("Item added: " + name);
+    }
+}
+
+// ฟังก์ชันอัปเดตการแสดงผลตะกร้า
+function updateBasketUI() {
+    const basketUI = document.getElementById('copy-basket-ui');
+    const basketCount = document.getElementById('basket-count');
+    const previewList = document.getElementById('preview-list');
+
+    if (!basketUI || !basketCount || !previewList) return;
+
+    // ถ้าไม่มีของให้ซ่อน ถ้ามีของให้แสดง
+    if (basket.length === 0) {
+        basketUI.style.display = 'none';
+        return;
+    }
+
+    basketUI.style.display = 'block';
+    basketCount.innerText = basket.length;
+
+    // สร้างรายการในตะกร้า
+    previewList.innerHTML = basket.map((item, index) => `
+        <div class="basket-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f0f0;">
+            <div style="font-size: 13px; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%;">
+                ${item.name}
+            </div>
+            <button onclick="removeItem(${index})" style="background: none; border: none; color: #ff3b30; cursor: pointer; font-size: 16px; padding: 0 5px;">✕</button>
+        </div>
+    `).join('');
+}
+
+// ฟังก์ชันคัดลอกทั้งหมดในตะกร้า
+function copyAllItems() {
+    if (basket.length === 0) return;
+
+    // จัดรูปแบบข้อความก่อนคัดลอก
+    const textToCopy = basket.map(item => `${item.name}: ${item.url}`).join('\n');
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        // เปลี่ยนข้อความที่ปุ่มชั่วคราว
+        const btn = document.querySelector('.btn-copy-all');
+        const originalText = btn.innerText;
+        btn.innerText = 'คัดลอกสำเร็จ! ✅';
+        btn.style.background = '#34c759';
+        
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.background = ''; // กลับเป็นสีเดิมใน CSS
+        }, 2000);
+    });
+}
+
+// ฟังก์ชันลบบางรายการ
+function removeItem(index) {
+    basket.splice(index, 1);
+    updateBasketUI();
+}
+
+// ฟังก์ชันล้างตะกร้าทั้งหมด
+function clearBasket() {
+    if (confirm('คุณต้องการล้างรายการที่เลือกทั้งหมดใช่หรือไม่?')) {
+        basket = [];
+        updateBasketUI();
+    }
+}
+
+// --- 3. ระบบ Mobile Menu & UI Interactions ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mainNav = document.getElementById('main-nav');
+    const menuOverlay = document.getElementById('menu-overlay');
+
+    if (mobileToggle && mainNav) {
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+            if (menuOverlay) menuOverlay.classList.toggle('active');
+        });
+    }
+
+    // คลิก Overlay เพื่อปิดเมนู
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', () => {
+            mobileToggle.classList.remove('active');
+            mainNav.classList.remove('active');
+            menuOverlay.classList.remove('active');
+        });
+    }
+});
