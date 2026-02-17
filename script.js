@@ -195,3 +195,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+// เพิ่มโค้ดนี้ต่อท้ายใน script.js ของคุณ
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. ดึงค่า id จาก URL (เช่น ?id=adobe)
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+
+    if (!productId) return;
+
+    // 2. ไปดึงข้อมูลจากไฟล์ JSON
+    fetch('data/products.json')
+        .then(response => response.json())
+        .then(data => {
+            const product = data[productId];
+            
+            if (product) {
+                // 3. เอาข้อมูลไปหยอดใส่ HTML ที่เราทำ id ไว้
+                document.title = `${product.name} - 8Baht`;
+                document.getElementById('product-name').innerText = product.name;
+                document.getElementById('display-product-name').innerText = product.name;
+                document.getElementById('product-logo').src = product.logo;
+                document.getElementById('product-desc').innerText = product.description;
+                
+                // ตั้งค่าปุ่ม Copy
+                const copyBtn = document.getElementById('copy-btn');
+                copyBtn.onclick = () => {
+                    navigator.clipboard.writeText(`${product.name}\nลิงก์ติดตั้ง: ${product.install_link}\n\nบริการช่วยเหลือ: https://8baht.com/help`);
+                    copyBtn.innerText = "Copied!";
+                    setTimeout(() => copyBtn.innerText = "Copy Link", 2000);
+                };
+            }
+        });
+});
