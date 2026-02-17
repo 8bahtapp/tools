@@ -158,13 +158,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 3. Copy System ---
-    const linkIcon = `<svg class="icon-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:middle"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`;
-    const checkIcon = `<svg class="icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display:none;margin-right:6px;vertical-align:middle"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-
+// --- 3. Copy System (ปรับปรุงใหม่: ลบไอคอนออก) ---
     document.querySelectorAll('.btn-copy').forEach(btn => {
         const txt = btn.innerText;
-        btn.innerHTML = `${linkIcon}${checkIcon}<span class="btn-text">${txt}</span>`;
+        btn.innerHTML = `<span class="btn-text">${txt}</span>`;
     });
 
     document.addEventListener("click", async (e) => {
@@ -176,15 +173,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (navigator.vibrate) navigator.vibrate([15, 30, 15]);
 
             btn.classList.add("success");
-            btn.querySelector(".icon-link").style.display = "none";
-            btn.querySelector(".icon-check").style.display = "inline-block";
-            btn.querySelector(".btn-text").innerText = "Copied!";
+            const btnText = btn.querySelector(".btn-text");
+            btnText.innerText = "✔"; // เปลี่ยนข้อความเมื่อกดสำเร็จ
 
             setTimeout(() => {
                 btn.classList.remove("success");
-                btn.querySelector(".icon-link").style.display = "inline-block";
-                btn.querySelector(".icon-check").style.display = "none";
-                btn.querySelector(".btn-text").innerText = "Copy Link";
+                btnText.innerText = "Copy Link"; // กลับมาเป็นข้อความเดิม (หรือใส่ข้อความที่คุณต้องการ)
             }, 2000);
         } catch (err) {
             console.error(err);
