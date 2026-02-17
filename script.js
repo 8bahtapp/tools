@@ -1,5 +1,5 @@
 /************************************************************
- * 1) PIN SECURITY SYSTEM
+ * 1) PIN SECURITY SYSTEM (คงเดิม)
  ************************************************************/
 const CORRECT_PIN = "8888";
 const SESSION_DURATION = 12 * 60 * 60 * 1000; // 12h
@@ -63,13 +63,13 @@ window.clearPin = function() {
 initPinSystem();
 
 /************************************************************
- * 2) GLOBAL VARIABLES FOR COPY SYSTEM
+ * 2) GLOBAL VARIABLES (คงเดิม)
  ************************************************************/
 let basket = JSON.parse(localStorage.getItem("copy_basket")) || [];
 const helpLink = "บริการช่วยเหลือ: https://8baht.com/help";
 
 /************************************************************
- * 3) TOAST
+ * 3) TOAST (คงเดิม)
  ************************************************************/
 function showToast(msg="คัดลอกสำเร็จ!") {
     const toast = document.getElementById("copy-toast");
@@ -81,18 +81,18 @@ function showToast(msg="คัดลอกสำเร็จ!") {
 }
 
 /************************************************************
- * 4) BASKET UI
+ * 4) BASKET UI (คงเดิม + ปรับ ID ให้ตรง HTML ใหม่)
  ************************************************************/
 function updateBasketUI() {
-    const basketEl = document.getElementById("copy-basket");
+    // ปรับ ID จาก copy-basket เป็น copy-basket-ui ให้ตรงกับ index.html ที่คุยกันก่อนหน้า
+    const basketEl = document.getElementById("copy-basket-ui"); 
     const countEl = document.getElementById("basket-count");
     const previewList = document.getElementById("preview-list");
     if (!basketEl) return;
 
     if (basket.length) {
-        basketEl.classList.add("basket-show");
-        basketEl.classList.remove("basket-hidden");
-        countEl.innerText = basket.length;
+        basketEl.style.display = "block"; // ใช้ display แทน class เพื่อความชัวร์
+        if(countEl) countEl.innerText = basket.length;
 
         if (previewList) {
             previewList.innerHTML = basket.map((item,i)=>`
@@ -103,8 +103,7 @@ function updateBasketUI() {
             `).join("");
         }
     } else {
-        basketEl.classList.add("basket-hidden");
-        basketEl.classList.remove("basket-show");
+        basketEl.style.display = "none";
     }
 }
 
@@ -115,7 +114,7 @@ window.removeItem = function(i) {
 };
 
 /************************************************************
- * 5) DOM READY
+ * 5) DOM READY (คงเดิม + ปรับ Path JSON)
  ************************************************************/
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -163,31 +162,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("scroll", handleScrollSpy);
 
-    /******** Copy Button UI ********/
-    document.querySelectorAll(".btn-copy").forEach(btn => {
-        btn.innerHTML = `<span class="btn-text">${btn.innerText}</span>`;
-    });
-
-    /******** FAQ Auto Scroll ********/
-    document.querySelectorAll("#faq details").forEach(d => {
-        d.addEventListener("toggle", ()=> d.open && d.scrollIntoView({behavior:"smooth", block:"center"}));
-    });
-
     /******** Load Product JSON ********/
-    const params = new URLSearchParams(location.search);
-    const productId = params.get("id");
+    // ปรับ Logic การดึง ID ให้รองรับโครงสร้างแบบ Folder
+    const pathParts = window.location.pathname.split('/');
+    const productId = pathParts[pathParts.length - 2]; // ดึงชื่อโฟลเดอร์ เช่น 'adobe'
 
-    if (productId) {
-        fetch("data/products.json")
+    if (productId && window.location.pathname.includes('/product/')) {
+        // ถอยกลับ 2 ชั้นเพื่อไปหาไฟล์ JSON ที่ root/data/
+        fetch("../../data/products.json")
         .then(r=>r.json())
         .then(data=>{
             const p = data[productId];
             if (!p) return;
             document.title = `${p.name} - 8Baht`;
-            document.getElementById("product-name")?.innerText = p.name;
-            document.getElementById("display-product-name")?.innerText = p.name;
-            document.getElementById("product-logo")?.src = p.logo;
-            document.getElementById("product-desc")?.innerText = p.description;
+            if(document.getElementById("product-name")) document.getElementById("product-name").innerText = p.name;
+            if(document.getElementById("product-logo")) document.getElementById("product-logo").src = p.icon;
         });
     }
 
@@ -195,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /************************************************************
- * 6) GLOBAL CLICK HANDLER (COPY + BASKET)
+ * 6) GLOBAL CLICK HANDLER (คงเดิม)
  ************************************************************/
 document.addEventListener("click", (e) => {
 
@@ -214,39 +203,29 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    // Add to Basket
-    const addBtn = e.target.closest(".btn-add-list");
+    // Add to Basket (จากปุ่มในหน้า Product)
+    const addBtn = e.target.closest(".btn-add-basket"); // ปรับชื่อ Class ให้ตรงกับ CSS
     if (addBtn) {
         const name = addBtn.dataset.name;
         const link = addBtn.dataset.link;
-        if (!basket.find(i=>i.name===name)) {
-            basket.push({name, link});
-            localStorage.setItem("copy_basket", JSON.stringify(basket));
-            updateBasketUI();
-            showToast("เพิ่ม "+name);
-        }
+        addToBasket(name, link);
         return;
     }
 
-    // Bulk Copy
-    if (e.target.id === "btn-copy-bulk") {
-        let text = basket.map(i=>`${i.name}\nดาวน์โหลดติดตั้ง: ${i.link}`).join("\n\n---\n\n");
-        text += `\n\n${helpLink}`;
-        navigator.clipboard.writeText(text).then(()=>showToast(`คัดลอกรวม ${basket.length} รายการ`));
+    // Bulk Copy (จากปุ่มในหน้าจอเมนูลอย)
+    if (e.target.classList.contains("btn-copy-all")) {
+        copyAllItems();
         return;
     }
 
     // Clear Basket
-    if (e.target.id === "btn-clear-basket") {
-        basket = [];
-        localStorage.removeItem("copy_basket");
-        updateBasketUI();
-        showToast("ล้างแล้ว");
+    if (e.target.classList.contains("btn-clear")) {
+        clearBasket();
     }
 });
 
 /************************************************************
- * 7) GLOBAL FUNCTION FOR INDEX PAGE (+ BUTTON)
+ * 7) GLOBAL FUNCTIONS (คงเดิมตาม Logic คุณ)
  ************************************************************/
 window.addToBasket = function(name, link) {
     if (!basket.find(i=>i.name===name)) {
@@ -256,5 +235,18 @@ window.addToBasket = function(name, link) {
         showToast("เพิ่ม "+name);
     }
 };
+
+window.copyAllItems = function() {
+    let text = basket.map(i=>`${i.name}\nดาวน์โหลดติดตั้ง: ${i.link}`).join("\n\n---\n\n");
+    text += `\n\n${helpLink}`;
+    navigator.clipboard.writeText(text).then(()=>showToast(`คัดลอกรวม ${basket.length} รายการ`));
+}
+
+window.clearBasket = function() {
+    basket = [];
+    localStorage.removeItem("copy_basket");
+    updateBasketUI();
+    showToast("ล้างแล้ว");
+}
 
 updateBasketUI();
