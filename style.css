@@ -438,3 +438,25 @@ body {
     font-weight: 500;
     letter-spacing: -0.01em;
 }
+/* สไตล์เบื้องต้นสำหรับตะกร้าลอย */
+.basket-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    z-index: 1000;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.basket-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    padding: 16px;
+    border: 1px solid #e5e5ea;
+}
