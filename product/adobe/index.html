@@ -13,7 +13,22 @@
         body { font-family: 'Noto Sans Thai', sans-serif; line-height: 1.6; }
         .header-right { display: flex; align-items: center; gap: 12px; }
         .doc-card-link { text-decoration: none; color: inherit; display: flex; align-items: center; transition: all 0.2s ease; }
-        .doc-card-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-standard); }
+        .doc-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .doc-card-link:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-standard);
+        }
+        .doc-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
         
         /* ปุ่มเพิ่มเข้าตะกร้า (Basket Plus Button) */
         .btn-add-basket {
@@ -136,10 +151,14 @@
 
             <section id="docs">
                 <h2 class="section-title">Document</h2>
-                <div class="card-grid" style="grid-template-columns: 1fr;">
+                <div class="doc-grid">
                     <a href="https://drive.google.com/file/d/1bAhDrH2Y58BgvbeNK_jbs6Gy7SsBwt1Z/view?usp=sharing" class="doc-card doc-card-link" target="_blank">
-                        <div class="doc-icon"><img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/pdf.png" alt="PDF"></div>
-                        <div class="doc-name">ตารางเปรียบเทียบแผนการใช้งาน Adobe</div>
+                        <div class="doc-icon">
+                            <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/pdf.png" alt="PDF Icon">
+                        </div>
+                        <div style="flex:1">
+                            <div class="doc-name">ตารางเปรียบเทียบ</div>
+                        </div>
                     </a>
                 </div>
             </section>
@@ -149,9 +168,38 @@
                 <details class="faq-item">
                     <summary>ต้องลบเวอร์ชันเก่าก่อนติดตั้งหรือไม่? <span class="arrow">▾</span></summary>
                     <div class="faq-content">
-                        <span>แนะนำให้ลบเวอร์ชันเก่าออกก่อนเพื่อป้องกันความขัดแย้งของไฟล์โปรแกรม</span>
-                        <button class="btn-copy-icon" data-url="แนะนำให้ลบเวอร์ชันเก่าออกก่อนเพื่อป้องกันความขัดแย้งของไฟล์โปรแกรม" title="คัดลอกคำตอบ">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span>แนะนำให้ลบเวอร์ชันเก่าออกก่อนเพื่อป้องกันความขัดแย้งของไฟล์โปรแกรม (Conflict)</span>
+                        <button class="btn-copy-icon" data-url="แนะนำให้ลบเวอร์ชันเก่าออกก่อนเพื่อป้องกันความขัดแย้งของไฟล์โปรแกรม (Conflict)" title="คัดลอกคำตอบ">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </details>
+              
+                <details class="faq-item">
+                    <summary>ต้องลบเวอร์ชันเก่าก่อนติดตั้งหรือไม่? <span class="arrow">▾</span></summary>
+                    <div class="faq-content">
+                        <span>แนะนำให้ลบเวอร์ชันเก่าออกก่อนเพื่อป้องกันความขัดแย้งของไฟล์โปรแกรม (Conflict)</span>
+                        <button class="btn-copy-icon" data-url="แนะนำให้ลบเวอร์ชันเก่าออกก่อนเพื่อป้องกันความขัดแย้งของไฟล์โปรแกรม (Conflict)" title="คัดลอกคำตอบ">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </details>
+              
+                <details class="faq-item">
+                    <summary>ต้องลบเวอร์ชันเก่าก่อนติดตั้งหรือไม่? <span class="arrow">▾</span></summary>
+                    <div class="faq-content">
+                        <span>แนะนำให้ลบเวอร์ชันเก่าออกก่อนเพื่อป้องกันความขัดแย้งของไฟล์โปรแกรม (Conflict)</span>
+                        <button class="btn-copy-icon" data-url="แนะนำให้ลบเวอร์ชันเก่าออกก่อนเพื่อป้องกันความขัดแย้งของไฟล์โปรแกรม (Conflict)" title="คัดลอกคำตอบ">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
                         </button>
                     </div>
                 </details>
@@ -216,12 +264,40 @@
         </div>
     </div>
 
-    <div id="copy-toast" class="copy-toast toast-hidden">คัดลอกสำเร็จ!</div>
+    <div id="copy-toast" class="toast-hidden">คัดลอกสำเร็จ!</div>
 
     <footer class="main-footer">
         <p>Copyright © 2026 8Baht Support. All rights reserved.</p>
     </footer>
 
-    <script src="../../script.js"></script>
+    <script src="../script.js"></script>
+    <script>
+        // ระบบแจ้งเตือนและคัดลอก
+        const toast = document.getElementById('copy-toast');
+        const showToast = () => {
+            toast.classList.remove('toast-hidden');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.classList.add('toast-hidden');
+            }, 2000);
+        };
+
+        // ระบบคัดลอกสำหรับ FAQ
+        document.querySelectorAll('.btn-copy-icon').forEach(button => {
+            button.addEventListener('click', function() {
+                const text = this.getAttribute('data-url');
+                navigator.clipboard.writeText(text).then(showToast);
+            });
+        });
+
+        // ระบบคัดลอกสำหรับ Card
+        document.querySelectorAll('.btn-copy').forEach(button => {
+            button.addEventListener('click', function() {
+                const text = this.getAttribute('data-url');
+                navigator.clipboard.writeText(text).then(showToast);
+            });
+        });
+    </script>
 </body>
 </html>
