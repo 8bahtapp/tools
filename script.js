@@ -228,3 +228,69 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 });
+
+// โหลดข้อมูลจากเครื่องเมื่อเปิดหน้าใหม่
+let basket = JSON.parse(localStorage.getItem('copy_basket')) || [];
+
+const helpLink = "บริการช่วยเหลือ: https://8baht.com/help";
+
+// ฟังก์ชันอัปเดตหน้าตาตะกร้า
+function updateBasketUI() {
+    const basketEl = document.getElementById('copy-basket');
+    const countEl = document.getElementById('basket-count');
+    if(!basketEl) return;
+
+    if (basket.length > 0) {
+        basketEl.classList.add('basket-show');
+        basketEl.classList.remove('basket-hidden');
+        countEl.innerText = basket.length;
+    } else {
+        basketEl.classList.add('basket-hidden');
+        basketEl.classList.remove('basket-show');
+    }
+}
+
+// ระบบคัดลอก และ เพิ่มลงตะกร้า
+document.addEventListener('click', function(e) {
+    // 1. กด Copy Link ปกติ
+    if (e.target.classList.contains('btn-copy')) {
+        const text = e.target.getAttribute('data-url');
+        navigator.clipboard.writeText(text).then(() => showToast());
+    }
+
+    // 2. กดปุ่ม + แอดลงตะกร้า
+    if (e.target.classList.contains('btn-add-list')) {
+        const name = e.target.getAttribute('data-name');
+        const link = e.target.getAttribute('data-link');
+        
+        if (!basket.find(item => item.name === name)) {
+            basket.push({ name, link });
+            localStorage.setItem('copy_basket', JSON.stringify(basket));
+            updateBasketUI();
+            showToast(`เพิ่ม ${name} แล้ว`);
+        }
+    }
+});
+
+// 3. กดคัดลอกทั้งหมด
+document.getElementById('btn-copy-bulk')?.addEventListener('click', function() {
+    let combinedText = "";
+    basket.forEach((item, index) => {
+        combinedText += `${item.name}\nดาวน์โหลดติดตั้ง: ${item.link}\n${helpLink}`;
+        if (index < basket.length - 1) combinedText += "\n\n---\n\n";
+    });
+
+    navigator.clipboard.writeText(combinedText).then(() => {
+        showToast(`คัดลอกทั้งหมด ${basket.length} รายการแล้ว`);
+    });
+});
+
+// 4. ล้างตะกร้า
+document.getElementById('btn-clear-basket')?.addEventListener('click', () => {
+    basket = [];
+    localStorage.removeItem('copy_basket');
+    updateBasketUI();
+});
+
+// รันครั้งแรกเมื่อโหลดหน้า
+updateBasketUI();
