@@ -251,20 +251,33 @@ function updateBasketUI() {
 function copyAllItems() {
     if (basket.length === 0) return;
 
-    // จัดรูปแบบข้อความก่อนคัดลอก
-    const textToCopy = basket.map(item => `${item.name}: ${item.url}`).join('\n');
+    // 1. วนลูปสร้างรายการสินค้าแต่ละชิ้น
+    let productLines = basket.map(item => {
+        return `${item.name}\nดาวน์โหลดติดตั้ง: ${item.url}`;
+    }).join('\n\n'); // เว้นบรรทัดระหว่างสินค้าแต่ละตัว
 
+    // 2. กำหนดลิงก์บริการช่วยเหลือ (อันเดียวต่อท้าย)
+    const helpLine = "\n\nบริการช่วยเหลือ: https://8baht.com/help";
+
+    // 3. รวมร่างข้อความทั้งหมด
+    const textToCopy = productLines + helpLine;
+
+    // 4. สั่งคัดลอกลง Clipboard
     navigator.clipboard.writeText(textToCopy).then(() => {
-        // เปลี่ยนข้อความที่ปุ่มชั่วคราว
+        // แจ้งเตือนที่ปุ่มว่าสำเร็จ
         const btn = document.querySelector('.btn-copy-all');
         const originalText = btn.innerText;
         btn.innerText = 'คัดลอกสำเร็จ! ✅';
-        btn.style.background = '#34c759';
-        
+        btn.style.background = '#34c759'; // เปลี่ยนเป็นสีเขียวชั่วคราว
+        btn.style.color = '#ffffff';
+
         setTimeout(() => {
             btn.innerText = originalText;
-            btn.style.background = ''; // กลับเป็นสีเดิมใน CSS
+            btn.style.background = ''; // กลับไปใช้สีตาม CSS (สีขาว)
+            btn.style.color = '';
         }, 2000);
+    }).catch(err => {
+        console.error('ไม่สามารถคัดลอกได้:', err);
     });
 }
 
