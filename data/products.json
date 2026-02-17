@@ -1,13 +1,18 @@
 {
   "adobe": {
-    "name": "Adobe",
+    "name": "Adobe Creative Cloud",
     "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-adobe.png",
-    "install_link": "https://8baht.com/adobe-link",
-    "description": "Creative Cloud Full Apps",
+    "desc": "ชุดโปรแกรม Adobe ทั้งหมดรวมในที่เดียว",
+    "install_link": "https://8baht.com/adobe-install",
+    "trial_link": "https://8baht.com/adobe-trial",
+    "doc_link": "https://8baht.com/adobe-docs",
     "faq": [
-      { "q": "ติดตั้งได้กี่เครื่อง?", "a": "ใช้งานพร้อมกันได้ 2 เครื่องครับ" }
-    ]
-  },
+      { "q": "คำถามที่พบบ่อย 1", "a": "คำตอบรายละเอียด..." }
+    ],
+    "fix_link": "https://8baht.com/adobe-fix",
+    "old_version_link": "https://8baht.com/adobe-old"
+  }
+},
   "autodesk": {
     "name": "Autodesk",
     "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-autodesk.png",
