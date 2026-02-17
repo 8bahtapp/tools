@@ -1,22 +1,48 @@
 {
   "adobe": {
     "name": "Adobe Creative Cloud",
-    "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-adobe.png",
-    "desc": "ชุดโปรแกรม Adobe ทั้งหมดรวมในที่เดียว",
-    "install_link": "https://8baht.com/adobe-install",
-    "trial_link": "https://8baht.com/adobe-trial",
-    "manual_link": "https://8baht.com/adobe-guide",
+    "icon": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-adobe.png",
+    "help_link": "https://8baht.com/help",
+    "items": [
+      {
+        "label": "Adobe CC All Apps",
+        "description": "ติดตั้งและใช้งานผ่าน Adobe Creative Cloud",
+        "download_url": "https://8baht.com/adobe-install",
+        "official_url": "https://www.adobe.com/"
+      },
+      {
+        "label": "Acrobat Pro",
+        "description": "เครื่องมือจัดการไฟล์ PDF ระดับมืออาชีพ",
+        "download_url": "https://8baht.com/acrobat-pro",
+        "official_url": "https://www.adobe.com/acrobat.html"
+      }
+    ],
+    "documents": [
+      {
+        "name": "คู่มือการติดตั้ง Adobe CC",
+        "url": "https://8baht.com/doc-adobe"
+      }
+    ],
     "faq": [
-      { "q": "คำถาม Adobe 1", "a": "คำตอบ..." }
+      {
+        "q": "ต้องลบของเก่าออกไหม?",
+        "a": "แนะนำให้ลบเวอร์ชันเก่าออกก่อนติดตั้งเพื่อป้องกันการชนกันของไฟล์"
+      }
     ]
   },
   "autodesk": {
-    "name": "Autodesk",
-    "logo": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-autodesk.png",
-    "desc": "AutoCAD, Revit, 3ds Max",
-    "install_link": "https://8baht.com/autodesk-link",
-    "trial_link": "",
-    "manual_link": "",
+    "name": "Autodesk Suite",
+    "icon": "https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/logo-autodesk.png",
+    "help_link": "https://8baht.com/help",
+    "items": [
+      {
+        "label": "AutoCAD 2026",
+        "description": "ซอฟต์แวร์เขียนแบบ 2D และ 3D",
+        "download_url": "https://8baht.com/autocad-2026",
+        "official_url": "https://www.autodesk.com/autocad"
+      }
+    ],
+    "documents": [],
     "faq": []
   }
 }
