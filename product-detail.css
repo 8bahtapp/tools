@@ -418,3 +418,38 @@ section:last-child { border-bottom: none; }
     .card-grid { grid-template-columns: 1fr; }
     .section-title { font-size: 20px; }
 }
+/* ============================================================
+   ฟังก์ชันการยุบหน้าตะกร้า (Minimize State)
+   ============================================================ */
+
+/* เมื่อตะกร้ามีคลาส .minimized ให้ซ่อนส่วนรายการและปุ่มคัดลอก */
+.basket-container.minimized .basket-items,
+.basket-container.minimized .basket-footer,
+.basket-container.minimized .btn-clear {
+    display: none !important; 
+}
+
+/* ปรับความกว้างของตะกร้าตอนยุบให้กะทัดรัด */
+.basket-container.minimized {
+    width: 220px !important; /* ปรับขนาดความกว้างตอนยุบตามใจชอบ */
+}
+
+/* ปรับระยะห่างภายในตอนยุบให้ดูเป็นแถบ Widget */
+.basket-container.minimized .basket-card {
+    padding: 12px 16px !important;
+    border-radius: 40px; /* ทำให้ดูโค้งมนเหมือนแคปซูล */
+    cursor: pointer;    /* เปลี่ยนเมาส์เป็นรูปมือเพื่อให้รู้ว่ากดได้ */
+}
+
+/* ปรับส่วนหัวให้ไม่มีเส้นคั่นตอนยุบ */
+.basket-container.minimized .basket-header {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* เอฟเฟกต์ตอน Hover ให้ดูมีมิติ */
+.basket-container.minimized:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
