@@ -250,6 +250,27 @@
                 </div>
             </section>
         </main>
+
+    <div id="copy-basket-ui" class="basket-container" style="display: none;">
+        <div class="basket-card">
+            <div class="basket-header">
+                <div class="basket-title">
+                    📋 <h4>รายการที่เลือก (<span id="basket-count">0</span>)</h4>
+                </div>
+                
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <button onclick="clearBasket()" class="btn-clear">ล้างทั้งหมด</button>
+                    <button id="btn-minimize" onclick="toggleBasket()" style="background:none; border:none; color:white; cursor:pointer; font-size: 20px; line-height: 1;">
+                        <span id="minimize-icon">−</span>
+                    </button>
+                </div>
+            </div>
+    
+            <div id="preview-list" class="basket-items"></div>
+            <div class="basket-footer">
+                <button onclick="copyAllItems()" class="btn-copy-all">คัดลอกลิ้งก์ทั้งหมด</button>
+            </div>
+        </div>
     </div>
 
     <div id="copy-toast" class="toast-hidden">คัดลอกสำเร็จ!</div>
