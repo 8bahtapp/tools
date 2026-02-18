@@ -101,11 +101,11 @@ body {
 /* สำหรับ Desktop: จัดการให้แถบเมนูเลื่อนซ้าย-ขวาได้ถ้าหัวข้อเยอะเกินจอ */
 @media (min-width: 1101px) {
     .desktop-menu {
-        overflow-x: auto;
-        white-space: nowrap;
+        overflow: visible;
+        white-space: normal;
         scrollbar-width: none; /* ซ่อนแถบเลื่อน Firefox */
         -ms-overflow-style: none; /* ซ่อนแถบเลื่อน IE/Edge */
-        padding-bottom: 5px;
+        padding-bottom: 0px;
     }
     .desktop-menu::-webkit-scrollbar {
         display: none; /* ซ่อนแถบเลื่อน Chrome/Safari */
