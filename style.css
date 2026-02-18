@@ -497,14 +497,14 @@ body {
     box-shadow: none !important;
     backdrop-filter: none;
 }
-/* คัดลอกส่วนนี้ทับ slider-wrapper และ .active เดิม */
+/* ค่าเริ่มต้นสำหรับ Desktop (ให้ขยับลงมาหน่อยไม่ให้ห่างเกินไป) */
 .slider-wrapper {
     display: none; 
     position: absolute;
-    bottom: 40px;
+    bottom: 60px; /* ระยะสำหรับ Desktop */
     left: 0;
     right: 0;
-    margin: 0 auto; /* ใช้ margin แทน transform เพื่อให้ลากได้ไม่เพี้ยน */
+    margin: 0 auto;
     width: 260px;
     z-index: 10002;
     transition: opacity 0.5s ease;
@@ -512,6 +512,14 @@ body {
     pointer-events: none;
 }
 
+/* ปรับแต่งเฉพาะ Mobile (หน้าจอเล็กลง ให้ขยับแถบสไลด์สูงขึ้น) */
+@media (max-width: 768px) {
+    .slider-wrapper {
+        bottom: 100px; /* ขยับขึ้นสูงอีกนิดสำหรับมือถือ */
+    }
+}
+
+/* ส่วนที่เหลือคงเดิม */
 .slider-wrapper.active {
     display: block !important;
     opacity: 1 !important;
