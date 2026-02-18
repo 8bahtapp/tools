@@ -525,10 +525,11 @@ body {
 
 /* วางต่อจาก .pin-grid */
 .slider-wrapper {
-    position: absolute;   /* ทำให้ปุ่มสไลด์ลอยตัว */
+    position: relative; 
     bottom: 120px;         /* ระยะห่างจากขอบล่างของหน้าจอ */
     left: 50%;
     transform: translateX(-50%); /* จัดให้อยู่กึ่งกลางแนวนอน */
+    margin-top: auto; 
     width: 260px;
     z-index: 10;
     transition: opacity 0.3s ease; /* จางเข้า-ออก แบบนุ่มนวล */
