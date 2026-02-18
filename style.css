@@ -547,10 +547,17 @@ body {
 }
 
 .slider-text {
+    position: absolute;      /* เพิ่มบรรทัดนี้ */
+    left: 50%;               /* ดันมาที่ 50% ของแถบ */
+    top: 50%;                /* ดันลงมาที่ 50% ของแถบ */
+    transform: translate(-50%, -50%); /* ดึงกลับมาให้กึ่งกลางจุดตัดพอดี */
+    
     font-size: 11px;
     color: rgba(255, 255, 255, 0.3);
     font-weight: 500;
     letter-spacing: 1.5px;
+    pointer-events: none;    /* สำคัญ: เพื่อให้เวลาคลิกโดนตัวหนังสือแล้วยังลากปุ่มได้ */
+    z-index: 1;              /* ให้อยู่ต่ำกว่าปุ่ม (ปุ่มเป็น z-index: 5) */
 }
 
 .slider-handle {
