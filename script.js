@@ -1,4 +1,4 @@
-// --- 1. PIN CONFIGURATION & SYSTEM ---
+// --- 1. PIN CONFIGURATION & SYSTEM (Slide to Unlock Version - 6 Digits) ---
 const CORRECT_PIN = "8888";
 const SESSION_DURATION = 12 * 60 * 60 * 1000; 
 
@@ -10,8 +10,7 @@ function initPinSystem() {
     const pinHtml = `
         <div id="pin-screen">
             <div class="pin-container">
-                <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/icon-8baht.png" style="height:25px; margin-bottom:20px;">
-                <p style="font-size:14px; color:#86868b; margin-bottom:20px; font-weight:500;">Enter Security PIN</p>
+                <p style="font-size:16px; color:#1d1d1f; margin-bottom:20px; font-weight:600;">Enter Security PIN</p>
                 <div class="pin-display-wrapper">
                     <div class="pin-display" id="pin-dots"></div>
                 </div>
@@ -23,33 +22,35 @@ function initPinSystem() {
                     <button class="pin-btn" onclick="pressPin('0')" ontouchend="event.preventDefault(); pressPin('0')">0</button>
                     <div style="visibility:hidden"></div>
                 </div>
-                <div id="pin-error" style="color:#ff3b30; font-size:12px; margin-top:20px; min-height:16px; font-weight:500;"></div>
+                
+                <div id="pin-error" style="color:#ff3b30; font-size:12px; margin: 15px 0; min-height:16px; font-weight:500;"></div>
+
+                <div class="slider-wrapper" id="slider-container" style="display:none;">
+                    <div class="slider-bg">
+                        <span class="slider-text">Slide to Unlock</span>
+                        <div class="slider-handle" id="slider-handle">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     `;
     document.body.insertAdjacentHTML('afterbegin', pinHtml);
+    initSlider(); 
 }
 
 let inputCode = "";
+
 window.pressPin = function(num) {
-    if (inputCode.length < 4) {
+    if (inputCode.length < 6) { // ปรับเป็นสูงสุด 6 หลักตามสั่ง
         inputCode += num;
         const dotsDisplay = document.getElementById('pin-dots');
-        if (dotsDisplay) dotsDisplay.innerText = "*".repeat(inputCode.length);
+        if (dotsDisplay) dotsDisplay.innerText = "•".repeat(inputCode.length);
         
-        if (inputCode === CORRECT_PIN) {
-            localStorage.setItem('auth_time_8baht', new Date().getTime());
-            const screen = document.getElementById('pin-screen');
-            if (screen) {
-                screen.style.transition = "opacity 0.4s ease";
-                screen.style.opacity = "0";
-                setTimeout(() => screen.remove(), 400);
-            }
-        } else if (inputCode.length >= 4) {
-            const errorDisplay = document.getElementById('pin-error');
-            if (errorDisplay) errorDisplay.innerText = "Incorrect PIN, please try again.";
-            setTimeout(clearPin, 500);
-        }
+        // แสดงแถบสไลด์ทันทีที่มีการกดตัวเลข
+        const sliderContainer = document.getElementById('slider-container');
+        if (sliderContainer) sliderContainer.style.display = 'block';
     }
 }
 
@@ -57,8 +58,81 @@ window.clearPin = function() {
     inputCode = "";
     const dotsDisplay = document.getElementById('pin-dots');
     const errorDisplay = document.getElementById('pin-error');
+    const sliderContainer = document.getElementById('slider-container');
     if (dotsDisplay) dotsDisplay.innerText = "";
     if (errorDisplay) errorDisplay.innerText = "";
+    if (sliderContainer) sliderContainer.style.display = 'none';
+    resetSlider();
+}
+
+function initSlider() {
+    const handle = document.getElementById('slider-handle');
+    const container = document.querySelector('.slider-bg');
+    if (!handle || !container) return;
+
+    let isDragging = false;
+    let startX = 0;
+
+    const onStart = (e) => {
+        isDragging = true;
+        startX = (e.type === 'mousedown') ? e.pageX : e.touches[0].pageX;
+        handle.style.transition = 'none';
+    };
+
+    const onMove = (e) => {
+        if (!isDragging) return;
+        const currentX = (e.type === 'mousemove') ? e.pageX : e.touches[0].pageX;
+        let deltaX = currentX - startX;
+        const maxSlide = container.offsetWidth - handle.offsetWidth - 10;
+
+        if (deltaX < 0) deltaX = 0;
+        if (deltaX > maxSlide) deltaX = maxSlide;
+
+        handle.style.transform = `translateX(${deltaX}px)`;
+        
+        if (deltaX >= maxSlide) {
+            isDragging = false;
+            validateAndUnlock();
+        }
+    };
+
+    const onEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        resetSlider();
+    };
+
+    handle.addEventListener('mousedown', onStart);
+    handle.addEventListener('touchstart', onStart, {passive: true});
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove, {passive: false});
+    window.addEventListener('mouseup', onEnd);
+    window.addEventListener('touchend', onEnd);
+}
+
+function resetSlider() {
+    const handle = document.getElementById('slider-handle');
+    if (handle) {
+        handle.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        handle.style.transform = 'translateX(0)';
+    }
+}
+
+function validateAndUnlock() {
+    if (inputCode === CORRECT_PIN) {
+        localStorage.setItem('auth_time_8baht', new Date().getTime());
+        const screen = document.getElementById('pin-screen');
+        if (screen) {
+            screen.style.transition = "opacity 0.4s ease";
+            screen.style.opacity = "0";
+            setTimeout(() => screen.remove(), 400);
+        }
+    } else {
+        const errorDisplay = document.getElementById('pin-error');
+        if (errorDisplay) errorDisplay.innerText = "รหัส PIN ไม่ถูกต้อง";
+        resetSlider();
+        setTimeout(clearPin, 800);
+    }
 }
 
 initPinSystem();
@@ -93,7 +167,6 @@ function addToBasket(name, url) {
         basket.push({ name, url });
         updateBasketUI();
     }
-    if (typeof showToast === 'function') showToast();
 }
 
 function removeItem(index) {
