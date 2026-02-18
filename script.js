@@ -182,3 +182,31 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (err) { console.error(err); }
     });
 });
+
+// --- ปรับปรุงส่วนการคลิกเมนูใน DOMContentLoaded ---
+document.addEventListener("DOMContentLoaded", () => {
+    const navItems = document.querySelectorAll(".desktop-menu a");
+
+    navItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+            const href = item.getAttribute("href");
+            const currentPage = window.location.pathname;
+
+            // ตรวจสอบว่าลิ้งก์ที่คลิก ตรงกับหน้าปัจจุบันหรือไม่
+            if (href.includes(currentPage) || (currentPage.endsWith('/') && href.endsWith(currentPage.split('/').slice(-2, -1)[0] + '/'))) {
+                e.preventDefault(); // ป้องกันการโหลดหน้าใหม่/Error 404
+                
+                // เลื่อนหน้าจอขึ้นบนสุด (Smooth Scroll ตามสไตล์ Apple)
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                
+                // ถ้าเมนูมือถือเปิดอยู่ให้ปิดด้วย
+                const mainNav = document.querySelector('.desktop-menu');
+                if (mainNav && mainNav.classList.contains('active')) {
+                    toggleMenu(); // เรียกใช้ฟังก์ชันปิดเมนูที่คุณมีอยู่แล้ว
+                }
+            }
+        });
+    });
+    
+    // ... โค้ดส่วนอื่นๆ ของคุณ ...
+});
