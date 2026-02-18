@@ -373,14 +373,14 @@ body {
 }
 
 /* =========================================
-   PIN SYSTEM - LIQUID GLASS PREMIUM BLACK
+   PIN SYSTEM - LIQUID GLASS PREMIUM BLACK (UPDATED)
    ========================================= */
 
-/* พื้นหลังหลักแบบเต็มจอ */
+/* พื้นหลังหลัก: ดำพรีเมี่ยมสนิท */
 #pin-screen {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: #0a0a0a; /* สีดำพรีเมี่ยม */
+    background: #000000; /* Deep Premium Black */
     z-index: 10000;
     display: flex;
     flex-direction: column;
@@ -389,7 +389,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* คอนเทนเนอร์แบบลอยตัว (ไม่มีกรอบพื้นหลัง) */
+/* คอนเทนเนอร์: ลอยตัวบนพื้นหลัง */
 .pin-container {
     background: transparent;
     text-align: center;
@@ -397,138 +397,151 @@ body {
     padding: 20px;
 }
 
-/* ข้อความหัวข้อ */
+/* ข้อความหัวข้อ: เน้นความเรียบหรู */
 .pin-container p {
-    color: rgba(255, 255, 255, 0.8) !important;
-    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 14px;
     font-weight: 300;
-    letter-spacing: 1px;
-    margin-bottom: 30px;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
 }
 
-/* ช่องแสดงผลจุดพินแบบกระจกเหลว */
+/* ช่องแสดงผลพิน: Liquid Glass Effect */
 .pin-display-wrapper {
-    background: rgba(255, 255, 255, 0.05);
-    height: 50px;
-    width: 200px;
-    margin: 0 auto 40px auto;
-    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.03);
+    height: 56px;
+    width: 220px;
+    margin: 0 auto 50px auto;
+    border-radius: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    /* ขอบกระจกที่มีแสงตกกระทบด้านบน */
     border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 
+                0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .pin-display {
     color: #ffffff;
-    font-size: 24px;
-    letter-spacing: 10px;
+    font-size: 28px;
+    letter-spacing: 12px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 /* แผงปุ่มตัวเลข */
 .pin-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 25px;
     justify-items: center;
 }
 
-/* ดีไซน์ปุ่มแบบ Liquid Glass (ทรงกลมใส) */
+/* ปุ่มตัวเลข: ดีไซน์หยดน้ำ/กระจกใส (Liquid Glass) */
 .pin-btn {
-    width: 70px;
-    height: 70px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.03);
+    /* ไล่เฉดสีในตัวปุ่มเพื่อให้ดูมีปริมาตรโค้งมนแบบหยดน้ำ */
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
     color: #ffffff;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 300;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(8px);
+    /* ขอบปุ่มแบบกระจก */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4),
+                inset 0 0 10px rgba(255, 255, 255, 0.02);
     -webkit-tap-highlight-color: transparent;
 }
 
-/* เอฟเฟกต์เมื่อกดปุ่ม (Liquid Glow) */
+/* เอฟเฟกต์เมื่อกด: ยุบตัวและเรืองแสง */
 .pin-btn:active {
-    transform: scale(0.9);
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-/* ปุ่ม Clear (ปุ่มพิเศษ) */
 .pin-btn.special {
     background: transparent !important;
     border: none !important;
-    font-size: 14px;
+    font-size: 13px;
     color: rgba(255, 255, 255, 0.4);
     box-shadow: none !important;
+    backdrop-filter: none;
 }
 
-.pin-btn.special:hover {
-    color: #ff453a;
-}
-
-/* --- แถบสไลด์แบบสั้นลง (Short Slider) --- */
+/* --- แถบสไลด์: ปรับขนาดและดีไซน์ให้สมดุล --- */
 .slider-wrapper {
-    margin: 40px auto 0 auto;
-    width: 220px; /* ปรับให้สั้นลงตามสั่ง */
+    margin: 50px auto 0 auto;
+    width: 240px; /* ขนาดที่ดูสมดุลกับช่องพิน */
 }
 
 .slider-bg {
     position: relative;
-    height: 48px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .slider-text {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.4);
-    font-weight: 400;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 500;
+    letter-spacing: 1.5px;
 }
 
-/* หัวสไลด์แบบหยดน้ำเรืองแสง */
+/* หัวสไลด์: ขาวนวลทรงหยดน้ำ */
 .slider-handle {
     position: absolute;
-    left: 4px;
-    width: 40px;
-    height: 40px;
+    left: 5px;
+    width: 42px;
+    height: 42px;
     background: #ffffff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    /* แสงเรืองรอบหัวสไลด์ */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
     cursor: grab;
     z-index: 5;
+    transition: transform 0.2s;
+}
+
+.slider-handle:active {
+    transform: scale(0.95);
 }
 
 .slider-handle svg {
     color: #000000;
-    width: 18px;
+    width: 16px;
 }
 
-/* ข้อความแจ้งเตือนความผิดพลาด */
 #pin-error {
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 13px;
     color: #ff453a;
     min-height: 16px;
+    letter-spacing: 0.5px;
 }
+
 /* สไตล์เบื้องต้นสำหรับตะกร้าลอย */
 .basket-container {
     position: fixed;
