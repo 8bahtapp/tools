@@ -393,7 +393,8 @@ body {
 .pin-container {
     background: transparent;
     text-align: center;
-    width: 320px;
+    max-width: 320px;
+    width: 100%;
     padding: 20px;
 }
 
@@ -495,6 +496,31 @@ body {
     color: rgba(255, 255, 255, 0.4);
     box-shadow: none !important;
     backdrop-filter: none;
+}
+/* การปรับแต่งสำหรับหน้าจอมือถือ */
+@media screen and (max-width: 480px) {
+    .pin-container {
+        width: 90vw; /* กว้าง 90% ของความกว้างหน้าจอ */
+        max-width: 320px;
+        padding: 15px;
+        height: auto; /* ให้ความสูงยืดหยุ่นตามเนื้อหา */
+        min-height: 550px;
+    }
+
+    .pin-grid {
+        gap: 15px; /* ลดระยะห่างระหว่างปุ่มลงเพื่อให้พอดีจอ */
+    }
+
+    .pin-btn {
+        width: 65px;  /* ลดขนาดปุ่มลงเล็กน้อย */
+        height: 65px;
+        font-size: 24px;
+    }
+
+    .slider-wrapper {
+        width: 80%; /* สไลด์กว้าง 80% ของคอนเทนเนอร์ */
+        bottom: 40px;
+    }
 }
 
 /* วางต่อจาก .pin-grid */
