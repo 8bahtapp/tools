@@ -533,9 +533,9 @@ body {
 /* หัวสไลด์: ขาวนวลทรงหยดน้ำ */
 .slider-handle {
     position: absolute;
-    left: 5px;
-    width: 42px;
-    height: 42px;
+    left: 6px;
+    width: 66px;
+    height: 66px;
     background: #ffffff;
     border-radius: 50%;
     display: flex;
