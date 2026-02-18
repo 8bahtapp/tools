@@ -128,16 +128,22 @@ function copyAllItems() {
     });
 }
 
-// --- 3. DOM INITIALIZATION (Mobile Menu, Scroll Spy, etc.) ---
+// --- 3. DOM INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", () => {
-    updateBasketUI(); // รันตะกร้าครั้งแรก
+    updateBasketUI(); 
 
-    const mobileToggle = document.getElementById('mobile-toggle');
+    // ใช้ querySelector ให้ตรงกับ Class ใน CSS
+    const mobileToggle = document.querySelector('.mobile-menu-btn'); 
     const mainNav = document.querySelector('.desktop-menu');
-    let overlay = document.getElementById('menu-overlay') || (() => {
-        const el = document.createElement('div'); el.id = 'menu-overlay'; el.className = 'menu-overlay';
-        document.body.appendChild(el); return el;
-    })();
+    
+    // พยายามหา Overlay ถ้าไม่มีให้สร้าง (คงเดิมไว้ได้)
+    let overlay = document.getElementById('menu-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'menu-overlay';
+        overlay.className = 'menu-overlay';
+        document.body.appendChild(overlay);
+    }
 
     function toggleMenu() {
         if (!mainNav) return;
@@ -145,22 +151,22 @@ document.addEventListener("DOMContentLoaded", () => {
         overlay.classList.toggle('active', isOpen);
         
         if (isOpen) {
-            // เมื่อเปิดเมนู: ล็อกหน้าเว็บหลักไม่ให้เลื่อน แต่ให้เมนูเลื่อนได้
             document.body.style.overflow = 'hidden'; 
-            mainNav.style.maxHeight = 'calc(100vh - 80px)'; // หักออกตามความสูงของ Header
+            mainNav.style.maxHeight = 'calc(100vh - 48px)'; // ปรับเป็น 48px ตามความสูง header คุณ
             mainNav.style.overflowY = 'auto'; 
-            mainNav.style.webkitOverflowScrolling = 'touch'; // ให้การเลื่อนใน iOS ลื่นไหล
+            mainNav.style.webkitOverflowScrolling = 'touch';
         } else {
-            // เมื่อปิดเมนู: คืนค่าปกติ
             document.body.style.overflow = '';
             mainNav.style.maxHeight = '';
             mainNav.style.overflowY = '';
         }
-
         if (isOpen && navigator.vibrate) navigator.vibrate(10);
     }
+
     mobileToggle?.addEventListener('click', toggleMenu);
     overlay?.addEventListener('click', toggleMenu);
+    
+});
 
     // Copy Link System สำหรับปุ่มเดี่ยว
     document.addEventListener("click", async (e) => {
