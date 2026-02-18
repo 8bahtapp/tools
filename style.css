@@ -489,6 +489,58 @@ body {
     font-weight: 500;
     letter-spacing: -0.01em;
 }
+
+/* --- เพิ่มเติมเฉพาะส่วน SLIDER (Slide to Unlock) --- */
+.slider-wrapper {
+    margin-top: 25px;
+    width: 100%;
+    user-select: none;
+}
+
+.slider-bg {
+    position: relative;
+    height: 54px;
+    background: #f2f2f7;
+    border-radius: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.slider-text {
+    font-size: 13px;
+    color: #86868b;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.slider-handle {
+    position: absolute;
+    left: 4px;
+    width: 46px;
+    height: 46px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    cursor: grab;
+    z-index: 5;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slider-handle:active {
+    cursor: grabbing;
+}
+
+.slider-handle svg {
+    color: #1d1d1f;
+    opacity: 0.8;
+}
+}
 /* สไตล์เบื้องต้นสำหรับตะกร้าลอย */
 .basket-container {
     position: fixed;
