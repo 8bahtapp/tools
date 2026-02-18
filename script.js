@@ -143,9 +143,22 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!mainNav) return;
         const isOpen = mainNav.classList.toggle('active');
         overlay.classList.toggle('active', isOpen);
-        document.body.style.overflow = isOpen ? 'hidden' : '';
-    }
+        
+        if (isOpen) {
+            // เมื่อเปิดเมนู: ล็อกหน้าเว็บหลักไม่ให้เลื่อน แต่ให้เมนูเลื่อนได้
+            document.body.style.overflow = 'hidden'; 
+            mainNav.style.maxHeight = 'calc(100vh - 80px)'; // หักออกตามความสูงของ Header
+            mainNav.style.overflowY = 'auto'; 
+            mainNav.style.webkitOverflowScrolling = 'touch'; // ให้การเลื่อนใน iOS ลื่นไหล
+        } else {
+            // เมื่อปิดเมนู: คืนค่าปกติ
+            document.body.style.overflow = '';
+            mainNav.style.maxHeight = '';
+            mainNav.style.overflowY = '';
+        }
 
+        if (isOpen && navigator.vibrate) navigator.vibrate(10);
+    }
     mobileToggle?.addEventListener('click', toggleMenu);
     overlay?.addEventListener('click', toggleMenu);
 
