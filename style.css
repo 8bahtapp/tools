@@ -540,7 +540,7 @@ body {
     border-radius: 34px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     border: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
@@ -556,10 +556,8 @@ body {
 .slider-handle {
     position: absolute;
     left: 4px; 
-    top: 50%;
-    transform: translateY(-50%); /* เพิ่มบรรทัดนี้เพื่อขยับปุ่มขึ้นไปครึ่งหนึ่ง */
-    width: 60px; /* แนะนำให้เล็กกว่าความสูงแถบเล็กน้อย ถ้าแถบสูง 68px */
-    height: 60px;
+    width: 68px; /* แนะนำให้เล็กกว่าความสูงแถบเล็กน้อย ถ้าแถบสูง 68px */
+    height: 68px;
     background: #ffffff;
     border-radius: 50%;
     display: flex;
@@ -573,7 +571,7 @@ body {
 
 /* อย่าลืมแก้ตรง :active ด้วย เพื่อไม่ให้มันทับ transform เดิม */
 .slider-handle:active {
-    transform: translateY(-50%) scale(0.95);
+    transform: scale(0.95);
 }
 
 .slider-handle svg {
