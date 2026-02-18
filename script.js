@@ -49,7 +49,12 @@ window.pressPin = function(num) {
         if (dotsDisplay) dotsDisplay.innerText = "•".repeat(inputCode.length);
         
         const sliderContainer = document.getElementById('slider-container');
-        if (sliderContainer) sliderContainer.style.display = 'block';
+        if (sliderContainer) {
+            // เปลี่ยนจาก display เป็น opacity เพื่อไม่ให้ Layout ขยับ
+            sliderContainer.style.display = 'block'; 
+            sliderContainer.style.opacity = '1';
+            sliderContainer.style.pointerEvents = 'auto';
+        }
     }
 }
 
@@ -60,7 +65,12 @@ window.clearPin = function() {
     const sliderContainer = document.getElementById('slider-container');
     if (dotsDisplay) dotsDisplay.innerText = "";
     if (errorDisplay) errorDisplay.innerText = "";
-    if (sliderContainer) sliderContainer.style.display = 'none';
+    
+    if (sliderContainer) {
+        // ซ่อนแบบ opacity แทนการสั่ง display: none ทันที
+        sliderContainer.style.opacity = '0';
+        sliderContainer.style.pointerEvents = 'none';
+    }
     resetSlider();
 }
 
