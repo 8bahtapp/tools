@@ -457,13 +457,12 @@ body {
     color: rgba(255, 255, 255, 0.8) !important;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
-/* ปุ่มตัวเลข: ดีไซน์หยดน้ำ/กระจกใส (Liquid Glass) */
+/* ปุ่มตัวเลข: ดีไซน์หยดน้ำ/กระจกใส (Liquid Glass) - Updated Borders */
 .pin-btn {
     width: 75px;
     height: 75px;
     border-radius: 50%;
-    /* ไล่เฉดสีในตัวปุ่มเพื่อให้ดูมีปริมาตรโค้งมนแบบหยดน้ำ */
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
     color: #ffffff;
     font-size: 28px;
     font-weight: 300;
@@ -472,13 +471,21 @@ body {
     justify-content: center;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    backdrop-filter: blur(8px);
-    /* ขอบปุ่มแบบกระจก */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4),
-                inset 0 0 10px rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px); /* เพิ่มความฟุ้งของกระจกอีกนิด */
+    
+    /* แก้ไขขอบใหม่: ขอบสองชั้น (Double-Rim Effect) */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* ขอบรอบนอกบางๆ */
+    border-top: 1.5px solid rgba(255, 255, 255, 0.25); /* ขอบบนรับแสงให้ดูนูน */
+    border-left: 1px solid rgba(255, 255, 255, 0.15); /* ขอบข้างรับแสงเฉียง */
+
+    /* เพิ่มเงาและแสงสะท้อนภายใน (Inner Glow) */
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.6),             /* เงาตกกระทบพื้นหลัง */
+        inset 0 1px 2px rgba(255, 255, 255, 0.2),  /* แสงสะท้อนที่ขอบบนด้านใน */
+        inset 0 -2px 10px rgba(255, 255, 255, 0.02); /* เงาจางๆ ด้านล่างให้ดูมีความหนา */
+        
     -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 /* เอฟเฟกต์เมื่อกด: ยุบตัวและเรืองแสง */
@@ -550,8 +557,8 @@ body {
     position: absolute;
     left: 4px; /* ระยะห่างจากขอบซ้าย */
     top: 5px;  /* จัดให้อยู่กลางแนวตั้ง */
-    width: 56px;
-    height: 56px;
+    width: 66px;
+    height: 66px;
     background: #ffffff;
     border-radius: 50%;
     display: flex;
