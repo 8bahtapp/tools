@@ -372,174 +372,162 @@ body {
     opacity: 1;
 }
 
-/* ================================
-   PIN SYSTEM - LUXURY DESIGN (Updated)
-================================ */
+/* =========================================
+   PIN SYSTEM - LIQUID GLASS PREMIUM BLACK
+   ========================================= */
+
+/* พื้นหลังหลักแบบเต็มจอ */
 #pin-screen {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, #2c2c2e 0%, var(--text-main) 100%);
+    background: #0a0a0a; /* สีดำพรีเมี่ยม */
     z-index: 10000;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+/* คอนเทนเนอร์แบบลอยตัว (ไม่มีกรอบพื้นหลัง) */
 .pin-container {
-    background: var(--header-glass);
-    padding: 40px;
-    border-radius: 40px;
-    box-shadow: var(--shadow-hover);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    background: transparent;
     text-align: center;
-    width: 340px;
+    width: 320px;
+    padding: 20px;
 }
 
-/* ช่องแสดงผล **** */
+/* ข้อความหัวข้อ */
+.pin-container p {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+/* ช่องแสดงผลจุดพินแบบกระจกเหลว */
 .pin-display-wrapper {
-    background: #f2f2f7; 
-    height: 60px;
-    width: 100%;
-    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    height: 50px;
+    width: 200px;
+    margin: 0 auto 40px auto;
+    border-radius: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .pin-display {
-    font-size: 32px;
-    letter-spacing: 12px;
-    color: var(--text-main);
-    font-weight: bold;
+    color: #ffffff;
+    font-size: 24px;
+    letter-spacing: 10px;
 }
 
 /* แผงปุ่มตัวเลข */
 .pin-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: 20px;
+    justify-items: center;
 }
 
-/* สถานะปกติ: มีขอบและเงาชัดเจน */
+/* ดีไซน์ปุ่มแบบ Liquid Glass (ทรงกลมใส) */
 .pin-btn {
-    aspect-ratio: 1/1;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    border: 1.5px solid rgba(0, 0, 0, 0.08); /* เส้นขอบปุ่ม */
-    background: var(--card-bg);
-    font-size: 24px;
-    font-weight: 500;
-    color: var(--text-main);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* เงาปุ่ม */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 300;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    
-    /* ป้องกันการซูมและหน่วงในมือถือ */
-    touch-action: manipulation;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     -webkit-tap-highlight-color: transparent;
-    user-select: none;
-    outline: none;
 }
 
-/* สถานะเมาส์จ่อ: เปลี่ยนเป็นสีดำ (text-main) ตามสั่ง */
-@media (hover: hover) {
-    .pin-btn:hover {
-        background: var(--text-main) !important;
-        color: #ffffff !important;
-        border-color: var(--text-main);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        transform: translateY(-3px);
-    }
-}
-
-/* สถานะตอนกด: ให้ความรู้สึกปุ่มยุบลง */
+/* เอฟเฟกต์เมื่อกดปุ่ม (Liquid Glow) */
 .pin-btn:active {
-    transform: scale(0.92);
-    background: #e5e5ea !important;
-    color: var(--text-main) !important;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    transform: scale(0.9);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
+/* ปุ่ม Clear (ปุ่มพิเศษ) */
 .pin-btn.special {
     background: transparent !important;
+    border: none !important;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
     box-shadow: none !important;
-    border-color: transparent !important;
-    font-size: 15px;
-    color: var(--text-gray);
 }
 
 .pin-btn.special:hover {
-    background: rgba(0,0,0,0.05) !important;
-    color: var(--text-main) !important;
+    color: #ff453a;
 }
 
-.pin-btn.special:active {
-    color: #ff3b30 !important;
-    background: transparent !important;
-}
-
-#pin-error {
-    font-weight: 500;
-    letter-spacing: -0.01em;
-}
-
-/* --- เพิ่มเติมเฉพาะส่วน SLIDER (Slide to Unlock) --- */
+/* --- แถบสไลด์แบบสั้นลง (Short Slider) --- */
 .slider-wrapper {
-    margin-top: 25px;
-    width: 100%;
-    user-select: none;
+    margin: 40px auto 0 auto;
+    width: 220px; /* ปรับให้สั้นลงตามสั่ง */
 }
 
 .slider-bg {
     position: relative;
-    height: 54px;
-    background: #f2f2f7;
-    border-radius: 27px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .slider-text {
-    font-size: 13px;
-    color: #86868b;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
+/* หัวสไลด์แบบหยดน้ำเรืองแสง */
 .slider-handle {
     position: absolute;
     left: 4px;
-    width: 46px;
-    height: 46px;
+    width: 40px;
+    height: 40px;
     background: #ffffff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
     cursor: grab;
     z-index: 5;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.slider-handle:active {
-    cursor: grabbing;
 }
 
 .slider-handle svg {
-    color: #1d1d1f;
-    opacity: 0.8;
+    color: #000000;
+    width: 18px;
 }
+
+/* ข้อความแจ้งเตือนความผิดพลาด */
+#pin-error {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #ff453a;
+    min-height: 16px;
 }
 /* สไตล์เบื้องต้นสำหรับตะกร้าลอย */
 .basket-container {
