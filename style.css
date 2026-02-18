@@ -497,25 +497,25 @@ body {
     box-shadow: none !important;
     backdrop-filter: none;
 }
-/* เพิ่มส่วนนี้เพื่อให้แถบสไลด์แสดงผล */
-.slider-wrapper.active {
-    display: block !important; /* บังคับให้แสดง */
-    opacity: 1 !important;     /* ทำให้มองเห็น */
-    pointer-events: auto !important; /* ทำให้ลากได้ */
-    transform: translateX(-50%) translateY(0); /* จัดตำแหน่งให้เข้าที่ */
-}
-
-/* ปรับ Slider Wrapper เดิมให้พร้อมสำหรับการแสดงผล */
+/* คัดลอกส่วนนี้ทับ slider-wrapper และ .active เดิม */
 .slider-wrapper {
-    display: none; /* ซ่อนไว้ตอนแรก */
+    display: none; 
     position: absolute;
-    bottom: 40px; /* ปรับตำแหน่งให้อยู่เหนือขอบล่างพอดี */
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto; /* ใช้ margin แทน transform เพื่อให้ลากได้ไม่เพี้ยน */
     width: 260px;
     z-index: 10002;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 0.5s ease;
     opacity: 0;
+    pointer-events: none;
+}
+
+.slider-wrapper.active {
+    display: block !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }
 
 .slider-bg {
@@ -538,22 +538,21 @@ body {
     letter-spacing: 1.5px;
 }
 
-/* หัวสไลด์: ขาวนวลทรงหยดน้ำ */
 .slider-handle {
     position: absolute;
-    left: 6px;
-    width: 66px;
-    height: 66px;
+    left: 4px; /* ระยะห่างจากขอบซ้าย */
+    top: 5px;  /* จัดให้อยู่กลางแนวตั้ง */
+    width: 56px;
+    height: 56px;
     background: #ffffff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* แสงเรืองรอบหัวสไลด์ */
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
     cursor: grab;
     z-index: 5;
-    transition: transform 0.2s;
+    touch-action: none; /* ป้องกัน browser แย่งลากหน้าจอ */
 }
 
 .slider-handle:active {
