@@ -80,15 +80,20 @@ function initSlider() {
 
     const onStart = (e) => {
         isDragging = true;
-        startX = (e.type === 'mousedown') ? e.pageX : e.touches[0].pageX;
-        handle.style.transition = 'none';
+        // เก็บค่าตำแหน่งเริ่มต้นของเมาส์/นิ้ว
+        const clientX = (e.type === 'mousedown') ? e.clientX : e.touches[0].clientX;
+        startX = clientX;
+        handle.style.transition = 'none'; // ปิด transition ขณะลาก
     };
 
     const onMove = (e) => {
         if (!isDragging) return;
-        const currentX = (e.type === 'mousemove') ? e.pageX : e.touches[0].pageX;
-        let deltaX = currentX - startX;
-        const maxSlide = container.offsetWidth - handle.offsetWidth - 8;
+        
+        const clientX = (e.type === 'mousemove') ? e.clientX : e.touches[0].clientX;
+        let deltaX = clientX - startX;
+        
+        // คำนวณระยะลากสูงสุด (ความกว้างพื้นหลัง - ความกว้างปุ่ม - margin)
+        const maxSlide = container.clientWidth - handle.offsetWidth - 8;
 
         if (deltaX < 0) deltaX = 0;
         if (deltaX > maxSlide) deltaX = maxSlide;
@@ -107,8 +112,10 @@ function initSlider() {
         resetSlider();
     };
 
+    // ผูก Event เข้ากับ Handle และ Window
     handle.addEventListener('mousedown', onStart);
-    handle.addEventListener('touchstart', onStart, {passive: true});
+    handle.addEventListener('touchstart', onStart, {passive: false});
+    
     window.addEventListener('mousemove', onMove);
     window.addEventListener('touchmove', onMove, {passive: false});
     window.addEventListener('mouseup', onEnd);
@@ -118,7 +125,8 @@ function initSlider() {
 function resetSlider() {
     const handle = document.getElementById('slider-handle');
     if (handle) {
-        handle.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        // ใส่ transition กลับเฉพาะตอนเด้งกลับ
+        handle.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
         handle.style.transform = 'translateX(0)';
     }
 }
