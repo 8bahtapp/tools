@@ -439,7 +439,23 @@ body {
     gap: 25px;
     justify-items: center;
 }
+/* เอฟเฟกต์เมื่อเอาเมาส์ไปวาง (Hover) */
+@media (hover: hover) {
+    .pin-btn:hover:not(.special) {
+        background: rgba(255, 255, 255, 0.12); /* สว่างขึ้นเล็กน้อย */
+        border: 1px solid rgba(255, 255, 255, 0.3); /* ขอบชัดขึ้น */
+        transform: translateY(-3px); /* ยกตัวขึ้นเบาๆ ให้ดูมีมิติ */
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5), 
+                    0 0 15px rgba(255, 255, 255, 0.1); /* เพิ่มเงาและแสงฟุ้ง */
+        color: #ffffff;
+    }
+}
 
+/* ปรับแต่งปุ่มพิเศษ (Cancel/Delete) เมื่อ Hover */
+.pin-btn.special:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
 /* ปุ่มตัวเลข: ดีไซน์หยดน้ำ/กระจกใส (Liquid Glass) */
 .pin-btn {
     width: 75px;
