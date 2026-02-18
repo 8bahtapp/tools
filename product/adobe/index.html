@@ -250,6 +250,7 @@
                 </div>
             </section>
         </main>
+    </div>
 
     <div id="copy-basket-ui" class="basket-container" style="display: none;">
         <div class="basket-card">
@@ -272,46 +273,41 @@
             </div>
         </div>
     </div>
-<div id="copy-toast" class="toast-hidden">คัดลอกสำเร็จ!</div>
 
-<script src="../../script.js"></script>
-<script>
-    // ระบบแจ้งเตือนและคัดลอก
-    const toast = document.getElementById('copy-toast');
-    const showToast = () => {
-        toast.classList.remove('toast-hidden');
-        toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-            toast.classList.add('toast-hidden');
-        }, 2000);
-    };
+    <div id="copy-toast" class="toast-hidden">คัดลอกสำเร็จ!</div>
 
-    // ระบบคัดลอกสำหรับ FAQ
-    document.querySelectorAll('.btn-copy-icon').forEach(button => {
-        button.addEventListener('click', function() {
-            const text = this.getAttribute('data-url');
-            navigator.clipboard.writeText(text).then(showToast);
-        });
-    });
-
-    // ระบบคัดลอกสำหรับ Card
-    document.querySelectorAll('.btn-copy').forEach(button => {
-        button.addEventListener('click', function() {
-            const text = this.getAttribute('data-url');
-            navigator.clipboard.writeText(text).then(showToast);
-        });
-    });
-</script>
-
-<div class="product-layout">
-        <aside class="product-sidebar"> ... </aside>
-        <main class="product-content"> ... </main>
-        
-        </div> <footer class="main-footer">
+    <footer class="main-footer">
         <p>Copyright © 2026 8Baht Support. All rights reserved.</p>
     </footer>
 
     <script src="../../script.js"></script>
+    <script>
+        // ระบบแจ้งเตือนและคัดลอก
+        const toast = document.getElementById('copy-toast');
+        const showToast = () => {
+            toast.classList.remove('toast-hidden');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.classList.add('toast-hidden');
+            }, 2000);
+        };
+
+        // ระบบคัดลอกสำหรับ FAQ
+        document.querySelectorAll('.btn-copy-icon').forEach(button => {
+            button.addEventListener('click', function() {
+                const text = this.getAttribute('data-url');
+                navigator.clipboard.writeText(text).then(showToast);
+            });
+        });
+
+        // ระบบคัดลอกสำหรับ Card
+        document.querySelectorAll('.btn-copy').forEach(button => {
+            button.addEventListener('click', function() {
+                const text = this.getAttribute('data-url');
+                navigator.clipboard.writeText(text).then(showToast);
+            });
+        });
+    </script>
 </body>
 </html>
