@@ -497,44 +497,25 @@ body {
     box-shadow: none !important;
     backdrop-filter: none;
 }
-/* การปรับแต่งสำหรับหน้าจอมือถือ */
-@media screen and (max-width: 480px) {
-    .pin-container {
-        width: 90vw; /* กว้าง 90% ของความกว้างหน้าจอ */
-        max-width: 320px;
-        padding: 15px;
-        height: auto; /* ให้ความสูงยืดหยุ่นตามเนื้อหา */
-        min-height: 550px;
-    }
-
-    .pin-grid {
-        gap: 15px; /* ลดระยะห่างระหว่างปุ่มลงเพื่อให้พอดีจอ */
-    }
-
-    .pin-btn {
-        width: 65px;  /* ลดขนาดปุ่มลงเล็กน้อย */
-        height: 65px;
-        font-size: 24px;
-    }
-
-    .slider-wrapper {
-        width: 80%; /* สไลด์กว้าง 80% ของคอนเทนเนอร์ */
-        bottom: 40px;
-    }
+/* เพิ่มส่วนนี้เพื่อให้แถบสไลด์แสดงผล */
+.slider-wrapper.active {
+    display: block !important; /* บังคับให้แสดง */
+    opacity: 1 !important;     /* ทำให้มองเห็น */
+    pointer-events: auto !important; /* ทำให้ลากได้ */
+    transform: translateX(-50%) translateY(0); /* จัดตำแหน่งให้เข้าที่ */
 }
 
-/* วางต่อจาก .pin-grid */
+/* ปรับ Slider Wrapper เดิมให้พร้อมสำหรับการแสดงผล */
 .slider-wrapper {
-    position: relative; 
-    bottom: 120px;         /* ระยะห่างจากขอบล่างของหน้าจอ */
+    display: none; /* ซ่อนไว้ตอนแรก */
+    position: absolute;
+    bottom: 40px; /* ปรับตำแหน่งให้อยู่เหนือขอบล่างพอดี */
     left: 50%;
-    transform: translateX(-50%); /* จัดให้อยู่กึ่งกลางแนวนอน */
-    margin-top: auto; 
+    transform: translateX(-50%) translateY(20px);
     width: 260px;
-    z-index: 10;
-    transition: opacity 0.3s ease; /* จางเข้า-ออก แบบนุ่มนวล */
-    opacity: 0;           /* เริ่มต้นให้จางไว้ก่อน */
-    pointer-events: none; /* เริ่มต้นให้กดไม่ได้จนกว่าจะกดเลข */
+    z-index: 10002;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    opacity: 0;
 }
 
 .slider-bg {
