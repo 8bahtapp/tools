@@ -497,10 +497,17 @@ body {
     backdrop-filter: none;
 }
 
-/* --- แถบสไลด์: ปรับขนาดและดีไซน์ให้สมดุล --- */
+/* วางต่อจาก .pin-grid */
 .slider-wrapper {
-    margin: 50px auto 0 auto;
-    width: 240px; /* ขนาดที่ดูสมดุลกับช่องพิน */
+    position: absolute;   /* ทำให้ปุ่มสไลด์ลอยตัว */
+    bottom: 50px;         /* ระยะห่างจากขอบล่างของหน้าจอ */
+    left: 50%;
+    transform: translateX(-50%); /* จัดให้อยู่กึ่งกลางแนวนอน */
+    width: 240px;
+    z-index: 10;
+    transition: opacity 0.3s ease; /* จางเข้า-ออก แบบนุ่มนวล */
+    opacity: 0;           /* เริ่มต้นให้จางไว้ก่อน */
+    pointer-events: none; /* เริ่มต้นให้กดไม่ได้จนกว่าจะกดเลข */
 }
 
 .slider-bg {
