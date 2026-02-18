@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateBasketUI(); // รันตะกร้าครั้งแรก
 
     const mobileToggle = document.getElementById('mobile-toggle');
-    const mainNav = document.getElementById('main-nav');
+    const mainNav = document.querySelector('.desktop-menu');
     let overlay = document.getElementById('menu-overlay') || (() => {
         const el = document.createElement('div'); el.id = 'menu-overlay'; el.className = 'menu-overlay';
         document.body.appendChild(el); return el;
