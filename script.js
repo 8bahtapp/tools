@@ -32,7 +32,7 @@ function initPinSystem() {
 
 let inputCode = "";
 window.pressPin = function(num) {
-    if (inputCode.length < 4) { // ปรับเป็น 4 ตามความยาว CORRECT_PIN
+    if (inputCode.length < 4) {
         inputCode += num;
         const dotsDisplay = document.getElementById('pin-dots');
         if (dotsDisplay) dotsDisplay.innerText = "*".repeat(inputCode.length);
@@ -63,24 +63,20 @@ window.clearPin = function() {
 
 initPinSystem();
 
-// --- 2. BASKET SYSTEM (ตัวแปรส่วนกลาง) ---
+// --- 2. BASKET SYSTEM ---
 let basket = JSON.parse(localStorage.getItem('8baht_basket')) || [];
 
 function updateBasketUI() {
     const basketUI = document.getElementById('copy-basket-ui');
     const basketCount = document.getElementById('basket-count');
     const previewList = document.getElementById('preview-list');
-    
-    // บันทึกค่าลงเครื่องทันที
     localStorage.setItem('8baht_basket', JSON.stringify(basket));
 
     if (!basketUI || !basketCount || !previewList) return;
-
     if (basket.length === 0) {
         basketUI.style.display = 'none';
         return;
     }
-
     basketUI.style.display = 'block';
     basketCount.innerText = basket.length;
     previewList.innerHTML = basket.map((item, index) => `
@@ -115,9 +111,7 @@ function clearBasket() {
 function copyAllItems() {
     if (basket.length === 0) return;
     let productLines = basket.map(item => `${item.name}\nดาวน์โหลดติดตั้ง: ${item.url}`).join('\n\n');
-    const helpLine = "\n\nบริการช่วยเหลือ: https://8baht.com/help";
-    const textToCopy = productLines + helpLine;
-
+    const textToCopy = productLines + "\n\nบริการช่วยเหลือ: https://8baht.com/help";
     navigator.clipboard.writeText(textToCopy).then(() => {
         const btn = document.querySelector('.btn-copy-all');
         if (btn) {
@@ -128,15 +122,13 @@ function copyAllItems() {
     });
 }
 
-// --- 3. DOM INITIALIZATION ---
+// --- 3. DOM INITIALIZATION (Unified) ---
 document.addEventListener("DOMContentLoaded", () => {
     updateBasketUI(); 
 
-    // ใช้ querySelector ให้ตรงกับ Class ใน CSS
     const mobileToggle = document.querySelector('.mobile-menu-btn'); 
     const mainNav = document.querySelector('.desktop-menu');
     
-    // พยายามหา Overlay ถ้าไม่มีให้สร้าง (คงเดิมไว้ได้)
     let overlay = document.getElementById('menu-overlay');
     if (!overlay) {
         overlay = document.createElement('div');
@@ -152,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (isOpen) {
             document.body.style.overflow = 'hidden'; 
-            mainNav.style.maxHeight = 'calc(100vh - 48px)'; // ปรับเป็น 48px ตามความสูง header คุณ
+            mainNav.style.maxHeight = 'calc(100vh - 48px)';
             mainNav.style.overflowY = 'auto'; 
             mainNav.style.webkitOverflowScrolling = 'touch';
         } else {
@@ -163,16 +155,30 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isOpen && navigator.vibrate) navigator.vibrate(10);
     }
 
+    // แก้ไขปัญหาคลิกหน้าเดิมแล้ว Error 404
+    const navItems = document.querySelectorAll(".desktop-menu a");
+    navItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+            const href = item.getAttribute("href");
+            const currentPage = window.location.pathname;
+
+            if (href && (href.includes(currentPage) || (currentPage.endsWith('/') && href.includes(currentPage.split('/').filter(Boolean).pop())))) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                if (mainNav.classList.contains('active')) toggleMenu();
+            }
+        });
+    });
+
     mobileToggle?.addEventListener('click', toggleMenu);
     overlay?.addEventListener('click', toggleMenu);
-    
-});
 
-    // Copy Link System สำหรับปุ่มเดี่ยว
+    // Single Copy Button
     document.addEventListener("click", async (e) => {
         const btn = e.target.closest(".btn-copy");
         if (!btn) return;
         const url = btn.dataset.url;
+        if (!url) return;
         try {
             await navigator.clipboard.writeText(url);
             const btnText = btn.querySelector(".btn-text") || btn;
@@ -181,32 +187,4 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => btnText.innerText = originalText, 2000);
         } catch (err) { console.error(err); }
     });
-});
-
-// --- ปรับปรุงส่วนการคลิกเมนูใน DOMContentLoaded ---
-document.addEventListener("DOMContentLoaded", () => {
-    const navItems = document.querySelectorAll(".desktop-menu a");
-
-    navItems.forEach(item => {
-        item.addEventListener("click", (e) => {
-            const href = item.getAttribute("href");
-            const currentPage = window.location.pathname;
-
-            // ตรวจสอบว่าลิ้งก์ที่คลิก ตรงกับหน้าปัจจุบันหรือไม่
-            if (href.includes(currentPage) || (currentPage.endsWith('/') && href.endsWith(currentPage.split('/').slice(-2, -1)[0] + '/'))) {
-                e.preventDefault(); // ป้องกันการโหลดหน้าใหม่/Error 404
-                
-                // เลื่อนหน้าจอขึ้นบนสุด (Smooth Scroll ตามสไตล์ Apple)
-                window.scrollTo({ top: 0, behavior: "smooth" });
-                
-                // ถ้าเมนูมือถือเปิดอยู่ให้ปิดด้วย
-                const mainNav = document.querySelector('.desktop-menu');
-                if (mainNav && mainNav.classList.contains('active')) {
-                    toggleMenu(); // เรียกใช้ฟังก์ชันปิดเมนูที่คุณมีอยู่แล้ว
-                }
-            }
-        });
-    });
-    
-    // ... โค้ดส่วนอื่นๆ ของคุณ ...
 });
