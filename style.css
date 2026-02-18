@@ -503,7 +503,7 @@ body {
     bottom: 120px;         /* ระยะห่างจากขอบล่างของหน้าจอ */
     left: 50%;
     transform: translateX(-50%); /* จัดให้อยู่กึ่งกลางแนวนอน */
-    width: 240px;
+    width: 260px;
     z-index: 10;
     transition: opacity 0.3s ease; /* จางเข้า-ออก แบบนุ่มนวล */
     opacity: 0;           /* เริ่มต้นให้จางไว้ก่อน */
