@@ -418,6 +418,7 @@ section:last-child { border-bottom: none; }
     .card-grid { grid-template-columns: 1fr; }
     .section-title { font-size: 20px; }
 }
+
 /* ============================================================
    ฟังก์ชันการยุบหน้าตะกร้า (Minimize State)
    ============================================================ */
