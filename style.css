@@ -248,38 +248,62 @@ body {
 }
 
 @media (max-width: 1100px) {
+    /* 1. ปุ่มสามขีด: มั่นใจว่ายังอยู่และกดง่าย */
+    .mobile-menu-btn { 
+        display: flex !important; 
+        z-index: 10001; 
+    }
+
+    /* 2. ตัวเมนู: ปรับให้เป็นกล่องลอย (Floating Card) ไม่เต็มจอ */
     .desktop-menu {
         display: none;
-        position: fixed; /* เปลี่ยนจาก absolute เป็น fixed เพื่อให้เกาะหน้าจอ */
-        top: 48px;      /* ให้เริ่มใต้ Header (สูง 48px) พอดี */
-        left: 0;
-        width: 100%;    /* ขยายเต็มจอซ้ายไปขวา */
+        position: fixed;
+        top: 55px;         /* เว้นระยะจาก Header เล็กน้อย */
+        left: 22px;
+        right: auto;
+        width: 280px;      /* ความกว้างพอเหมาะแบบ Apple */
         height: auto;
-        max-height: calc(100vh - 48px); /* ฟิกความสูงไม่ให้เกินหน้าจอ */
-        overflow-y: auto;               /* สั่งให้เลื่อนขึ้นลงได้ถ้าเมนูยาว */
-        background: rgba(255,255,255,0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        max-height: calc(100vh - 80px); 
+        overflow-y: auto;
+        
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
         flex-direction: column;
-        padding: 20px;
-        border-radius: 0 0 20px 20px;   /* มนเฉพาะมุมล่าง */
-        box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+        padding: 10px 20px;
+        border-radius: 20px; /* มนรอบด้านให้ดูพรีเมียม */
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        border: 1px solid rgba(0,0,0,0.05);
         gap: 0;
-        z-index: 9999;
+        z-index: 10000;
     }
 
     .desktop-menu.active { 
         display: flex; 
     }
 
+    /* 3. รายการเมนู: แก้ปัญหาตัวหนังสือหลบหนี */
     .desktop-menu a {
-        font-size: 17px; /* ปรับขนาดให้กดง่ายขึ้นบนมือถือ */
-        padding: 15px 0;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 16px 0;
         border-bottom: 1px solid rgba(0,0,0,0.05);
         width: 100%;
+        color: var(--text-main);
+        /* สั่งยกเลิกการขยายตัว (Scale) ที่เคยเขียนไว้ด้านบน */
+        transform: none !important; 
+        transition: opacity 0.2s;
     }
 
-    .mobile-menu-btn { display: flex; }
+    /* ปิด Hover Effect ที่ทำให้ตัวหนังสือดีดในมือถือ */
+    .desktop-menu a:hover {
+        transform: none !important;
+        color: var(--apple-blue);
+    }
+
+    .desktop-menu a:last-child {
+        border-bottom: none;
+    }
 }
 
 /* ================================
