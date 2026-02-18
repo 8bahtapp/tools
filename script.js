@@ -120,6 +120,30 @@ function copyAllItems() {
             setTimeout(() => btn.innerText = originalText, 2000);
         }
     });
+  
+  function toggleBasket() {
+    const basket = document.getElementById('copy-basket-ui');
+    const icon = document.getElementById('minimize-icon');
+    
+    // สลับคลาส minimized
+    basket.classList.toggle('minimized');
+    
+    // เปลี่ยนไอคอนระหว่าง - กับ +
+    if (basket.classList.contains('minimized')) {
+        icon.innerText = '+';
+    } else {
+        icon.innerText = '−';
+    }
+}
+
+// (Option) ถ้าอยากให้กดที่หัวตะกร้าแล้วขยายได้เลย
+document.querySelector('.basket-header').addEventListener('click', function(e) {
+    const basket = document.getElementById('copy-basket-ui');
+    if (basket.classList.contains('minimized') && e.target.tagName !== 'BUTTON') {
+        toggleBasket();
+    }
+});
+  
 }
 
 // --- 3. DOM INITIALIZATION (Unified) ---
@@ -188,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (err) { console.error(err); }
     });
 });
-
 window.addEventListener('DOMContentLoaded', () => {
 
     const observerOptions = {
@@ -221,4 +244,26 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('section[id]').forEach((section) => {
         observer.observe(section);
     });
+});
+function toggleBasket() {
+    const basket = document.getElementById('copy-basket-ui');
+    const icon = document.getElementById('minimize-icon');
+    
+    // สลับคลาส minimized
+    basket.classList.toggle('minimized');
+    
+    // เปลี่ยนไอคอนระหว่าง - กับ +
+    if (basket.classList.contains('minimized')) {
+        icon.innerText = '+';
+    } else {
+        icon.innerText = '−';
+    }
+}
+
+// (Option) ถ้าอยากให้กดที่หัวตะกร้าแล้วขยายได้เลย
+document.querySelector('.basket-header').addEventListener('click', function(e) {
+    const basket = document.getElementById('copy-basket-ui');
+    if (basket.classList.contains('minimized') && e.target.tagName !== 'BUTTON') {
+        toggleBasket();
+    }
 });
