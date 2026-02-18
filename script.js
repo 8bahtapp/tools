@@ -116,7 +116,7 @@ function copyAllItems() {
         const btn = document.querySelector('.btn-copy-all');
         if (btn) {
             const originalText = btn.innerText;
-            btn.innerText = 'คัดลอกสำเร็จ! ✅';
+            btn.innerText = 'คัดลอกสำเร็จ';
             setTimeout(() => btn.innerText = originalText, 2000);
         }
     });
