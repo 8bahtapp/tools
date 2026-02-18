@@ -572,7 +572,7 @@ body {
 }
 
 .slider-handle:active {
-    transform: scale(0.95);
+    transform: translateY(-50%) scale(0.95);
 }
 
 .slider-handle svg {
