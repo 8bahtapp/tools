@@ -500,7 +500,7 @@ body {
 /* วางต่อจาก .pin-grid */
 .slider-wrapper {
     position: absolute;   /* ทำให้ปุ่มสไลด์ลอยตัว */
-    bottom: 50px;         /* ระยะห่างจากขอบล่างของหน้าจอ */
+    bottom: 120px;         /* ระยะห่างจากขอบล่างของหน้าจอ */
     left: 50%;
     transform: translateX(-50%); /* จัดให้อยู่กึ่งกลางแนวนอน */
     width: 240px;
@@ -512,9 +512,9 @@ body {
 
 .slider-bg {
     position: relative;
-    height: 52px;
+    height: 66px;
     background: rgba(255, 255, 255, 0.04);
-    border-radius: 26px;
+    border-radius: 33px;
     display: flex;
     align-items: center;
     justify-content: center;
