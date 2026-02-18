@@ -205,10 +205,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!url) return;
         try {
             await navigator.clipboard.writeText(url);
+            btn.classList.add("success");
             const btnText = btn.querySelector(".btn-text") || btn;
             const originalText = btnText.innerText;
             btnText.innerText = "✔";
-            setTimeout(() => btnText.innerText = originalText, 2000);
+          
+            setTimeout(() => {
+              btnText.innerText = originalText;
+              btn.classList.remove("success");
+            }, 2000);
         } catch (err) { console.error(err); }
     });
 });
