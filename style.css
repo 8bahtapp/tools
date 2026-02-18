@@ -92,6 +92,26 @@ body {
 }
 .desktop-menu a:hover { color: var(--accent-blue); transform: scale(1.2); }
 
+.desktop-menu a.active {
+    color: var(--apple-blue) !important;
+    font-weight: 700;
+    opacity: 1;
+}
+
+/* สำหรับ Desktop: จัดการให้แถบเมนูเลื่อนซ้าย-ขวาได้ถ้าหัวข้อเยอะเกินจอ */
+@media (min-width: 1101px) {
+    .desktop-menu {
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none; /* ซ่อนแถบเลื่อน Firefox */
+        -ms-overflow-style: none; /* ซ่อนแถบเลื่อน IE/Edge */
+        padding-bottom: 5px;
+    }
+    .desktop-menu::-webkit-scrollbar {
+        display: none; /* ซ่อนแถบเลื่อน Chrome/Safari */
+    }
+}
+
 .header-right { display: flex; align-items: center; gap: 16px; }
 
 .btn-ticket {
