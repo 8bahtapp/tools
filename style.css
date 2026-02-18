@@ -557,6 +557,7 @@ body {
     position: absolute;
     left: 4px; /* ระยะห่างจากขอบซ้าย */
     top: 50%;  /* จัดให้อยู่กลางแนวตั้ง */
+    transform: translateY(-50%);
     width: 68px;
     height: 68px;
     background: #ffffff;
