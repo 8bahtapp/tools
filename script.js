@@ -188,3 +188,37 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (err) { console.error(err); }
     });
 });
+
+window.addEventListener('DOMContentLoaded', () => {
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px', // ปรับช่วงที่จะให้เมนู Active (คำนวณจากกึ่งกลางจอ)
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // หา id ของ section ที่กำลังปรากฏบนจอ
+                const id = entry.target.getAttribute('id');
+                
+                // ลบ class active ออกจากทุกเมนู
+                document.querySelectorAll('.nav-item').forEach((nav) => {
+                    nav.classList.remove('active');
+                });
+                
+                // เพิ่ม class active ให้เมนูที่ตรงกับ id นั้น
+                const activeNav = document.querySelector(`.nav-item[href="#${id}"]`);
+                if (activeNav) {
+                    activeNav.classList.add('active');
+                }
+            }
+        });
+    }, observerOptions);
+
+    // เริ่มตรวจจับทุก <section> ที่มี id
+    document.querySelectorAll('section[id]').forEach((section) => {
+        observer.observe(section);
+    });
+});
