@@ -48,13 +48,9 @@ window.pressPin = function(num) {
         const dotsDisplay = document.getElementById('pin-dots');
         if (dotsDisplay) dotsDisplay.innerText = "•".repeat(inputCode.length);
         
+        // ใช้ Class แทนการเปลี่ยน Style โดยตรง
         const sliderContainer = document.getElementById('slider-container');
-        if (sliderContainer) {
-            // เปลี่ยนจาก display เป็น opacity เพื่อไม่ให้ Layout ขยับ
-            sliderContainer.style.display = 'block'; 
-            sliderContainer.style.opacity = '1';
-            sliderContainer.style.pointerEvents = 'auto';
-        }
+        if (sliderContainer) sliderContainer.classList.add('active');
     }
 }
 
@@ -63,13 +59,13 @@ window.clearPin = function() {
     const dotsDisplay = document.getElementById('pin-dots');
     const errorDisplay = document.getElementById('pin-error');
     const sliderContainer = document.getElementById('slider-container');
+    
     if (dotsDisplay) dotsDisplay.innerText = "";
     if (errorDisplay) errorDisplay.innerText = "";
     
+    // ลบ Class ออกเมื่อเคลียร์พิน
     if (sliderContainer) {
-        // ซ่อนแบบ opacity แทนการสั่ง display: none ทันที
-        sliderContainer.style.opacity = '0';
-        sliderContainer.style.pointerEvents = 'none';
+        sliderContainer.classList.remove('active');
     }
     resetSlider();
 }
