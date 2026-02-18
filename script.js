@@ -73,10 +73,12 @@ function updateBasketUI() {
     localStorage.setItem('8baht_basket', JSON.stringify(basket));
 
     if (!basketUI || !basketCount || !previewList) return;
+    
     if (basket.length === 0) {
         basketUI.style.display = 'none';
         return;
     }
+    
     basketUI.style.display = 'block';
     basketCount.innerText = basket.length;
     previewList.innerHTML = basket.map((item, index) => `
@@ -108,6 +110,7 @@ function clearBasket() {
     }
 }
 
+// ฟังก์ชันคัดลอก (ปิดปีกกาถูกต้องแล้ว)
 function copyAllItems() {
     if (basket.length === 0) return;
     let productLines = basket.map(item => `${item.name}\nดาวน์โหลดติดตั้ง: ${item.url}`).join('\n\n');
@@ -120,29 +123,22 @@ function copyAllItems() {
             setTimeout(() => btn.innerText = originalText, 2000);
         }
     });
-  
-  function toggleBasket() {
-    const basket = document.getElementById('copy-basket-ui');
+}
+
+// ฟังก์ชัน ยุบ/ขยาย (แยกออกมาข้างนอกเพื่อให้เรียกใช้งานได้)
+window.toggleBasket = function() {
+    const basketEl = document.getElementById('copy-basket-ui');
     const icon = document.getElementById('minimize-icon');
+    if (!basketEl || !icon) return;
+
+    basketEl.classList.toggle('minimized');
     
-    // สลับคลาส minimized
-    basket.classList.toggle('minimized');
-    
-    // เปลี่ยนไอคอนระหว่าง - กับ +
-    if (basket.classList.contains('minimized')) {
+    if (basketEl.classList.contains('minimized')) {
         icon.innerText = '+';
     } else {
         icon.innerText = '−';
     }
-}
-
-// (Option) ถ้าอยากให้กดที่หัวตะกร้าแล้วขยายได้เลย
-document.querySelector('.basket-header').addEventListener('click', function(e) {
-    const basket = document.getElementById('copy-basket-ui');
-    if (basket.classList.contains('minimized') && e.target.tagName !== 'BUTTON') {
-        toggleBasket();
-    }
-});
+};
   
 }
 
