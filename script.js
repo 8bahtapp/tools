@@ -1,5 +1,5 @@
-// --- 1. PIN CONFIGURATION & SYSTEM (Slide to Unlock Version - 6 Digits) ---
-const CORRECT_PIN = "8888";
+// --- 1. PIN CONFIGURATION & SYSTEM (Slide to Unlock & Hidden PIN) ---
+const SECRET_KEY = "ODg4OA=="; // รหัสผ่าน 8888 ถูกซ่อนไว้
 const SESSION_DURATION = 12 * 60 * 60 * 1000; 
 
 function initPinSystem() {
@@ -43,12 +43,11 @@ function initPinSystem() {
 let inputCode = "";
 
 window.pressPin = function(num) {
-    if (inputCode.length < 6) { // ปรับเป็นสูงสุด 6 หลักตามสั่ง
+    if (inputCode.length < 6) { 
         inputCode += num;
         const dotsDisplay = document.getElementById('pin-dots');
         if (dotsDisplay) dotsDisplay.innerText = "•".repeat(inputCode.length);
         
-        // แสดงแถบสไลด์ทันทีที่มีการกดตัวเลข
         const sliderContainer = document.getElementById('slider-container');
         if (sliderContainer) sliderContainer.style.display = 'block';
     }
@@ -83,7 +82,7 @@ function initSlider() {
         if (!isDragging) return;
         const currentX = (e.type === 'mousemove') ? e.pageX : e.touches[0].pageX;
         let deltaX = currentX - startX;
-        const maxSlide = container.offsetWidth - handle.offsetWidth - 10;
+        const maxSlide = container.offsetWidth - handle.offsetWidth - 8;
 
         if (deltaX < 0) deltaX = 0;
         if (deltaX > maxSlide) deltaX = maxSlide;
@@ -119,7 +118,8 @@ function resetSlider() {
 }
 
 function validateAndUnlock() {
-    if (inputCode === CORRECT_PIN) {
+    // เช็ครหัสผ่านที่ Encode เป็น Base64
+    if (btoa(inputCode) === SECRET_KEY) {
         localStorage.setItem('auth_time_8baht', new Date().getTime());
         const screen = document.getElementById('pin-screen');
         if (screen) {
@@ -129,7 +129,7 @@ function validateAndUnlock() {
         }
     } else {
         const errorDisplay = document.getElementById('pin-error');
-        if (errorDisplay) errorDisplay.innerText = "รหัส PIN ไม่ถูกต้อง";
+        if (errorDisplay) errorDisplay.innerText = "Access Denied. Incorrect PIN.";
         resetSlider();
         setTimeout(clearPin, 800);
     }
