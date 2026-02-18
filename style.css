@@ -535,9 +535,9 @@ body {
 
 .slider-bg {
     position: relative;
-    height: 66px;
+    height: 68px;
     background: rgba(255, 255, 255, 0.04);
-    border-radius: 33px;
+    border-radius: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -556,9 +556,9 @@ body {
 .slider-handle {
     position: absolute;
     left: 4px; /* ระยะห่างจากขอบซ้าย */
-    top: 5px;  /* จัดให้อยู่กลางแนวตั้ง */
-    width: 66px;
-    height: 66px;
+    top: 50%;  /* จัดให้อยู่กลางแนวตั้ง */
+    width: 68px;
+    height: 68px;
     background: #ffffff;
     border-radius: 50%;
     display: flex;
