@@ -146,39 +146,11 @@ function copyAllItems() {
     });
 }
 
-// ฟังก์ชันสำหรับ ยุบ และ ขยาย หน้าต่าง
-function toggleBasket() {
-    const basketUI = document.getElementById('copy-basket-ui');
-    const icon = document.getElementById('minimize-icon');
-    
-    if (!basketUI || !icon) return;
-
-    // สลับ Class เพื่อเปลี่ยนหน้าตา
-    basketUI.classList.toggle('minimized');
-    
-    // เปลี่ยนข้อความ ยุบ <-> ขยาย
-    if (basketUI.classList.contains('minimized')) {
-        icon.innerText = 'ขยาย';
-        icon.style.color = '#007aff'; // เปลี่ยนเป็นสีฟ้าตอนย่อ
-    } else {
-        icon.innerText = 'ยุบ';
-        icon.style.color = '#ff453a'; // กลับเป็นสีแดงตอนกางออก
-    }
-}
-
-// ตรวจสอบการโหลด DOM ก่อนผูก Event กับ Header
 document.addEventListener('DOMContentLoaded', () => {
-    const basketHeader = document.querySelector('.basket-header');
-    if (basketHeader) {
-        basketHeader.addEventListener('click', function(e) {
-            const basketUI = document.getElementById('copy-basket-ui');
-            // ยอมให้กดที่ส่วนหัวเพื่อขยาย ยกเว้นการกดโดนปุ่ม "ล้างทั้งหมด"
-            if (basketUI && basketUI.classList.contains('minimized') && !e.target.classList.contains('btn-clear')) {
-                toggleBasket();
-            }
-        });
+    // อัปเดต UI ตอนโหลดหน้าเผื่อมีของค้างในระบบ
+    if (typeof updateBasketUI === 'function') {
+        updateBasketUI();
     }
-    updateBasketUI();
 });
 
 // --- 3. DOM INITIALIZATION (Unified) ---
