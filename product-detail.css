@@ -423,7 +423,7 @@ section:last-child { border-bottom: none; }
    ฟังก์ชันการยุบหน้าตะกร้า (Minimize State)
    ============================================================ */
 
-/* เมื่อตะกร้ามีคลาส .minimized ให้ซ่อนส่วนรายการและปุ่มคัดลอก */
+/* เมื่อตะกร้ามีคลาส .minimized ให้ซ่อนรายการและปุ่มต่างๆ */
 .basket-container.minimized .basket-items,
 .basket-container.minimized .basket-footer,
 .basket-container.minimized .btn-clear {
@@ -432,25 +432,27 @@ section:last-child { border-bottom: none; }
 
 /* ปรับความกว้างของตะกร้าตอนยุบให้กะทัดรัด */
 .basket-container.minimized {
-    width: 220px !important; /* ปรับขนาดความกว้างตอนยุบตามใจชอบ */
+    width: auto !important;
+    min-width: 200px;
 }
 
-/* ปรับระยะห่างภายในตอนยุบให้ดูเป็นแถบ Widget */
+/* ปรับลักษณะให้เป็นทรงแคปซูลตอนย่อ (สไตล์ Apple) */
 .basket-container.minimized .basket-card {
-    padding: 12px 16px !important;
-    border-radius: 40px; /* ทำให้ดูโค้งมนเหมือนแคปซูล */
-    cursor: pointer;    /* เปลี่ยนเมาส์เป็นรูปมือเพื่อให้รู้ว่ากดได้ */
+    padding: 10px 18px !important;
+    border-radius: 40px !important; 
+    cursor: pointer;
+    background: rgba(28, 28, 30, 0.95) !important; /* เข้มขึ้นเล็กน้อยให้อ่านง่าย */
 }
 
-/* ปรับส่วนหัวให้ไม่มีเส้นคั่นตอนยุบ */
+/* เอาเส้นคั่นออกเมื่อย่อ */
 .basket-container.minimized .basket-header {
     margin-bottom: 0;
     border-bottom: none;
     padding-bottom: 0;
 }
 
-/* เอฟเฟกต์ตอน Hover ให้ดูมีมิติ */
+/* เอฟเฟกต์ตอน Hover */
 .basket-container.minimized:hover {
-    transform: scale(1.05);
-    transition: transform 0.2s ease;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
