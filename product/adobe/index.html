@@ -256,14 +256,12 @@
         <div class="basket-card">
             <div class="basket-header">
                 <div class="basket-title">
-                    📋 <h4>รายการที่เลือก (<span id="basket-count">0</span>)</h4>
+                    <span>📋</span>
+                    <h4>รายการที่เลือก (<span id="basket-count">0</span>)</h4>
                 </div>
-                
-                <div style="display: flex; gap: 10px; align-items: center;">
-                    <button onclick="clearBasket()" class="btn-clear">ล้างทั้งหมด</button>
-                    <button id="btn-minimize" onclick="toggleBasket()" style="background:none; border:none; color:white; cursor:pointer; font-size: 20px; line-height: 1;">
-                        <span id="minimize-icon">−</span>
-                    </button>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button class="btn-clear" onclick="clearBasket()">ล้างทั้งหมด</button>
+                    <span id="minimize-icon" onclick="toggleBasket()" style="cursor:pointer; font-size: 13px; font-weight: 500; color: #ff453a;">ยุบ</span>
                 </div>
             </div>
     
