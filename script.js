@@ -1,5 +1,5 @@
-// --- 1. PIN CONFIGURATION & SYSTEM (Slide to Unlock & Hidden PIN) ---
-const SECRET_KEY = "ODg4OA=="; // รหัสผ่าน 8888 ถูกซ่อนไว้
+// --- 1. PIN CONFIGURATION & SYSTEM ---
+const SECRET_KEY = "ODg4OA=="; 
 const SESSION_DURATION = 12 * 60 * 60 * 1000; 
 
 function initPinSystem() {
@@ -10,34 +10,23 @@ function initPinSystem() {
     const pinHtml = `
         <div id="pin-screen">
             <div class="pin-container">
-                <p style="font-size:16px; color:#1d1d1f; margin-bottom:20px; font-weight:600;">Enter Security PIN</p>
+                <p style="font-size:16px; color:rgba(255,255,255,0.6); margin-bottom:20px; font-weight:600;">Enter Security PIN</p>
                 <div class="pin-display-wrapper">
                     <div class="pin-display" id="pin-dots"></div>
                 </div>
                 <div class="pin-grid">
                     ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => `
-                        <button class="pin-btn" onclick="pressPin('${n}')" ontouchend="event.preventDefault(); pressPin('${n}')">${n}</button>
+                        <button class="pin-btn" onclick="pressPin('${n}')">${n}</button>
                     `).join('')}
-                    <button class="pin-btn special" onclick="clearPin()" ontouchend="event.preventDefault(); clearPin()">Clear</button>
-                    <button class="pin-btn" onclick="pressPin('0')" ontouchend="event.preventDefault(); pressPin('0')">0</button>
-                    <div style="visibility:hidden"></div>
+                    <button class="pin-btn special" onclick="clearPin()">Clear</button>
+                    <button class="pin-btn" onclick="pressPin('0')">0</button>
+                    <button class="pin-btn ok-btn" id="ok-button" onclick="validateAndUnlock()">OK</button>
                 </div>
-                
                 <div id="pin-error" style="color:#ff3b30; font-size:12px; margin: 15px 0; min-height:16px; font-weight:500;"></div>
-
-                <div class="slider-wrapper" id="slider-container" style="display:none;">
-                    <div class="slider-bg">
-                        <span class="slider-text">Slide to Unlock</span>
-                        <div class="slider-handle" id="slider-handle">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     `;
     document.body.insertAdjacentHTML('afterbegin', pinHtml);
-    initSlider(); 
 }
 
 let inputCode = "";
@@ -48,9 +37,9 @@ window.pressPin = function(num) {
         const dotsDisplay = document.getElementById('pin-dots');
         if (dotsDisplay) dotsDisplay.innerText = "•".repeat(inputCode.length);
         
-        // ใช้ Class แทนการเปลี่ยน Style โดยตรง
-        const sliderContainer = document.getElementById('slider-container');
-        if (sliderContainer) sliderContainer.classList.add('active');
+        // แสดงปุ่ม OK เมื่อเริ่มมีการกดเลข
+        const okBtn = document.getElementById('ok-button');
+        if (okBtn) okBtn.classList.add('active');
     }
 }
 
@@ -58,81 +47,14 @@ window.clearPin = function() {
     inputCode = "";
     const dotsDisplay = document.getElementById('pin-dots');
     const errorDisplay = document.getElementById('pin-error');
-    const sliderContainer = document.getElementById('slider-container');
+    const okBtn = document.getElementById('ok-button');
     
     if (dotsDisplay) dotsDisplay.innerText = "";
     if (errorDisplay) errorDisplay.innerText = "";
-    
-    // ลบ Class ออกเมื่อเคลียร์พิน
-    if (sliderContainer) {
-        sliderContainer.classList.remove('active');
-    }
-    resetSlider();
-}
-
-function initSlider() {
-    const handle = document.getElementById('slider-handle');
-    const container = document.querySelector('.slider-bg');
-    if (!handle || !container) return;
-
-    let isDragging = false;
-    let startX = 0;
-
-    const onStart = (e) => {
-        isDragging = true;
-        // เก็บค่าตำแหน่งเริ่มต้นของเมาส์/นิ้ว
-        const clientX = (e.type === 'mousedown') ? e.clientX : e.touches[0].clientX;
-        startX = clientX;
-        handle.style.transition = 'none'; // ปิด transition ขณะลาก
-    };
-
-    const onMove = (e) => {
-        if (!isDragging) return;
-        
-        const clientX = (e.type === 'mousemove') ? e.clientX : e.touches[0].clientX;
-        let deltaX = clientX - startX;
-        
-        // คำนวณระยะลากสูงสุด (ความกว้างพื้นหลัง - ความกว้างปุ่ม - margin)
-        const maxSlide = container.clientWidth - handle.offsetWidth - 8;
-
-        if (deltaX < 0) deltaX = 0;
-        if (deltaX > maxSlide) deltaX = maxSlide;
-
-        handle.style.transform = `translateX(${deltaX}px)`;
-        
-        if (deltaX >= maxSlide) {
-            isDragging = false;
-            validateAndUnlock();
-        }
-    };
-
-    const onEnd = () => {
-        if (!isDragging) return;
-        isDragging = false;
-        resetSlider();
-    };
-
-    // ผูก Event เข้ากับ Handle และ Window
-    handle.addEventListener('mousedown', onStart);
-    handle.addEventListener('touchstart', onStart, {passive: false});
-    
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('touchmove', onMove, {passive: false});
-    window.addEventListener('mouseup', onEnd);
-    window.addEventListener('touchend', onEnd);
-}
-
-function resetSlider() {
-    const handle = document.getElementById('slider-handle');
-    if (handle) {
-        // ใส่ transition กลับเฉพาะตอนเด้งกลับ
-        handle.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        handle.style.transform = 'translateX(0)';
-    }
+    if (okBtn) okBtn.classList.remove('active');
 }
 
 function validateAndUnlock() {
-    // เช็ครหัสผ่านที่ Encode เป็น Base64
     if (btoa(inputCode) === SECRET_KEY) {
         localStorage.setItem('auth_time_8baht', new Date().getTime());
         const screen = document.getElementById('pin-screen');
@@ -144,7 +66,6 @@ function validateAndUnlock() {
     } else {
         const errorDisplay = document.getElementById('pin-error');
         if (errorDisplay) errorDisplay.innerText = "Access Denied. Incorrect PIN.";
-        resetSlider();
         setTimeout(clearPin, 800);
     }
 }
