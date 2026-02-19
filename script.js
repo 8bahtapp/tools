@@ -146,20 +146,23 @@ function copyAllItems() {
     });
 }
 
+// ฟังก์ชันสำหรับ ยุบ และ ขยาย หน้าต่าง
 function toggleBasket() {
     const basketUI = document.getElementById('copy-basket-ui');
     const icon = document.getElementById('minimize-icon');
     
     if (!basketUI || !icon) return;
 
-    // สลับคลาสเพื่อใช้ CSS ที่คุณถามถึง
+    // สลับ Class เพื่อเปลี่ยนหน้าตา
     basketUI.classList.toggle('minimized');
     
-    // เปลี่ยนสัญลักษณ์
+    // เปลี่ยนข้อความ ยุบ <-> ขยาย
     if (basketUI.classList.contains('minimized')) {
-        icon.innerText = '+';
+        icon.innerText = 'ขยาย';
+        icon.style.color = '#007aff'; // เปลี่ยนเป็นสีฟ้าตอนย่อ
     } else {
-        icon.innerText = '−';
+        icon.innerText = 'ยุบ';
+        icon.style.color = '#ff453a'; // กลับเป็นสีแดงตอนกางออก
     }
 }
 
