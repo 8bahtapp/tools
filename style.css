@@ -537,28 +537,6 @@ body {
     to { opacity: 1; transform: scale(1); }
 }
 
-/* สไตล์เบื้องต้นสำหรับตะกร้าลอย */
-.basket-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    z-index: 1000;
-    animation: slideIn 0.3s ease-out;
-}
-
-@keyframes slideIn {
-    from { transform: translateY(100px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.basket-card {
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    padding: 16px;
-    border: 1px solid #e5e5ea;
-}
 /* --- Basket Floating Container --- */
 .basket-container {
     position: fixed;
@@ -567,33 +545,55 @@ body {
     width: 320px;
     z-index: 2000;
     font-family: 'Inter', 'Noto Sans Thai', sans-serif;
+    animation: slideIn 0.3s ease-out;
+    /* เพิ่ม transition เพื่อให้ตอนย่อ-ขยายดูลื่นไหล */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* --- ปรับแต่งตัวตะกร้าให้โปร่งใส --- */
+@keyframes slideIn {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- ปรับแต่งตัวตะกร้าให้โปร่งใส (Apple Style) --- */
 .basket-card {
-    /* ใช้ rgba เพื่อกำหนดความโปร่งใส (0.8 คือ โปร่งใส 80%) */
     background: rgba(28, 28, 30, 0.8) !important; 
-    
-    /* เอฟเฟกต์กระจกฝ้า (สำคัญมากสำหรับสไตล์ Apple) */
     backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px); /* สำหรับ Safari */
-    
+    -webkit-backdrop-filter: blur(15px); 
     border-radius: 20px;
     padding: 20px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     border: 1px solid rgba(255,255,255,0.1);
     color: #ffffff;
+    transition: all 0.3s ease;
 }
 
-/* ปรับให้รายการข้างในดูโปร่งตามไปด้วย (ถ้าต้องการ) */
-.basket-item {
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+/* --- ฟังก์ชันการยุบหน้าตะกร้า (Minimize State) --- */
+.basket-container.minimized {
+    width: auto !important;
+    min-width: 200px;
 }
 
-.btn-copy-all {
-    /* ปรับปุ่มให้มีความโปร่งใสเล็กน้อยเพื่อให้เข้าเซตกัน */
-    background: rgba(255, 255, 255, 0.9);
-    color: #000;
+.basket-container.minimized .basket-items,
+.basket-container.minimized .basket-footer,
+.basket-container.minimized .btn-clear {
+    display: none !important; 
+}
+
+.basket-container.minimized .basket-card {
+    padding: 12px 18px !important;
+    border-radius: 40px !important; 
+    cursor: pointer;
+}
+
+.basket-container.minimized .basket-header {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.basket-container.minimized:hover {
+    transform: translateY(-2px) scale(1.02);
 }
 
 /* --- Header --- */
@@ -621,7 +621,7 @@ body {
 .btn-clear {
     background: transparent;
     border: none;
-    color: #ff453a; /* สีแดง Apple */
+    color: #ff453a; 
     font-size: 12px;
     cursor: pointer;
     font-weight: 500;
@@ -634,7 +634,6 @@ body {
     margin-bottom: 15px;
 }
 
-/* ปรับแต่ง Scrollbar สำหรับสีเข้ม */
 .basket-items::-webkit-scrollbar { width: 4px; }
 .basket-items::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
 
@@ -658,7 +657,7 @@ body {
 /* --- Footer & Copy Button --- */
 .btn-copy-all {
     width: 100%;
-    background: #ffffff; /* ปุ่มขาวตัดกับพื้นหลังเข้ม */
+    background: rgba(255, 255, 255, 0.9);
     color: #000000;
     border: none;
     padding: 12px;
