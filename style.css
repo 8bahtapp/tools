@@ -537,6 +537,11 @@ body {
     to { opacity: 1; transform: scale(1); }
 }
 
+@keyframes slideIn {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
 /* --- Basket Floating Container --- */
 .basket-container {
     position: fixed;
@@ -546,16 +551,10 @@ body {
     z-index: 2000;
     font-family: 'Inter', 'Noto Sans Thai', sans-serif;
     animation: slideIn 0.3s ease-out;
-    /* เพิ่ม transition เพื่อให้ตอนย่อ-ขยายดูลื่นไหล */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* ลบบรรทัด transition เดิมออก หรือไม่ต้องใส่ก็ได้เพราะเราไม่ย่อแล้ว */
 }
 
-@keyframes slideIn {
-    from { transform: translateY(100px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-/* --- ปรับแต่งตัวตะกร้าให้โปร่งใส (Apple Style) --- */
+/* --- ตัวตะกร้า (Apple Style) --- */
 .basket-card {
     background: rgba(28, 28, 30, 0.8) !important; 
     backdrop-filter: blur(15px); 
@@ -565,35 +564,7 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     border: 1px solid rgba(255,255,255,0.1);
     color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-/* --- ฟังก์ชันการยุบหน้าตะกร้า (Minimize State) --- */
-.basket-container.minimized {
-    width: auto !important;
-    min-width: 200px;
-}
-
-.basket-container.minimized .basket-items,
-.basket-container.minimized .basket-footer,
-.basket-container.minimized .btn-clear {
-    display: none !important; 
-}
-
-.basket-container.minimized .basket-card {
-    padding: 12px 18px !important;
-    border-radius: 40px !important; 
-    cursor: pointer;
-}
-
-.basket-container.minimized .basket-header {
-    margin-bottom: 0;
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.basket-container.minimized:hover {
-    transform: translateY(-2px) scale(1.02);
+    /* transition: all 0.3s ease;  <-- ลบทิ้งเพื่อให้การแสดงผลนิ่ง */
 }
 
 /* --- Header --- */
