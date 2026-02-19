@@ -111,6 +111,12 @@ function addToBasket(name, url) {
     if (!exists) {
         basket.push({ name, url });
         updateBasketUI();
+        
+        // ถ้าเพิ่มของใหม่แล้วหน้าต่างย่ออยู่ ให้ขยายออกอัตโนมัติ
+        const basketUI = document.getElementById('copy-basket-ui');
+        if (basketUI && basketUI.classList.contains('minimized')) {
+            toggleBasket();
+        }
     }
 }
 
@@ -138,31 +144,39 @@ function copyAllItems() {
             setTimeout(() => btn.innerText = originalText, 2000);
         }
     });
-  
-  function toggleBasket() {
-    const basket = document.getElementById('copy-basket-ui');
+}
+
+function toggleBasket() {
+    const basketUI = document.getElementById('copy-basket-ui');
     const icon = document.getElementById('minimize-icon');
     
-    // สลับคลาส minimized
-    basket.classList.toggle('minimized');
+    if (!basketUI || !icon) return;
+
+    // สลับคลาสเพื่อใช้ CSS ที่คุณถามถึง
+    basketUI.classList.toggle('minimized');
     
-    // เปลี่ยนไอคอนระหว่าง - กับ +
-    if (basket.classList.contains('minimized')) {
+    // เปลี่ยนสัญลักษณ์
+    if (basketUI.classList.contains('minimized')) {
         icon.innerText = '+';
     } else {
         icon.innerText = '−';
     }
 }
 
-// (Option) ถ้าอยากให้กดที่หัวตะกร้าแล้วขยายได้เลย
-document.querySelector('.basket-header').addEventListener('click', function(e) {
-    const basket = document.getElementById('copy-basket-ui');
-    if (basket.classList.contains('minimized') && e.target.tagName !== 'BUTTON') {
-        toggleBasket();
+// ตรวจสอบการโหลด DOM ก่อนผูก Event กับ Header
+document.addEventListener('DOMContentLoaded', () => {
+    const basketHeader = document.querySelector('.basket-header');
+    if (basketHeader) {
+        basketHeader.addEventListener('click', function(e) {
+            const basketUI = document.getElementById('copy-basket-ui');
+            // ยอมให้กดที่ส่วนหัวเพื่อขยาย ยกเว้นการกดโดนปุ่ม "ล้างทั้งหมด"
+            if (basketUI && basketUI.classList.contains('minimized') && !e.target.classList.contains('btn-clear')) {
+                toggleBasket();
+            }
+        });
     }
+    updateBasketUI();
 });
-  
-}
 
 // --- 3. DOM INITIALIZATION (Unified) ---
 document.addEventListener("DOMContentLoaded", () => {
