@@ -423,36 +423,24 @@ section:last-child { border-bottom: none; }
    ฟังก์ชันการยุบหน้าตะกร้า (Minimize State)
    ============================================================ */
 
-/* เมื่อตะกร้ามีคลาส .minimized ให้ซ่อนรายการและปุ่มต่างๆ */
+/* --- ส่วนที่ทำให้การยุบทำงาน (ห้ามลบ) --- */
+.basket-container.minimized {
+    width: 200px !important; /* บังคับขนาดตอนย่อ */
+}
+
 .basket-container.minimized .basket-items,
 .basket-container.minimized .basket-footer,
 .basket-container.minimized .btn-clear {
-    display: none !important; 
+    display: none !important; /* ซ่อนเนื้อหาที่ไม่จำเป็น */
 }
 
-/* ปรับความกว้างของตะกร้าตอนยุบให้กะทัดรัด */
-.basket-container.minimized {
-    width: auto !important;
-    min-width: 200px;
-}
-
-/* ปรับลักษณะให้เป็นทรงแคปซูลตอนย่อ (สไตล์ Apple) */
 .basket-container.minimized .basket-card {
-    padding: 10px 18px !important;
-    border-radius: 40px !important; 
-    cursor: pointer;
-    background: rgba(28, 28, 30, 0.95) !important; /* เข้มขึ้นเล็กน้อยให้อ่านง่าย */
+    padding: 10px 15px !important;
+    border-radius: 40px !important; /* ทรงแคปซูล */
 }
 
-/* เอาเส้นคั่นออกเมื่อย่อ */
 .basket-container.minimized .basket-header {
-    margin-bottom: 0;
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-/* เอฟเฟกต์ตอน Hover */
-.basket-container.minimized:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    margin-bottom: 0 !important;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
 }
