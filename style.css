@@ -486,6 +486,19 @@ body {
         
     -webkit-tap-highlight-color: transparent;
     outline: none;
+    touch-action: manipulation; /* ป้องกันการหน่วง 300ms และแก้ปัญหา double click */
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.pin-btn.ok-btn {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+    font-size: 18px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: none; 
+    touch-action: manipulation; /* เพิ่มตรงนี้ด้วย */
 }
 
 /* เอฟเฟกต์เมื่อกด: ยุบตัวและเรืองแสง */
