@@ -1,3 +1,15 @@
+// --- 0. GLOBAL UTILITIES ---
+const showToast = () => {
+    const toast = document.getElementById('copy-toast');
+    if (!toast) return;
+    toast.classList.remove('toast-hidden');
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.classList.add('toast-hidden');
+    }, 2000);
+};
+
 // --- 1. PIN CONFIGURATION & SYSTEM ---
 const SECRET_KEY = "ODg4OA=="; 
 const SESSION_DURATION = 12 * 60 * 60 * 1000; 
@@ -16,70 +28,44 @@ function initPinSystem() {
                 </div>
                 <div class="pin-grid">
                     ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => `
-                        <button class="pin-btn" 
-                            onclick="pressPin('${n}')" 
-                            ontouchend="event.preventDefault(); pressPin('${n}')">${n}</button>
+                        <button class="pin-btn" onclick="pressPin('${n}')">${n}</button>
                     `).join('')}
-                    <button class="pin-btn special" 
-                        onclick="clearPin()" 
-                        ontouchend="event.preventDefault(); clearPin()">Clear</button>
-                
-                    <button class="pin-btn" 
-                        onclick="pressPin('0')" 
-                        ontouchend="event.preventDefault(); pressPin('0')">0</button>
-                
-                    <button class="pin-btn ok-btn" id="ok-button" 
-                        onclick="validateAndUnlock()" 
-                        ontouchend="event.preventDefault(); validateAndUnlock()">OK</button>
+                    <button class="pin-btn special" onclick="clearPin()">Clear</button>
+                    <button class="pin-btn" onclick="pressPin('0')">0</button>
+                    <button class="pin-btn ok-btn" id="ok-button" onclick="validateAndUnlock()">OK</button>
                 </div>
                 <div id="pin-error" style="color:#ff3b30; font-size:12px; margin: 15px 0; min-height:16px; font-weight:500;"></div>
             </div>
-        </div>
-    `;
+        </div>`;
     document.body.insertAdjacentHTML('afterbegin', pinHtml);
 }
 
 let inputCode = "";
-
-window.pressPin = function(num) {
+window.pressPin = (num) => {
     if (inputCode.length < 6) { 
         inputCode += num;
-        const dotsDisplay = document.getElementById('pin-dots');
-        if (dotsDisplay) dotsDisplay.innerText = "•".repeat(inputCode.length);
-        
-        // แสดงปุ่ม OK เมื่อเริ่มมีการกดเลข
-        const okBtn = document.getElementById('ok-button');
-        if (okBtn) okBtn.classList.add('active');
+        const dots = document.getElementById('pin-dots');
+        if (dots) dots.innerText = "•".repeat(inputCode.length);
+        document.getElementById('ok-button')?.classList.add('active');
     }
-}
-
-window.clearPin = function() {
+};
+window.clearPin = () => {
     inputCode = "";
-    const dotsDisplay = document.getElementById('pin-dots');
-    const errorDisplay = document.getElementById('pin-error');
-    const okBtn = document.getElementById('ok-button');
-    
-    if (dotsDisplay) dotsDisplay.innerText = "";
-    if (errorDisplay) errorDisplay.innerText = "";
-    if (okBtn) okBtn.classList.remove('active');
-}
-
-function validateAndUnlock() {
+    document.getElementById('pin-dots').innerText = "";
+    document.getElementById('pin-error').innerText = "";
+    document.getElementById('ok-button').classList.remove('active');
+};
+window.validateAndUnlock = () => {
     if (btoa(inputCode) === SECRET_KEY) {
         localStorage.setItem('auth_time_8baht', new Date().getTime());
         const screen = document.getElementById('pin-screen');
-        if (screen) {
-            screen.style.transition = "opacity 0.4s ease";
-            screen.style.opacity = "0";
-            setTimeout(() => screen.remove(), 400);
-        }
+        screen.style.opacity = "0";
+        setTimeout(() => screen.remove(), 400);
     } else {
-        const errorDisplay = document.getElementById('pin-error');
-        if (errorDisplay) errorDisplay.innerText = "Access Denied. Incorrect PIN.";
+        document.getElementById('pin-error').innerText = "Access Denied.";
         setTimeout(clearPin, 800);
     }
-}
-
+};
 initPinSystem();
 
 // --- 2. BASKET SYSTEM ---
@@ -101,214 +87,100 @@ function updateBasketUI() {
     previewList.innerHTML = basket.map((item, index) => `
         <div class="basket-item">
             <span>${item.name}</span>
-            <button onclick="removeItem(${index})" style="background:none; border:none; color:#ff453a; cursor:pointer; padding:5px;">✕</button>
-        </div>
-    `).join('');
+            <button onclick="removeItem(${index})" style="background:none; border:none; color:#ff453a; cursor:pointer;">✕</button>
+        </div>`).join('');
 }
 
 function addToBasket(name, url) {
-    const exists = basket.find(item => item.url === url);
-    if (!exists) {
+    if (!basket.find(item => item.url === url)) {
         basket.push({ name, url });
         updateBasketUI();
-        
-        // ถ้าเพิ่มของใหม่แล้วหน้าต่างย่ออยู่ ให้ขยายออกอัตโนมัติ
-        const basketUI = document.getElementById('copy-basket-ui');
-        if (basketUI && basketUI.classList.contains('minimized')) {
-            toggleBasket();
-        }
+        const ui = document.getElementById('copy-basket-ui');
+        if (ui && ui.classList.contains('minimized')) toggleBasket();
     }
 }
 
-function removeItem(index) {
-    basket.splice(index, 1);
-    updateBasketUI();
-}
-
-function clearBasket() {
-    if (confirm('ล้างรายการทั้งหมดใช่หรือไม่?')) {
-        basket = [];
-        updateBasketUI();
-    }
-}
+function removeItem(index) { basket.splice(index, 1); updateBasketUI(); }
+function clearBasket() { if (confirm('ล้างรายการ?')) { basket = []; updateBasketUI(); } }
 
 function copyAllItems() {
     if (basket.length === 0) return;
-    let productLines = basket.map(item => `${item.name}\nดาวน์โหลดติดตั้ง: ${item.url}`).join('\n\n');
-    const textToCopy = productLines + "\n\nบริการช่วยเหลือ: https://8baht.com/help";
-    navigator.clipboard.writeText(textToCopy).then(() => {
+    let text = basket.map(item => `${item.name}\nดาวน์โหลดติดตั้ง: ${item.url}`).join('\n\n');
+    text += "\n\nบริการช่วยเหลือ: https://8baht.com/help";
+    navigator.clipboard.writeText(text).then(() => {
         const btn = document.querySelector('.btn-copy-all');
-        if (btn) {
-            const originalText = btn.innerText;
-            btn.innerText = 'คัดลอกสำเร็จ';
-            setTimeout(() => btn.innerText = originalText, 2000);
-        }
+        btn.innerText = 'คัดลอกสำเร็จ';
+        setTimeout(() => btn.innerText = 'คัดลอกลิ้งก์ทั้งหมด', 2000);
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // อัปเดต UI ตอนโหลดหน้าเผื่อมีของค้างในระบบ
-    if (typeof updateBasketUI === 'function') {
-        updateBasketUI();
-    }
-});
+function toggleBasket() {
+    const basketUI = document.getElementById('copy-basket-ui');
+    const icon = document.getElementById('minimize-icon');
+    basketUI.classList.toggle('minimized');
+    if (icon) icon.innerText = basketUI.classList.contains('minimized') ? '+' : '−';
+}
 
-// --- 3. DOM INITIALIZATION (Unified) ---
+// --- 3. DOM INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", () => {
     updateBasketUI(); 
 
-    const mobileToggle = document.querySelector('.mobile-menu-btn'); 
+    // Mobile Menu & Overlay
+    const mobileToggle = document.querySelector('.mobile-menu-btn');
     const mainNav = document.querySelector('.desktop-menu');
-    
-    let overlay = document.getElementById('menu-overlay');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.id = 'menu-overlay';
-        overlay.className = 'menu-overlay';
-        document.body.appendChild(overlay);
-    }
+    const overlay = document.getElementById('menu-overlay');
 
-    function toggleMenu() {
-        if (!mainNav) return;
+    const toggleMenu = () => {
         const isOpen = mainNav.classList.toggle('active');
         overlay.classList.toggle('active', isOpen);
-        
-        if (isOpen) {
-            document.body.style.overflow = 'hidden'; 
-            mainNav.style.maxHeight = 'calc(100vh - 48px)';
-            mainNav.style.overflowY = 'auto'; 
-            mainNav.style.webkitOverflowScrolling = 'touch';
-        } else {
-            document.body.style.overflow = '';
-            mainNav.style.maxHeight = '';
-            mainNav.style.overflowY = '';
-        }
-        if (isOpen && navigator.vibrate) navigator.vibrate(10);
-    }
-
-    // แก้ไขปัญหาคลิกหน้าเดิมแล้ว Error 404
-    const navItems = document.querySelectorAll(".desktop-menu a");
-    navItems.forEach(item => {
-        item.addEventListener("click", (e) => {
-            const href = item.getAttribute("href");
-            const currentPage = window.location.pathname;
-
-            if (href && (href.includes(currentPage) || (currentPage.endsWith('/') && href.includes(currentPage.split('/').filter(Boolean).pop())))) {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-                if (mainNav.classList.contains('active')) toggleMenu();
-            }
-        });
-    });
-
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
     mobileToggle?.addEventListener('click', toggleMenu);
     overlay?.addEventListener('click', toggleMenu);
 
-    // Single Copy Button
-    document.addEventListener("click", async (e) => {
-        const btn = e.target.closest(".btn-copy");
-        if (!btn) return;
-        const url = btn.dataset.url;
-        if (!url) return;
-        try {
-            await navigator.clipboard.writeText(url);
-            btn.classList.add("success");
-            const btnText = btn.querySelector(".btn-text") || btn;
-            const originalText = btnText.innerText;
-            btnText.innerText = "✔";
-          
-            setTimeout(() => {
-              btnText.innerText = originalText;
-              btn.classList.remove("success");
-            }, 2000);
-        } catch (err) { console.error(err); }
+    // ระบบคัดลอกส่วนกลาง (FAQ & Cards)
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.btn-copy-icon, .btn-copy');
+        if (btn && btn.hasAttribute('data-url')) {
+            navigator.clipboard.writeText(btn.getAttribute('data-url')).then(showToast);
+        }
     });
-});
-window.addEventListener('DOMContentLoaded', () => {
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '-20% 0px -70% 0px', // ปรับช่วงที่จะให้เมนู Active (คำนวณจากกึ่งกลางจอ)
-        threshold: 0
-    };
-
+    // Intersection Observer for Sidebar
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // หา id ของ section ที่กำลังปรากฏบนจอ
                 const id = entry.target.getAttribute('id');
-                
-                // ลบ class active ออกจากทุกเมนู
-                document.querySelectorAll('.nav-item').forEach((nav) => {
-                    nav.classList.remove('active');
-                });
-                
-                // เพิ่ม class active ให้เมนูที่ตรงกับ id นั้น
-                const activeNav = document.querySelector(`.nav-item[href="#${id}"]`);
-                if (activeNav) {
-                    activeNav.classList.add('active');
-                }
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                document.querySelector(`.nav-item[href="#${id}"]`)?.classList.add('active');
             }
         });
-    }, observerOptions);
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
 
-    // เริ่มตรวจจับทุก <section> ที่มี id
-    document.querySelectorAll('section[id]').forEach((section) => {
-        observer.observe(section);
-    });
-});
-function toggleBasket() {
-    const basket = document.getElementById('copy-basket-ui');
-    const icon = document.getElementById('minimize-icon');
-    
-    // สลับคลาส minimized
-    basket.classList.toggle('minimized');
-    
-    // เปลี่ยนไอคอนระหว่าง - กับ +
-    if (basket.classList.contains('minimized')) {
-        icon.innerText = '+';
-    } else {
-        icon.innerText = '−';
-    }
-}
-
-// (Option) ถ้าอยากให้กดที่หัวตะกร้าแล้วขยายได้เลย
-document.querySelector('.basket-header').addEventListener('click', function(e) {
-    const basket = document.getElementById('copy-basket-ui');
-    if (basket.classList.contains('minimized') && e.target.tagName !== 'BUTTON') {
-        toggleBasket();
-    }
-});
-// --- DOC DOWNLOAD + COPY FIX ---
-document.addEventListener('DOMContentLoaded', () => {
+    // --- DOC DOWNLOAD + COPY FIX ---
     document.querySelectorAll('.doc-card').forEach(card => {
-        const mainLinkObj = card.querySelector('.main-link');
-        if (!mainLinkObj) return;
+        const mainLink = card.querySelector('.main-link');
+        if (!mainLink) return;
 
-        const fullUrl = mainLinkObj.href;
+        const fullUrl = mainLink.href;
         const fileName = card.querySelector('.doc-name')?.innerText || 'Document';
-
-        // Extract Google Drive File ID
         const fileIdMatch = fullUrl.match(/\/d\/(.+?)\//);
-        if (!fileIdMatch) return;
-        const fileId = fileIdMatch[1];
 
-        // ✅ Download Button
-        const downloadBtn = card.querySelector('.download-btn');
-        if (downloadBtn) {
-            downloadBtn.href = `https://drive.google.com/uc?export=download&id=${fileId}`;
-            downloadBtn.target = "_blank";
+        if (fileIdMatch) {
+            const downloadBtn = card.querySelector('.download-btn');
+            if (downloadBtn) {
+                downloadBtn.href = `https://drive.google.com/uc?export=download&id=${fileIdMatch[1]}`;
+                downloadBtn.target = "_blank";
+            }
         }
 
-        // ✅ Copy Button
         const copyBtn = card.querySelector('.btn-copy-icon');
-        if (copyBtn) {
+        if (copyBtn && !copyBtn.hasAttribute('data-url')) { // ป้องกันทำงานซ้ำกับ logic ส่วนกลาง
             copyBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const text = `${fileName}\n${fullUrl}`;
-                navigator.clipboard.writeText(text).then(() => {
-                    alert('คัดลอกลิงก์แล้ว');
-                });
+                e.stopPropagation();
+                navigator.clipboard.writeText(`${fileName}\n${fullUrl}`).then(showToast);
             });
         }
     });
