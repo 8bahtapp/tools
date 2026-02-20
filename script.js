@@ -70,19 +70,39 @@ initPinSystem();
 
 // --- 2. BASKET SYSTEM ---
 let basket = JSON.parse(localStorage.getItem('8baht_basket')) || [];
+// โหลดสถานะการยุบจากเครื่อง (ถ้าไม่เคยตั้งค่าให้เป็น false)
+let isMinimized = JSON.parse(localStorage.getItem('8baht_minimized')) || false;
 
 function updateBasketUI() {
     const basketUI = document.getElementById('copy-basket-ui');
     const basketCount = document.getElementById('basket-count');
     const previewList = document.getElementById('preview-list');
+    const fabIcon = document.getElementById('basket-floating-icon');
+    const fabCount = document.getElementById('fab-count');
+
     localStorage.setItem('8baht_basket', JSON.stringify(basket));
+    localStorage.setItem('8baht_minimized', JSON.stringify(isMinimized));
 
     if (!basketUI || !basketCount || !previewList) return;
+
     if (basket.length === 0) {
         basketUI.style.display = 'none';
+        if (fabIcon) fabIcon.style.display = 'none';
         return;
     }
-    basketUI.style.display = 'block';
+
+    // จัดการการแสดงผลตามสถานะ IsMinimized
+    if (isMinimized) {
+        basketUI.style.display = 'none';
+        if (fabIcon) {
+            fabIcon.style.display = 'flex';
+            if (fabCount) fabCount.innerText = basket.length;
+        }
+    } else {
+        basketUI.style.display = 'block';
+        if (fabIcon) fabIcon.style.display = 'none';
+    }
+
     basketCount.innerText = basket.length;
     previewList.innerHTML = basket.map((item, index) => `
         <div class="basket-item">
@@ -91,14 +111,34 @@ function updateBasketUI() {
         </div>`).join('');
 }
 
+// ฟังก์ชันสำหรับสลับสถานะ ยุบ/ขยาย
+function toggleBasketUI(showFull) {
+    isMinimized = !showFull;
+    updateBasketUI();
+}
+
 function addToBasket(name, url) {
     if (!basket.find(item => item.url === url)) {
         basket.push({ name, url });
+        // เมื่อกดเพิ่มใหม่ ให้ขยายหน้าจอออกมาเสมอ
+        isMinimized = false; 
         updateBasketUI();
-        const ui = document.getElementById('copy-basket-ui');
-        if (ui && ui.classList.contains('minimized')) toggleBasket();
     }
 }
+
+function removeItem(index) {
+    basket.splice(index, 1);
+    updateBasketUI();
+}
+
+function clearBasket() {
+    basket = [];
+    isMinimized = false;
+    updateBasketUI();
+}
+
+// เรียกใช้งานครั้งแรกเมื่อโหลดหน้า
+document.addEventListener('DOMContentLoaded', updateBasketUI);
 
 function removeItem(index) { basket.splice(index, 1); updateBasketUI(); }
 function clearBasket() { if (confirm('ล้างรายการ?')) { basket = []; updateBasketUI(); } }
