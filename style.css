@@ -372,6 +372,9 @@ body {
     opacity: 1;
 }
 
+.toast-hidden {
+    display: none;
+}
 /* =========================================
    PIN SYSTEM - LIQUID GLASS PREMIUM BLACK (UPDATED)
    ========================================= */
