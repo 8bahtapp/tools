@@ -182,8 +182,8 @@
                         </button>
                     </div>
                 </div>
-            </section>>         
-          
+            </section>        
+
             <section id="faq">
                 <h2 class="section-title">FAQ</h2>
                 <details class="faq-item">
@@ -272,23 +272,32 @@
         </main>
     </div>
 
-    <div id="copy-basket-ui" class="basket-container" style="display: none;">
-        <div class="basket-card">
-            <div class="basket-header">
-                <div class="basket-title">
-                    <h4>รายการที่เลือก (<span id="basket-count">0</span>)</h4>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <button class="btn-clear" onclick="clearBasket()">ล้างทั้งหมด</button>
-                </div>
+<div id="copy-basket-ui" class="basket-container" style="display: none;">
+    <div class="basket-card">
+        <div class="basket-header">
+            <div class="basket-title">
+                <h4>รายการที่เลือก (<span id="basket-count">0</span>)</h4>
             </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <button class="btn-clear" onclick="clearBasket()">ล้างทั้งหมด</button>
     
-            <div id="preview-list" class="basket-items"></div>
-            <div class="basket-footer">
-                <button onclick="copyAllItems()" class="btn-copy-all">คัดลอกลิ้งก์ทั้งหมด</button>
+                <button class="btn-minimize" onclick="toggleBasketUI(false)" style="background:none; border:none; cursor:pointer; color:#86868b; font-size:18px;">
+                    ▼
+                </button>
             </div>
         </div>
+
+        <div id="preview-list" class="basket-items"></div>
+        <div class="basket-footer">
+            <button onclick="copyAllItems()" class="btn-copy-all">คัดลอกลิ้งก์ทั้งหมด</button>
+        </div>
     </div>
+</div>
+
+<div id="basket-floating-icon" class="basket-fab" style="display: none;" onclick="toggleBasketUI(true)">
+    <div class="fab-badge" id="fab-count">0</div>
+    <img src="https://raw.githubusercontent.com/8bahtapp/web-images/refs/heads/main/favicon.png" alt="Basket">
+</div>
 
     <div id="copy-toast" class="toast-hidden">คัดลอกสำเร็จ!</div>
 
@@ -298,7 +307,7 @@
 
     <script src="../../script.js"></script>
     <script>
-
+      
     </script>
 </body>
 </html>
