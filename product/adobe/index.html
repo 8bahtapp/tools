@@ -298,32 +298,7 @@
 
     <script src="../../script.js"></script>
     <script>
-        // ระบบแจ้งเตือนและคัดลอก
-        const toast = document.getElementById('copy-toast');
-        const showToast = () => {
-            toast.classList.remove('toast-hidden');
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-                toast.classList.add('toast-hidden');
-            }, 2000);
-        };
 
-        // ระบบคัดลอกสำหรับ FAQ
-        document.querySelectorAll('.btn-copy-icon').forEach(button => {
-            button.addEventListener('click', function() {
-                const text = this.getAttribute('data-url');
-                navigator.clipboard.writeText(text).then(showToast);
-            });
-        });
-
-        // ระบบคัดลอกสำหรับ Card
-        document.querySelectorAll('.btn-copy').forEach(button => {
-            button.addEventListener('click', function() {
-                const text = this.getAttribute('data-url');
-                navigator.clipboard.writeText(text).then(showToast);
-            });
-        });
     </script>
 </body>
 </html>
