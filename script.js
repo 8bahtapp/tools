@@ -279,40 +279,37 @@ document.querySelector('.basket-header').addEventListener('click', function(e) {
         toggleBasket();
     }
 });
-// วางต่อท้ายไฟล์ JS เดิมที่มีระบบ PIN และ Basket
+// --- DOC DOWNLOAD + COPY FIX ---
 document.addEventListener('DOMContentLoaded', () => {
-    // วนลูปหา doc-card ทุกใบ
     document.querySelectorAll('.doc-card').forEach(card => {
         const mainLinkObj = card.querySelector('.main-link');
         if (!mainLinkObj) return;
 
         const fullUrl = mainLinkObj.href;
-        const fileName = card.querySelector('.file-name').innerText;
+        const fileName = card.querySelector('.doc-name')?.innerText || 'Document';
 
-        // แกะ ID จากลิงก์ Google Drive
+        // Extract Google Drive File ID
         const fileIdMatch = fullUrl.match(/\/d\/(.+?)\//);
-        
-        if (fileIdMatch && fileIdMatch[1]) {
-            const fileId = fileIdMatch[1];
-            
-            // 1. เติมลิงก์ดาวน์โหลด
-            const downloadBtn = card.querySelector('.download-btn');
-            if (downloadBtn) {
-                downloadBtn.href = `https://drive.google.com/uc?export=download&id=${fileId}`;
-            }
+        if (!fileIdMatch) return;
+        const fileId = fileIdMatch[1];
 
-            // 2. ตั้งค่าปุ่มคัดลอก
-            const copyBtn = card.querySelector('.copy-btn');
-            if (copyBtn) {
-                copyBtn.onclick = function(e) {
-                    e.preventDefault();
-                    const textToCopy = `${fileName}: ${fullUrl}`;
-                    navigator.clipboard.writeText(textToCopy).then(() => {
-                        // แจ้งเตือนแบบง่ายๆ ไม่ต้องใช้ CSS ใหม่
-                        alert('คัดลอกชื่อและลิงก์แล้ว!');
-                    });
-                };
-            }
+        // ✅ Download Button
+        const downloadBtn = card.querySelector('.download-btn');
+        if (downloadBtn) {
+            downloadBtn.href = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            downloadBtn.target = "_blank";
+        }
+
+        // ✅ Copy Button
+        const copyBtn = card.querySelector('.btn-copy-icon');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const text = `${fileName}\n${fullUrl}`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('คัดลอกลิงก์แล้ว');
+                });
+            });
         }
     });
 });
