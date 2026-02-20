@@ -178,8 +178,8 @@ section:last-child { border-bottom: none; }
 
 /* เพิ่มขนาดข้อความ Official Website */
 .sub-text {
-    font-size: 10px;
-    font-weight: 400;
+    font-size: 12px;
+    font-weight: 500;
     color: var(--text-gray);
 }
 
