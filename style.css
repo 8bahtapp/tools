@@ -766,5 +766,5 @@ body {
 }
 /* เมื่อเอาเมาส์ชี้ที่ปุ่ม ให้เปลี่ยนเป็นสีน้ำเงิน */
 .btn-card-ticket:hover {
-    background-color: var(--apple-blue);
+    background-color: var(--text-main);
 }
