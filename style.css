@@ -172,7 +172,7 @@ body {
 
 .card img {
     max-width: 80%;
-    max-height: 55px;
+    max-height: 45px;
     object-fit: contain;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
