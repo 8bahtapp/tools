@@ -1,4 +1,3 @@
-// --- 0. GLOBAL UTILITIES ---
 const showToast = () => {
     const toast = document.getElementById('copy-toast');
     if (!toast) return;
@@ -10,7 +9,6 @@ const showToast = () => {
     }, 2000);
 };
 
-// --- 1. PIN CONFIGURATION & SYSTEM ---
 const SECRET_KEY = "ODg4OA=="; 
 const SESSION_DURATION = 12 * 60 * 60 * 1000; 
 
@@ -68,9 +66,7 @@ window.validateAndUnlock = () => {
 };
 initPinSystem();
 
-// --- 2. BASKET SYSTEM ---
 let basket = JSON.parse(localStorage.getItem('8baht_basket')) || [];
-// โหลดสถานะการยุบจากเครื่อง (ถ้าไม่เคยตั้งค่าให้เป็น false)
 let isMinimized = JSON.parse(localStorage.getItem('8baht_minimized')) || false;
 
 function updateBasketUI() {
@@ -91,7 +87,6 @@ function updateBasketUI() {
         return;
     }
 
-    // จัดการการแสดงผลตามสถานะ IsMinimized
     if (isMinimized) {
         basketUI.style.display = 'none';
         if (fabIcon) {
@@ -111,7 +106,6 @@ function updateBasketUI() {
         </div>`).join('');
 }
 
-// ฟังก์ชันสำหรับสลับสถานะ ยุบ/ขยาย
 function toggleBasketUI(showFull) {
     isMinimized = !showFull;
     updateBasketUI();
@@ -120,7 +114,6 @@ function toggleBasketUI(showFull) {
 function addToBasket(name, url) {
     if (!basket.find(item => item.url === url)) {
         basket.push({ name, url });
-        // เมื่อกดเพิ่มใหม่ ให้ขยายหน้าจอออกมาเสมอ
         isMinimized = false; 
         updateBasketUI();
     }
@@ -137,7 +130,6 @@ function clearBasket() {
     updateBasketUI();
 }
 
-// เรียกใช้งานครั้งแรกเมื่อโหลดหน้า
 document.addEventListener('DOMContentLoaded', updateBasketUI);
 
 function removeItem(index) { basket.splice(index, 1); updateBasketUI(); }
@@ -161,11 +153,9 @@ function toggleBasket() {
     if (icon) icon.innerText = basketUI.classList.contains('minimized') ? '+' : '−';
 }
 
-// --- 3. DOM INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", () => {
     updateBasketUI(); 
 
-    // Mobile Menu & Overlay
     const mobileToggle = document.querySelector('.mobile-menu-btn');
     const mainNav = document.querySelector('.desktop-menu');
     const overlay = document.getElementById('menu-overlay');
@@ -178,15 +168,25 @@ document.addEventListener("DOMContentLoaded", () => {
     mobileToggle?.addEventListener('click', toggleMenu);
     overlay?.addEventListener('click', toggleMenu);
 
-    // ระบบคัดลอกส่วนกลาง (FAQ & Cards)
-    document.addEventListener('click', (e) => {
-        const btn = e.target.closest('.btn-copy-icon, .btn-copy');
-        if (btn && btn.hasAttribute('data-url')) {
-            navigator.clipboard.writeText(btn.getAttribute('data-url')).then(showToast);
-        }
-    });
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-copy-icon, .btn-copy');
+    if (btn && btn.hasAttribute('data-url')) {
+        navigator.clipboard.writeText(btn.getAttribute('data-url')).then(() => {
+            showToast();
 
-    // Intersection Observer for Sidebar
+            if (btn.classList.contains('btn-copy')) {
+                const originalText = btn.innerHTML;
+                btn.classList.add('success');
+                btn.innerText = '✔';
+                setTimeout(() => {
+                    btn.classList.remove('success');
+                    btn.innerHTML = originalText;
+                }, 2000);
+            }
+        });
+    }
+});
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -198,7 +198,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { rootMargin: '-20% 0px -70% 0px' });
     document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
 
-    // --- DOC DOWNLOAD + COPY FIX ---
     document.querySelectorAll('.doc-card').forEach(card => {
         const mainLink = card.querySelector('.main-link');
         if (!mainLink) return;
