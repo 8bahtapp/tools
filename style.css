@@ -720,3 +720,51 @@ body {
     max-width: 350px;
     width: calc(100% - 60px);
 }
+
+/* การ์ดพิเศษสำหรับ GstarCAD */
+.card-special {
+    position: relative;
+    /* คง padding ไว้เพื่อให้โครงสร้าง card เท่ากับการ์ดใบอื่น */
+}
+
+.card-main-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+/* สไตล์ปุ่ม Open Ticket */
+.btn-card-ticket {
+    position: absolute;
+    bottom: 25px; /* ปรับขึ้นมาให้ดูสมดุลกับพื้นที่ว่างด้านล่าง */
+    background-color: var(--text-main);
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 12px;
+    border-radius: 980px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* เพิ่มความ Smooth แบบ Apple */
+    z-index: 2;
+}
+
+/* เมื่อ Hover: แสดงปุ่ม */
+.card-special:hover .btn-card-ticket {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* เมื่อ Hover: ดันโลโก้ขึ้นเล็กน้อยเพื่อให้ดูมี Dynamic */
+.card-special:hover img {
+    transform: scale(1.05) translateY(-15px);
+}
+/* เมื่อเอาเมาส์ชี้ที่ปุ่ม ให้เปลี่ยนเป็นสีน้ำเงิน */
+.btn-card-ticket:hover {
+    background-color: var(--apple-blue);
+}
