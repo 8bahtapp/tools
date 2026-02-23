@@ -1,8 +1,3 @@
-/* ============================================================
-    PRODUCT DETAIL STYLES - Apple Style + Mobile Optimized
-    ============================================================ */
-
-/* --- 1. Layout Structure --- */
 .product-layout {
     display: flex;
     gap: 40px;
@@ -11,7 +6,6 @@
     padding: 0 22px;
 }
 
-/* --- 2. Sidebar Navigation --- */
 .product-sidebar {
     width: 260px;
     position: sticky;
@@ -47,8 +41,6 @@
     font-weight: 600;
 }
 
-/* --- 2. Sidebar Navigation (ส่วนที่ปรับปรุงการขยับ) --- */
-
 .nav-item {
     position: relative;
     padding: 14px 16px 14px 40px;
@@ -60,19 +52,17 @@
     background: #ffffff;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.03);
     border: 1px solid rgba(0,0,0,0.01);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* ปรับให้การขยับดูมีสปริงนุ่มนวลขึ้น */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: block;
 }
 
-/* ปรับการ Hover ให้ขยับมากขึ้น */
 .nav-item:hover {
-    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.12); /* เงาฟุ้งขึ้นเพื่อให้ดูเหมือนลอยออกมา */
-    transform: translateX(15px); /* ขยับไปทางขวา 15px (จากเดิมแค่ 1px) */
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.12);
+    transform: translateX(15px);
     background: #ffffff;
     color: var(--accent-blue);
 }
 
-/* ปรับแถบสีฟ้าด้านหน้าให้ตอบสนองตอน Hover */
 .nav-item::before {
     content: "";
     position: absolute;
@@ -88,32 +78,26 @@
 }
 
 .nav-item:hover::before {
-    height: 24px; /* ให้แถบสีฟ้ายืดตัวยาวขึ้นเวลาชี้ */
+    height: 24px;
     opacity: 1;
 }
 
-/* สำหรับเมนูที่ Active อยู่ */
 .nav-item.active::before {
     height: 18px;
     opacity: 1;
 }
 
-/* --- 3. Main Content --- */
 .product-content { flex: 1; }
 section { padding: 60px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
 section:last-child { border-bottom: none; }
 .section-title { font-size: 20px; margin-bottom: 25px; font-weight: 600; }
 
-/* --- 4. Card Grid --- */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
 }
 
-/* ============================================================
-    Product Card (Apple Style)
-    ============================================================ */
 .product-card {
     background: var(--card-bg, #fff);
     border-radius: 16px;
@@ -176,16 +160,12 @@ section:last-child { border-bottom: none; }
     align-items: center;
 }
 
-/* เพิ่มขนาดข้อความ Official Website */
 .sub-text {
     font-size: 12px;
     font-weight: 500;
     color: var(--text-gray);
 }
 
-/* ============================================================
-    Copy Link Button
-    ============================================================ */
 .btn-copy {
     background: transparent;
     color: #1d1d1f;
@@ -217,9 +197,6 @@ section:last-child { border-bottom: none; }
     line-height: 1;
 }
 
-/* ============================================================
-    Document Section
-    ============================================================ */
 .doc-card {
     display: flex !important;
     align-items: center;
@@ -262,10 +239,6 @@ section:last-child { border-bottom: none; }
 }
 
 .btn-view { display: none !important; }
-
-/* ============================================================
-    FAQ STYLE (ADDED)
-    ============================================================ */
 
 #faq details {
     background: #fff;
@@ -310,7 +283,6 @@ section:last-child { border-bottom: none; }
     font-size: 14px;
     color: var(--text-gray);
     line-height: 1.6;
-    /* เพิ่มส่วนนี้เพื่อให้ไอคอนอยู่ขวามือ */
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -321,7 +293,6 @@ section:last-child { border-bottom: none; }
     margin-top: 10px;
 }
 
-/* --- เพิ่มเติมเฉพาะปุ่มไอคอนและ Toast --- */
 .btn-copy-icon {
     background: #f4f4f5;
     border: none;
@@ -353,9 +324,6 @@ section:last-child { border-bottom: none; }
 }
 .toast-hidden { opacity: 0; pointer-events: none; transform: translate(-50%, 20px) !important; }
 
-/* ============================================================
-    Mobile Optimization
-    ============================================================ */
 @media (max-width: 1100px) {
 
     .product-layout {
@@ -419,11 +387,6 @@ section:last-child { border-bottom: none; }
     .section-title { font-size: 20px; }
 }
 
-/* ============================================================
-   ฟังก์ชันการยุบหน้าตะกร้า (Minimize State)
-   ============================================================ */
-
-/* ตกแต่งปุ่มยุบในหน้าตะกร้า */
 .btn-minimize {
     background: #f2f2f7;
     border: none;
@@ -439,7 +402,6 @@ section:last-child { border-bottom: none; }
 }
 .btn-minimize:hover { background: #e5e5ea; color: #1d1d1f; }
 
-/* ปุ่ม Floating มุมขวาล่าง */
 .basket-fab {
     position: fixed;
     bottom: 30px;
@@ -461,7 +423,6 @@ section:last-child { border-bottom: none; }
 .basket-fab:hover { transform: scale(1.1); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
 .basket-fab img { width: 35px; height: 35px; object-fit: contain; }
 
-/* ตัวเลขแจ้งเตือนบนปุ่ม Floating */
 .fab-badge {
     position: absolute;
     top: -5px;
@@ -480,7 +441,6 @@ section:last-child { border-bottom: none; }
     border: 2px solid #fff;
 }
 
-/* ปรับตำแหน่ง Basket Container เดิมให้ไม่ทับ FAB */
 .basket-container {
     position: fixed;
     bottom: 30px;
