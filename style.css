@@ -645,6 +645,24 @@ body {
     width: calc(100% - 60px);
 }
 
+.btn-add-basket {
+    background: #f2f2f7;
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--apple-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+ }
+.btn-add-basket:hover { background: var(--apple-blue); color: white; transform: scale(1.1); }
+.btn-add-basket:active { transform: scale(0.9); }
+
 .card-special {
     position: relative;
 }
@@ -688,7 +706,6 @@ body {
     background-color: var(--text-main);
 }
 
-/* --- Document Section Styles (Added) --- */
 .doc-card-link {
     text-decoration: none;
     color: inherit;
