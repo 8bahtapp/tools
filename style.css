@@ -1,28 +1,18 @@
-/* ================================
-   1. Apple Design Tokens & Fonts
-================================ */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
 
 :root {
     --bg-color: #f5f5f7;
     --text-main: #1d1d1f;
     --text-gray: #86868b;
-
-    /* Apple Official Colors */
     --apple-blue: #0071e3;
     --apple-green: #34c759;
-
-    /* Alias for theme system */
     --accent-blue: var(--apple-blue);
     --accent-green: var(--apple-green);
-
     --card-bg: #ffffff;
     --header-glass: rgba(255, 255, 255, 0.8);
-
     --shadow-sm: 0 2px 4px rgba(0,0,0,0.02), 0 10px 20px rgba(0,0,0,0.04);
     --shadow-standard: 0 4px 12px rgba(0,0,0,0.05);
     --shadow-hover: 0 30px 60px rgba(0,0,0,0.12);
-
     --radius-main: 20px;
 }
 
@@ -39,9 +29,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* ================================
-   2. Global Container
-================================ */
 .container {
     max-width: 1400px;
     margin: 0 auto;
@@ -49,9 +36,6 @@ body {
     width: 100%;
 }
 
-/* ================================
-   3. Glass Header
-================================ */
 .main-header {
     position: sticky;
     top: 0;
@@ -98,17 +82,16 @@ body {
     opacity: 1;
 }
 
-/* สำหรับ Desktop: จัดการให้แถบเมนูเลื่อนซ้าย-ขวาได้ถ้าหัวข้อเยอะเกินจอ */
 @media (min-width: 1101px) {
     .desktop-menu {
         overflow: visible;
         white-space: normal;
-        scrollbar-width: none; /* ซ่อนแถบเลื่อน Firefox */
-        -ms-overflow-style: none; /* ซ่อนแถบเลื่อน IE/Edge */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
         padding-bottom: 0px;
     }
     .desktop-menu::-webkit-scrollbar {
-        display: none; /* ซ่อนแถบเลื่อน Chrome/Safari */
+        display: none;
     }
 }
 
@@ -132,9 +115,6 @@ body {
 }
 .search-btn:hover { opacity: 1; }
 
-/* ================================
-   4. Hero
-================================ */
 .hero { padding: 30px 0 15px; text-align: left; }
 .hero h1 {
     font-size: 13px;
@@ -143,9 +123,6 @@ body {
     letter-spacing: -0.01em;
 }
 
-/* ================================
-   5. Grid Cards
-================================ */
 .grid-menu {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -195,9 +172,6 @@ body {
 .card:hover img { transform: scale(1.1) translateY(-10px); }
 .card:hover .card-title { opacity: 1; transform: translateY(0); }
 
-/* ================================
-   6. Apple Blur Overlay
-================================ */
 .menu-overlay {
     position: fixed;
     top: 0; 
@@ -217,9 +191,6 @@ body {
     opacity: 1;
 }
 
-/* ================================
-   7. Apple Copy Button
-================================ */
 .btn-copy {
     background: #f2f2f7;
     color: var(--apple-blue);
@@ -237,21 +208,16 @@ body {
 
 .btn-copy:active { transform: scale(0.92); }
 
-/* Success State */
 .btn-copy.success {
     background: var(--apple-green) !important;
     color: white !important;
 }
 
-/* SVG icon inside button */
 .btn-copy svg {
     margin-right: 6px;
     vertical-align: middle;
 }
 
-/* ================================
-   8. Mobile Menu
-================================ */
 .mobile-menu-btn {
     display: none;
     flex-direction: column;
@@ -268,20 +234,18 @@ body {
 }
 
 @media (max-width: 1100px) {
-    /* 1. ปุ่มสามขีด: มั่นใจว่ายังอยู่และกดง่าย */
     .mobile-menu-btn { 
         display: flex !important; 
         z-index: 10001; 
     }
 
-    /* 2. ตัวเมนู: ปรับให้เป็นกล่องลอย (Floating Card) ไม่เต็มจอ */
     .desktop-menu {
         display: none;
         position: fixed;
-        top: 55px;         /* เว้นระยะจาก Header เล็กน้อย */
+        top: 55px;
         left: 22px;
         right: auto;
-        width: 280px;      /* ความกว้างพอเหมาะแบบ Apple */
+        width: 280px;
         height: auto;
         max-height: calc(100vh - 80px); 
         overflow-y: auto;
@@ -291,7 +255,7 @@ body {
         -webkit-backdrop-filter: saturate(180%) blur(20px);
         flex-direction: column;
         padding: 10px 20px;
-        border-radius: 20px; /* มนรอบด้านให้ดูพรีเมียม */
+        border-radius: 20px;
         box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         border: 1px solid rgba(0,0,0,0.05);
         gap: 0;
@@ -302,7 +266,6 @@ body {
         display: flex; 
     }
 
-    /* 3. รายการเมนู: แก้ปัญหาตัวหนังสือหลบหนี */
     .desktop-menu a {
         font-size: 16px;
         font-weight: 500;
@@ -310,12 +273,10 @@ body {
         border-bottom: 1px solid rgba(0,0,0,0.05);
         width: 100%;
         color: var(--text-main);
-        /* สั่งยกเลิกการขยายตัว (Scale) ที่เคยเขียนไว้ด้านบน */
         transform: none !important; 
         transition: opacity 0.2s;
     }
 
-    /* ปิด Hover Effect ที่ทำให้ตัวหนังสือดีดในมือถือ */
     .desktop-menu a:hover {
         transform: none !important;
         color: var(--apple-blue);
@@ -326,9 +287,6 @@ body {
     }
 }
 
-/* ================================
-   9. Mobile Cards
-================================ */
 @media (max-width: 600px) {
     .grid-menu { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .card { min-height: 160px; border-radius: 18px; }
@@ -336,9 +294,6 @@ body {
     .card-title { bottom: 15px; }
 }
 
-/* ================================
-   10. Footer
-================================ */
 .main-footer {
     text-align: center;
     padding: 60px 40px;
@@ -348,9 +303,6 @@ body {
     margin-top: 40px;
 }
 
-/* ================================
-   11. Toast Notification
-================================ */
 .copy-toast {
     position: fixed;
     bottom: 30px;
@@ -375,15 +327,11 @@ body {
 .toast-hidden {
     display: none;
 }
-/* =========================================
-   PIN SYSTEM - LIQUID GLASS PREMIUM BLACK (UPDATED)
-   ========================================= */
 
-/* พื้นหลังหลัก: ดำพรีเมี่ยมสนิท */
 #pin-screen {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: #000000; /* Deep Premium Black */
+    background: #000000;
     z-index: 10000;
     display: flex;
     flex-direction: column;
@@ -392,7 +340,6 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* คอนเทนเนอร์: ลอยตัวบนพื้นหลัง */
 .pin-container {
     background: transparent;
     text-align: center;
@@ -401,7 +348,6 @@ body {
     padding: 20px;
 }
 
-/* ข้อความหัวข้อ: เน้นความเรียบหรู */
 .pin-container p {
     color: rgba(255, 255, 255, 0.6) !important;
     font-size: 14px;
@@ -411,7 +357,6 @@ body {
     text-transform: uppercase;
 }
 
-/* ช่องแสดงผลพิน: Liquid Glass Effect */
 .pin-display-wrapper {
     background: rgba(255, 255, 255, 0.03);
     height: 56px;
@@ -422,7 +367,6 @@ body {
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(15px);
-    /* ขอบกระจกที่มีแสงตกกระทบด้านบน */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-top: 1px solid rgba(255, 255, 255, 0.2); 
     box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 
@@ -436,31 +380,29 @@ body {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-/* แผงปุ่มตัวเลข */
 .pin-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
     justify-items: center;
 }
-/* เอฟเฟกต์เมื่อเอาเมาส์ไปวาง (Hover) */
+
 @media (hover: hover) {
     .pin-btn:hover:not(.special) {
-        background: rgba(255, 255, 255, 0.12); /* สว่างขึ้นเล็กน้อย */
-        border: 1px solid rgba(255, 255, 255, 0.3); /* ขอบชัดขึ้น */
-        transform: translateY(-3px); /* ยกตัวขึ้นเบาๆ ให้ดูมีมิติ */
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transform: translateY(-3px);
         box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5), 
-                    0 0 15px rgba(255, 255, 255, 0.1); /* เพิ่มเงาและแสงฟุ้ง */
+                    0 0 15px rgba(255, 255, 255, 0.1);
         color: #ffffff;
     }
 }
 
-/* ปรับแต่งปุ่มพิเศษ (Cancel/Delete) เมื่อ Hover */
 .pin-btn.special:hover {
     color: rgba(255, 255, 255, 0.8) !important;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
-/* ปุ่มตัวเลข: ดีไซน์หยดน้ำ/กระจกใส (Liquid Glass) - Updated Borders */
+
 .pin-btn {
     width: 75px;
     height: 75px;
@@ -474,22 +416,19 @@ body {
     justify-content: center;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    backdrop-filter: blur(10px); /* เพิ่มความฟุ้งของกระจกอีกนิด */
-    
-    /* แก้ไขขอบใหม่: ขอบสองชั้น (Double-Rim Effect) */
-    border: 1px solid rgba(255, 255, 255, 0.05); /* ขอบรอบนอกบางๆ */
-    border-top: 1.5px solid rgba(255, 255, 255, 0.25); /* ขอบบนรับแสงให้ดูนูน */
-    border-left: 1px solid rgba(255, 255, 255, 0.15); /* ขอบข้างรับแสงเฉียง */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
 
-    /* เพิ่มเงาและแสงสะท้อนภายใน (Inner Glow) */
     box-shadow: 
-        0 8px 20px rgba(0, 0, 0, 0.6),             /* เงาตกกระทบพื้นหลัง */
-        inset 0 1px 2px rgba(255, 255, 255, 0.2),  /* แสงสะท้อนที่ขอบบนด้านใน */
-        inset 0 -2px 10px rgba(255, 255, 255, 0.02); /* เงาจางๆ ด้านล่างให้ดูมีความหนา */
+        0 8px 20px rgba(0, 0, 0, 0.6),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2),
+        inset 0 -2px 10px rgba(255, 255, 255, 0.02);
         
     -webkit-tap-highlight-color: transparent;
     outline: none;
-    touch-action: manipulation; /* ป้องกันการหน่วง 300ms และแก้ปัญหา double click */
+    touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     outline: none;
 }
@@ -501,10 +440,9 @@ body {
     font-weight: 600;
     border: 1px solid rgba(255, 255, 255, 0.2);
     display: none; 
-    touch-action: manipulation; /* เพิ่มตรงนี้ด้วย */
+    touch-action: manipulation;
 }
 
-/* เอฟเฟกต์เมื่อกด: ยุบตัวและเรืองแสง */
 .pin-btn:active {
     transform: scale(0.92);
     background: rgba(255, 255, 255, 0.15);
@@ -520,18 +458,18 @@ body {
     box-shadow: none !important;
     backdrop-filter: none;
 }
-/* ลบ .slider-wrapper เดิมออก และเพิ่มส่วนนี้แทน */
+
 .pin-btn.ok-btn {
     background: rgba(255, 255, 255, 0.1) !important;
     color: #ffffff !important;
     font-size: 18px;
     font-weight: 600;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    display: none; /* ซ่อนไว้ก่อนจนกว่าจะมีการกดเลข */
+    display: none;
 }
 
 .pin-btn.ok-btn.active {
-    display: flex; /* แสดงเมื่อมีการกดเลข */
+    display: flex;
     animation: fadeIn 0.3s ease;
 }
 
@@ -545,7 +483,6 @@ body {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* --- Basket Floating Container --- */
 .basket-container {
     position: fixed;
     bottom: 30px;
@@ -554,10 +491,8 @@ body {
     z-index: 2000;
     font-family: 'Inter', 'Noto Sans Thai', sans-serif;
     animation: slideIn 0.3s ease-out;
-    /* ลบบรรทัด transition เดิมออก หรือไม่ต้องใส่ก็ได้เพราะเราไม่ย่อแล้ว */
 }
 
-/* --- ตัวตะกร้า (Apple Style) --- */
 .basket-card {
     background: rgba(28, 28, 30, 0.8) !important; 
     backdrop-filter: blur(15px); 
@@ -567,10 +502,8 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     border: 1px solid rgba(255,255,255,0.1);
     color: #ffffff;
-    /* transition: all 0.3s ease;  <-- ลบทิ้งเพื่อให้การแสดงผลนิ่ง */
 }
 
-/* --- Header --- */
 .basket-header {
     display: flex;
     justify-content: space-between;
@@ -601,7 +534,6 @@ body {
     font-weight: 500;
 }
 
-/* --- Items List --- */
 .basket-items {
     max-height: 250px;
     overflow-y: auto;
@@ -628,7 +560,6 @@ body {
     max-width: 200px;
 }
 
-/* --- Footer & Copy Button --- */
 .btn-copy-all {
     width: 100%;
     background: rgba(255, 255, 255, 0.9);
@@ -650,11 +581,7 @@ body {
 .btn-copy-all:active {
     transform: scale(0.98);
 }
-/* ============================================================
-   ฟังก์ชันการยุบหน้าตะกร้า (Minimize State)
-   ============================================================ */
 
-/* ตกแต่งปุ่มยุบในหน้าตะกร้า */
 .btn-minimize {
     background: #f2f2f7;
     border: none;
@@ -670,7 +597,6 @@ body {
 }
 .btn-minimize:hover { background: #e5e5ea; color: #1d1d1f; }
 
-/* ปุ่ม Floating มุมขวาล่าง */
 .basket-fab {
     position: fixed;
     bottom: 30px;
@@ -692,7 +618,6 @@ body {
 .basket-fab:hover { transform: scale(1.1); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
 .basket-fab img { width: 35px; height: 35px; object-fit: contain; }
 
-/* ตัวเลขแจ้งเตือนบนปุ่ม Floating */
 .fab-badge {
     position: absolute;
     top: -5px;
@@ -711,7 +636,6 @@ body {
     border: 2px solid #fff;
 }
 
-/* ปรับตำแหน่ง Basket Container เดิมให้ไม่ทับ FAB */
 .basket-container {
     position: fixed;
     bottom: 30px;
@@ -721,10 +645,8 @@ body {
     width: calc(100% - 60px);
 }
 
-/* การ์ดพิเศษสำหรับ GstarCAD */
 .card-special {
     position: relative;
-    /* คง padding ไว้เพื่อให้โครงสร้าง card เท่ากับการ์ดใบอื่น */
 }
 
 .card-main-link {
@@ -737,10 +659,9 @@ body {
     text-decoration: none;
 }
 
-/* สไตล์ปุ่ม Open Ticket */
 .btn-card-ticket {
     position: absolute;
-    bottom: 25px; /* ปรับขึ้นมาให้ดูสมดุลกับพื้นที่ว่างด้านล่าง */
+    bottom: 25px;
     background-color: var(--text-gray);
     color: white;
     text-decoration: none;
@@ -750,21 +671,39 @@ body {
     border-radius: 980px;
     opacity: 0;
     transform: translateY(10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* เพิ่มความ Smooth แบบ Apple */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 2;
 }
 
-/* เมื่อ Hover: แสดงปุ่ม */
 .card-special:hover .btn-card-ticket {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* เมื่อ Hover: ดันโลโก้ขึ้นเล็กน้อยเพื่อให้ดูมี Dynamic */
 .card-special:hover img {
     transform: scale(1.05) translateY(-15px);
 }
-/* เมื่อเอาเมาส์ชี้ที่ปุ่ม ให้เปลี่ยนเป็นสีน้ำเงิน */
+
 .btn-card-ticket:hover {
     background-color: var(--text-main);
+}
+
+/* --- Document Section Styles (Added) --- */
+.doc-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doc-card-link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-standard);
+}
+
+.doc-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
