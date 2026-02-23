@@ -741,7 +741,7 @@ body {
 .btn-card-ticket {
     position: absolute;
     bottom: 25px; /* ปรับขึ้นมาให้ดูสมดุลกับพื้นที่ว่างด้านล่าง */
-    background-color: var(--text-main);
+    background-color: var(--text-gray);
     color: white;
     text-decoration: none;
     font-size: 12px;
