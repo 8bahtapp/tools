@@ -494,7 +494,7 @@ body {
 }
 
 .basket-card {
-    background: rgba(28, 28, 30, 0.8) !important; 
+    background: rgba(28, 28, 30, 0.9) !important; 
     backdrop-filter: blur(15px); 
     -webkit-backdrop-filter: blur(15px); 
     border-radius: 20px;
