@@ -139,10 +139,23 @@ function copyAllItems() {
     if (basket.length === 0) return;
     let text = basket.map(item => `${item.name}\nดาวน์โหลดติดตั้ง: ${item.url}`).join('\n\n');
     text += "\n\nบริการช่วยเหลือ: https://8baht.com/help";
+    
     navigator.clipboard.writeText(text).then(() => {
         const btn = document.querySelector('.btn-copy-all');
-        btn.innerText = 'คัดลอกสำเร็จ';
-        setTimeout(() => btn.innerText = 'คัดลอกลิ้งก์ทั้งหมด', 2000);
+        
+        const originalText = btn.innerText;
+        const originalBg = btn.style.backgroundColor;
+        const originalColor = btn.style.color;
+
+        btn.innerText = '✔';
+        btn.style.backgroundColor = '#34c759';
+        btn.style.color = '#ffffff';
+
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.backgroundColor = originalBg;
+            btn.style.color = originalColor;
+        }, 2000);
     });
 }
 
